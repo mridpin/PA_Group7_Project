@@ -15,6 +15,7 @@ function printErrorMessage($errors) {
 
 function createConnection() {
     $con = mysqli_connect("localhost", "root", "");
+    //$con = mysqli_connect("localhost", "grupoa0_admin", "admin");
     if (!$con) {
         die("ERROR: Can't connect to host");
     }
