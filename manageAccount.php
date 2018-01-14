@@ -5,11 +5,12 @@ This structure is a WIP, so you can edit it as much as your want.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Welcome</title>
+        <title>Manage Your Account</title>
     </head>
     <body>
         <?php
-        // put your code here
+        include 'functions.php';
+	require_once 'functions.php';
         ?>
         
         <div>
@@ -25,14 +26,10 @@ This structure is a WIP, so you can edit it as much as your want.
         </div>
         
         <!--
-        This div is for the product boxes (see document Vision de la apliacion)
-        for reference.
+        
         -->
         <div>
             
-            <h2>Choose a product</h2>
-            
-            <a href="newProduct.php">Build a new Computer</a>
 
             
         </div>

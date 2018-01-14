@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--
 This structure is a WIP, so you can edit it as much as your want.
+TODO: If incorrect credentials, still show login form
 -->
 
 <?php
@@ -14,17 +15,23 @@ require_once 'functions.php';
         <title>Users Login</title>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
-        
+    
+    	
         <div>
             
             <a href="index.php"><p>Insert Logo Here</p></a>
             
         </div>
         
-        <div>
+        <?php
+
+
+	function loginForm()
+	{
+	?>
+	
+	
+	 <div>
             
             <h2>Please enter your login credentials</h2>
             
@@ -32,7 +39,7 @@ require_once 'functions.php';
 
         <div>
             
-            <form action="." method="POST">
+            <form action="login.php" method="POST">
                 
                 Username: <input name="username" type="text"/>
                 <br/>
@@ -40,7 +47,7 @@ require_once 'functions.php';
                 Password: <input name="password" type="password"/>
                 <br/>
                 <br/>
-                <input name="submit" type="submit" value="Submit"/>
+                <input name="login" type="submit" value="Submit"/>
                 
             </form>
             
@@ -53,6 +60,72 @@ require_once 'functions.php';
 
             
         </div>
+	
+	
+	<?php
+	
+	}
+	
+	
+	function checkLogin()
+        {
+            $con = createConnection();
+            $user = mysqli_real_escape_string($con,$_POST['username']);
+            $password = mysqli_real_escape_string($con,$_POST['password']);
+            
+            $sentencia = "SELECT * FROM users WHERE name='".$user."';";
+            $query = mysqli_query($con, $sentencia);
+            
+            if(!$query)
+            {
+                mysqli_close($con);
+                die("ERROR: There is an error in the SQL query");
+            }
+            //We found a user
+            else if(mysqli_num_rows($query)==1)
+            {
+                
+                $aux = mysqli_fetch_array($query);
+                
+                if(password_verify($password,$aux["password"]))
+                {
+                    //$_SESSION["user"]=$user;
+                    mysqli_free_result($query);
+                    mysqli_close($con);
+                    header("Location: account.php");
+                }
+                else
+                {
+                     mysqli_free_result($query);
+                mysqli_close($con);
+                die("ERROR: Incorrect login information");
+                }
+                
+            }
+            else
+            {
+                mysqli_free_result($query);
+                mysqli_close($con);
+                die("ERROR: Incorrect login information");
+            }
+            
+        }
+        
+        
+        
+        
+        if(isset($_POST['login']))
+        {
+            checkLogin();
+        }
+        
+        loginForm();
+	
+	
+
+
+
+        ?>
         
         <br>
         
