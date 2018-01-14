@@ -9,6 +9,7 @@ and open the template in the editor.
 session_start();
 include 'functions.php';
 require_once 'functions.php';
+
 $iso_array = array(
     'ABW' => 'Aruba',
     'AFG' => 'Afghanistan',
@@ -260,7 +261,6 @@ $iso_array = array(
     'ZMB' => 'Zambia',
     'ZWE' => 'Zimbabwe'
 );
-/* Las funciones se ponen siempre al principio del fichero: */
 ?>
 
 <html>

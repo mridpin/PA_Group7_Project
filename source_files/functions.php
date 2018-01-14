@@ -1,7 +1,5 @@
 <?php
 
-
-
 function printErrorMessage($errors) {
     $res = "<p style='color:red'>";
     if (isset($errors) && !empty($errors)) {
@@ -27,5 +25,23 @@ function createConnection() {
     }
     return $con;
 }
+
+// Check if session is up. If not, send user to login or to speciefied site
+function checkSession($location = "login") {
+    if (!isset($_SESSION["user"])) {
+        header("Location: $location.php");
+    }
+}
+
+// Print a welcome message and account options
+function printWelcome() {
+    if (isset($_SESSION["user"])) {
+        echo "Welcome back, " . $_SESSION["user"] . "!";
+        echo "<div class='linkToAccount'><a href='account.php'>My Account</a></div>";
+    } else {
+        echo "<a href='login.php'><p>Login/Register</p></a>";
+    }
+}
+
 
 ?>

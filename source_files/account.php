@@ -1,14 +1,87 @@
 <!DOCTYPE html>
-<!--
-This structure is a WIP, so you can edit it as much as your want.
--->
+
 <?php
 session_start();
 include 'functions.php';
 require_once 'functions.php';
 
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
+checkSession();
+
+//Function that uses a SQL query to get the current account information
+function accountDetails() {
+    $link = createConnection();
+    $sql = "SELECT * FROM users WHERE email='" . $_SESSION["user"] . "'";
+    $result = mysqli_query($link, $sql);
+    if (!$result) {
+        mysqli_close($link);
+        die("ERROR: There is an error in SELECT ACCOUNT query");
+    } else {
+        $line = mysqli_fetch_array($result);
+        // Store the user_id in a session so as not to repeat the query
+        $_SESSION["user_id"] = $line["user_id"];
+        return $line;
+    }
+}
+
+//Function that shows the current account information using the function accountDetails
+function showAccountDetails() {
+    $info = accountDetails();
+    $result = "";
+    $result .= "Name: <input class='details_input' name='username' value='" . $info["name"] . "' /><br />";
+    $result .= "Last Name: <input class='details_input' name='last_name' value='" . $info["last_name"] . "' /><br />";
+    $result .= "Email: <input class='details_input' name='email' value='" . $info["email"] . "' /><br />";
+
+    return $result;
+}
+
+//Function that uses a SQL query to get the current account addresses. Returns an array of associative arrays: one for each address
+function addressDetails() {
+    $addesses = [];
+    $link = createConnection();
+    $sql = "SELECT * FROM user_address WHERE user_id='" . $_SESSION["user_id"] . "'";
+    $result1 = mysqli_query($link, $sql);
+    if (!$result1) {
+        mysqli_close($link);
+        die("ERROR: There is an error in SELECT USER ADDRESS query");
+    } else {
+        while ($row = mysqli_fetch_array($result1)) {
+            $sql = "SELECT * FROM address WHERE address_id='" . $row["address_id"] . "'";
+            $result2 = mysqli_query($link, $sql);
+            if (!$result2) {
+                mysqli_close($link);
+                die("ERROR: There is an error in SELECT ADDRESS query");
+            } else {
+                while ($row = mysqli_fetch_array($result2)) {
+                    $addesses[] = $row;
+                }
+            }
+        }
+    }
+    return $addesses;
+}
+
+//Function that shows the current account information using the function accountDetails
+function printAddressDetails() {
+    $info = addressDetails();
+    $result = "";
+    $i = 0;
+    foreach ($info as $address) {
+        $result .= "<li><ul class='address_list'>";
+        $result .= "<li class='details_li'>Zipcode: " . $address["zip_code"] . "</li>";
+        $result .= "<li class='details_li'>Street: " . $address["street"] . "</li>";
+        $result .= "<li class='details_li'>Number: " . $address["number"] . "</li>";
+        $result .= "<li class='details_li'>Country: " . $address["country"] . "</li>";
+        // We cannot sent the address_id as a form submission, because it will be visible by the users. 
+        // Instead, we sent the index of the address from the user's own addresses
+        // This prevents malicious users from trampling with the other user's addresses by F12 and modifiying the value of the form submissions.
+        // Now they can only screw with their own addresses
+        $result .= "<form method='post' action='addresses.php'><input type='hidden' name='address_number' value='" . $i . "' />" .
+                "<input type='submit' value='Update' name='update_address'/></form><br />";
+        $result .= "</ul></li>";
+        $_SESSION["address_to_modify"][$i] = $address;
+        $i++;
+    }
+    return $result;
 }
 ?>
 
@@ -27,68 +100,79 @@ if (!isset($_SESSION["user"])) {
         </div>
 
         <?php
-        if (isset($_SESSION["user"])) {
-            echo "Welcome back, " . $_SESSION["user"] . "!";
-            echo "<div class='linkToAccount'><a href='account.php'>My Account</a></div>";
-        } else {
-            echo "<a href='login.php'><p>Login/Register</p></a>";
-        }
+        printWelcome();
 
-        //Function that uses a SQL query to get the current account information
-        function accountDetails() {
-            $link = createConnection();
-            $sql = "SELECT * FROM users WHERE email='". $_SESSION["user"] . "'";
-            $result = mysqli_query($link, $sql);
-            if (!$result) {
-                mysqli_close($link);
-                die("ERROR: There is an error in SELECT ACCOUNT query");
-            } else {
-                $line = mysqli_fetch_array($result);
-                return $line;
+        if (isset($_POST['submitAccountDetails'])) {
+            $error = [];
+            // Check fields for errors:
+            if (!isset($_POST["username"]) || $_POST["username"] == "") {
+                $error[] = "Name can't be empty";
+            }
+            if (!isset($_POST["last_name"]) || $_POST["last_name"] == "") {
+                $error[] = "Last name can't be empty";
+            }
+            if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                $error[] = "Email not valid";
+            }
+
+            if (empty($error)) {
+                $link = createConnection();
+                // Sanitize all inputs
+                $name = mysqli_real_escape_string($link, $_POST['username']);
+                $lastName = mysqli_real_escape_string($link, $_POST['last_name']);
+                $email = mysqli_real_escape_string($link, $_POST['email']);
+                $sql1 = "UPDATE users SET name='" . $name . "', last_name='" . $lastName . "', email='" . $email . "' WHERE user_id='" . $_SESSION["user_id"] . "'";
+                $result1 = mysqli_query($link, $sql1);
+
+                // Update query
+                if (!$result1) {
+                    $error[] = "Email already registered";
+                    mysqli_close($link);
+                } else {
+                    // If update successful, close connection and reload the page                    
+                    mysqli_close($link);
+                    header("Refresh:0");
+                }
             }
         }
 
-        //Function that shows the current account information using the function accountDetails
-        function showAccountDetails() {
-            $info = accountDetails();
-            $result = "";
-            $result .= "<li class='detailsLi' id='name'><div>Name: </div><div id='name'>".$info["name"]."</div></li>";
-            $result .= "<li class='detailsLi' id='lastName'><div>Last name: </div><div id='name'>".$info["last_name"]."</div></li>";
-            $result .= "<li class='detailsLi' id='email'><div>Email: </div><div id='name'>".$info["email"]."</div></li>";
-            
-            return $result;
+        if (!isset($_POST['submit']) || !empty($error)) {
+            if (isset($error)) {
+                echo printErrorMessage($error);
+            }
+            ?>
+            <article class="mainArticle" id="accountInfoArticle">
+                <h2>Account Information</h2>
+
+                <section class="information_section" id="personal_details_section">
+                    <h3>My Personal Information</h3>
+                    <form id="personal_details_form" class="account_form" method="post" action="account.php">
+                        <?php
+                        echo showAccountDetails();
+                        ?>
+                        <input type="submit" name="submitAccountDetails" value="Update Account" />
+                    </form>
+
+                </section>
+
+                <section class="information_section" id="addresses_section">
+                    <h3>My Addresses</h3>
+                    <ol class="addresses_list">
+                        <?php
+                        echo printAddressDetails();
+                        ?>  
+                    </ol>
+                    <a id="update_addresses_link" class="account_button" href="addresses.php">Update Addresses</a>
+                </section>
+
+                <section>
+                    <h3>Payment Methods</h3>
+                </section>
+            </article>
+
+            <?php
         }
         ?>
-
-
-        <article class="mainAricle" id="accountInfoArticle">
-            <h2>Your Account Information</h2>
-
-            <section class="informationSection" id="personalDetailsSection">
-                <h3>Personal Information</h3>
-                <ul class="personalInfoDetails">
-                    <?php
-                    echo showAccountDetails();
-                    ?>
-                </ul>
-
-            </section>
-
-            <section>
-                <h3>Addresses</h3>
-            </section>
-
-            <section>
-                <h3>Payment Methods</h3>
-            </section>
-        </article>
-
-        <div>
-
-            <a href="manageAccount.php"><p>Manage Account</p></a>
-
-        </div>
-
 
         <footer>Legal stuff goes here</footer>
 
