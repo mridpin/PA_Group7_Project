@@ -27,9 +27,9 @@ function accountDetails() {
 function showAccountDetails() {
     $info = accountDetails();
     $result = "";
-    $result .= "Name: <input class='details_input' name='username' value='" . $info["name"] . "' /><br />";
-    $result .= "Last Name: <input class='details_input' name='last_name' value='" . $info["last_name"] . "' /><br />";
-    $result .= "Email: <input class='details_input' name='email' value='" . $info["email"] . "' /><br />";
+    $result .= "Name: <input class='details_input' type='text' name='username' value='" . $info["name"] . "' /><br />";
+    $result .= "Last Name: <input class='details_input' type='text' name='last_name' value='" . $info["last_name"] . "' /><br />";
+    $result .= "Email: <input class='details_input' type='email' name='email' value='" . $info["email"] . "' /><br />";
 
     return $result;
 }
@@ -76,7 +76,8 @@ function printAddressDetails() {
         // This prevents malicious users from trampling with the other user's addresses by F12 and modifiying the value of the form submissions.
         // Now they can only screw with their own addresses
         $result .= "<form method='post' action='addresses.php'><input type='hidden' name='address_number' value='" . $i . "' />" .
-                "<input type='submit' value='Update' name='update_address'/></form><br />";
+                "<input class='details_button' id='update_address_button' type='submit' value='Update Address' name='update_address'/>" .
+                "<input class='details_button' id='delete_address_button' type='submit' value='Delete Address' name='delete_address'/></form><br />";
         $result .= "</ul></li>";
         $_SESSION["address_to_modify"][$i] = $address;
         $i++;
@@ -134,6 +135,34 @@ function printAddressDetails() {
                     header("Refresh:0");
                 }
             }
+        } else if (isset($_POST["delete_account_submit"])) {
+            $error = [];
+            $link = createConnection();
+            // Sanitize all inputs
+            $password = mysqli_real_escape_string($link, $_POST['delete_account_password']);
+            $sql = "SELECT * FROM users WHERE user_id='" . $_SESSION["user_id"] . "'";
+            $result = mysqli_query($link, $sql);
+
+            if (!$result) {
+                mysqli_close($link);
+                die("ERROR: There is an error in the PASSWORD SQL query. Please contact site admin");
+            } else {
+                $row = mysqli_fetch_array($result);
+                // If passwords match, delete the user
+                if (password_verify($password, $row["password"])) {
+                    $sql = "DELETE FROM users WHERE user_id='" . $_SESSION["user_id"] . "'";
+                    $result = mysqli_query($link, $sql);
+
+                    if (!$result) {
+                        mysqli_close($link);
+                        die("ERROR: There is an error in the DELETE USER SQL query. Please contact site admin");
+                    } else {
+                        header("Location: logout.php");
+                    }
+                } else {
+                    $error[] = "Delete failed: Wrong Password";
+                }
+            }
         }
 
         if (!isset($_POST['submit']) || !empty($error)) {
@@ -162,11 +191,24 @@ function printAddressDetails() {
                         echo printAddressDetails();
                         ?>  
                     </ol>
-                    <a id="update_addresses_link" class="account_button" href="addresses.php">Update Addresses</a>
                 </section>
 
                 <section>
                     <h3>Payment Methods</h3>
+                </section>
+
+                <section>
+                    <h3>Delete Account</h3>
+                    <?php
+                    if (isset($error)) {
+                        printErrorMessage($error);
+                    }
+                    ?> 
+                    <form id="delete_account_form" class="account_form" method="post" action="account.php">
+                        <div class="account_instructions" id="delete_account_instructions">To delete your account, please confirm your password: </div>
+                        <input type="password" name="delete_account_password" required="required"/>
+                        <input type="submit" name="delete_account_submit" value="Delete Account" />
+                    </form>
                 </section>
             </article>
 
