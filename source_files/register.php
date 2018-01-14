@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 
 <?php
+session_start();
 include 'functions.php';
 require_once 'functions.php';
 $iso_array = array(
@@ -347,10 +348,9 @@ $iso_array = array(
                             mysqli_close($link);
                             die("USER_ADDRESS QUERY ERROR: PLEASE CONTACT SITE ADMIN");
                         } else {
-                            //$_SESSION["user"] = $user;
+                            $_SESSION["user"] = $name;
                             mysqli_close($link);
-                            //header("Location: " . $_SESSION["origin"]);
-                            //header("Location: index.php");
+                            header("Location: " . $_SESSION["origin"]);
                         }
                     }
                 }
