@@ -323,14 +323,14 @@ $iso_array = array(
                 $country = mysqli_real_escape_string($link, $_POST['country']);
                 $sql1 = "INSERT INTO users (type, name, password, last_name, email) VALUES ('user', '" . $name . "', '" . $hash . "', '" . $lastName . "', '" . $email . "')";
                 $result1 = mysqli_query($link, $sql1);
-                
+
                 // If query 1 fails, query 2 won't be executed, and the user will be redirected to the form
                 if (!$result1) {
                     $error[] = "Email already registered";
-                    mysqli_free_result($result1);
                     mysqli_close($link);
                 }
                 if (empty($error)) {
+                    $user_id = mysqli_insert_id($link);
                     $sql2 = "INSERT INTO address (zip_code, country, street, number) VALUES ('" . $zip . "', '" . $country . "', '" . $street . "', '" . $number . "')";
                     $result2 = mysqli_query($link, $sql2);
                     if (!$result2) {
@@ -338,13 +338,20 @@ $iso_array = array(
                         mysqli_close($link);
                         die("CREATE ADDRESS QUERY ERROR: PLEASE CONTACT SITE ADMIN");
                     } else {
-                        // If register successful
-                        //$_SESSION["user"] = $user;
-                        mysqli_free_result($result1);
-                        mysqli_free_result($result2);
-                        mysqli_close($link);
-                        //header("Location: " . $_SESSION["origin"]);
-                        //header("Location: index.php");
+                        // If register successful, add user and address to relational table
+                        $address_id = mysqli_insert_id($link);
+                        $sql3 = "INSERT INTO user_address (user_id, address_id) VALUES ('" . $user_id . "', '" . $address_id . "')";
+                        $result3 = mysqli_query($link, $sql3);
+                        if (!$result3) {
+                            var_dump($result3);
+                            mysqli_close($link);
+                            die("USER_ADDRESS QUERY ERROR: PLEASE CONTACT SITE ADMIN");
+                        } else {
+                            //$_SESSION["user"] = $user;
+                            mysqli_close($link);
+                            //header("Location: " . $_SESSION["origin"]);
+                            //header("Location: index.php");
+                        }
                     }
                 }
             }
