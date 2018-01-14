@@ -15,10 +15,11 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
 
         </div>
 
-        <div>
+        <div class="userMenu">
             <?php
             if (isset($_SESSION["user"])) {
                 echo "Welcome back, " . $_SESSION["user"] . "!";
+                echo "<div class='linkToAccount'><a href='account.php'>My Account</a></div>";
             } else {
                 echo "<a href='login.php'><p>Login/Register</p></a>";
             }
