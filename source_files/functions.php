@@ -1,5 +1,7 @@
 <?php
 
+
+
 function printErrorMessage($errors) {
     $res = "<p style='color:red'>";
     if (isset($errors) && !empty($errors)) {
