@@ -19,18 +19,36 @@ This structure is a WIP, so you can edit it as much as your want.
             
         </div>
         
-        <div>
-            
-            <a href="login.php"><p>Login/Register</p></a>
-            
-        </div>
-        
         <!--
+        
+        Depending on what we choose, we are shown a different form
         
         -->
         <div>
             
+            <h3>Select and Option</h3>
+            
+            <form action="manageProduct.php.php" method="POST">
 
+                    <br/>
+                    <input name="submit" type="submit" value="New Product"/>
+
+            </form>
+            
+            <form action="manageProduct.php.php" method="POST">
+
+                    <br/>
+                    <input name="submit" type="submit" value="Edit Product"/>
+
+            </form>
+            
+            <form action="manageProduct.php.php" method="POST">
+
+                    <br/>
+                    <input name="submit" type="submit" value="Delete Product"/>
+
+            </form>
+            
             
         </div>
         
