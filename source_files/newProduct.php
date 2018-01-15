@@ -23,6 +23,12 @@ This structure is a WIP, so you can edit it as much as your want.
             $hdCode = "CP_HD";
             $ramCode = "CP_RAM";
             $mbCode = "CP_MB";
+            $cpuCode = "CP_CPU";
+            $gpuCode="CP_GPU";
+            $csCode="CP_CS";
+            $msCode="PB_MS";
+            $mnCode="PB_MN";
+            $kbCode="PB_KB";
             
             //Hardrive Segment
             $result = "<form action='newProduct.php' method='POST'>"
@@ -46,6 +52,17 @@ This structure is a WIP, so you can edit it as much as your want.
                 $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
             }
             
+            //CPU Hardrive Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "CPU: <select name='cpu'>";
+            
+            $singleComponent = getSingleComponents($cpuCode); 
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
             
              //RAM Segment
             $result .="</select>"
@@ -55,6 +72,17 @@ This structure is a WIP, so you can edit it as much as your want.
             
            
             $singleComponent = getSingleComponents($ramCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //GPU Hardrive Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "GPU: <select name='cgpu'>";
+            
+            $singleComponent = getSingleComponents($gpuCode); 
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
                 $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
             }
@@ -71,6 +99,60 @@ This structure is a WIP, so you can edit it as much as your want.
                 $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
             }
             
+            //Case Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Case: <select name='case'>"; 
+            
+            
+            $singleComponent = getSingleComponents($csCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //Extra elements
+            
+            $result.="</select>"
+                    . "<h4>Additional Components</h4>";
+            
+            //Keyboard Segment
+            $result .="<br/>"
+                    . "Keyboard: <select name='keyboard'>"
+                    ."<option value='-' name='-'>-</option>" ; 
+            
+            
+            $singleComponent = getSingleComponents($kbCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //Mouse Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Mouse: <select name='mouse'>"
+                    ."<option value='-' name='-'>-</option>" ; 
+            
+            
+            $singleComponent = getSingleComponents($msCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //Monitor Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Monitor: <select name='monitor'>"
+                    ."<option value='-' name='-'>-</option>" ; 
+            
+            
+            $singleComponent = getSingleComponents($mnCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
             
             
             $result .="</select>" 
@@ -78,6 +160,8 @@ This structure is a WIP, so you can edit it as much as your want.
                     . "<input type='submit' name='firstForm' value='Next'>"
                     . "</form>";
 
+            //TODO: Add total amount of selected components
+            
             echo $result;
         }
 
@@ -112,7 +196,7 @@ This structure is a WIP, so you can edit it as much as your want.
             return $result;
         }
 
-        //Only gets the HDs in the components vector (components have the code CP and the HDs HD example: CP_HDxxxx)
+        //Gets a particular component depending on the code given as parameter variable
 
         function getSingleComponents($code) {
             $result = [];
