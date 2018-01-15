@@ -2,10 +2,10 @@
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 14, 2018 at 10:23 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 15-01-2018 a las 23:47:52
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `grupopa0_db`
+-- Base de datos: `grupopa0_db`
 --
 CREATE DATABASE IF NOT EXISTS `grupopa0_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `grupopa0_db`;
@@ -25,7 +25,7 @@ USE `grupopa0_db`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `address`
+-- Estructura de tabla para la tabla `address`
 --
 
 CREATE TABLE `address` (
@@ -37,7 +37,7 @@ CREATE TABLE `address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `address`
+-- Volcado de datos para la tabla `address`
 --
 
 INSERT INTO `address` (`address_id`, `zip_code`, `country`, `street`, `number`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `address` (`address_id`, `zip_code`, `country`, `street`, `number`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `custom_products`
+-- Estructura de tabla para la tabla `custom_products`
 --
 
 CREATE TABLE `custom_products` (
@@ -59,7 +59,7 @@ CREATE TABLE `custom_products` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `custom_products_components`
+-- Estructura de tabla para la tabla `custom_products_components`
 --
 
 CREATE TABLE `custom_products_components` (
@@ -70,7 +70,7 @@ CREATE TABLE `custom_products_components` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Estructura de tabla para la tabla `orders`
 --
 
 CREATE TABLE `orders` (
@@ -84,7 +84,7 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_prebuilt`
+-- Estructura de tabla para la tabla `order_prebuilt`
 --
 
 CREATE TABLE `order_prebuilt` (
@@ -96,7 +96,7 @@ CREATE TABLE `order_prebuilt` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payment_method`
+-- Estructura de tabla para la tabla `payment_method`
 --
 
 CREATE TABLE `payment_method` (
@@ -110,7 +110,7 @@ CREATE TABLE `payment_method` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Estructura de tabla para la tabla `products`
 --
 
 CREATE TABLE `products` (
@@ -121,7 +121,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `products`
+-- Volcado de datos para la tabla `products`
 --
 
 INSERT INTO `products` (`product_id`, `name`, `stock`, `price`) VALUES
@@ -129,12 +129,18 @@ INSERT INTO `products` (`product_id`, `name`, `stock`, `price`) VALUES
 (2, 'CP_RAMDDR2GB', 3, 30),
 (3, 'PB_PS4500GB', 5, 300),
 (4, 'CP_MBASUS', 2, 100),
-(5, 'PB_XBOXONE500GB', 1, 300);
+(5, 'PB_XBOXONE500GB', 1, 300),
+(6, 'CP_CPUi7', 2, 500),
+(7, 'CP_GPUNVIDIAGTX800', 7, 230),
+(8, 'CP_CSCOOLERMASTER', 10, 40),
+(9, 'PB_KBMECHANICAL', 8, 80),
+(10, 'PB_MNACER14HD', 3, 90),
+(11, 'PB_MSLOGITECH', 2, 10);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE `users` (
@@ -148,7 +154,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`user_id`, `type`, `name`, `password`, `last_name`, `address`, `email`) VALUES
@@ -159,7 +165,7 @@ INSERT INTO `users` (`user_id`, `type`, `name`, `password`, `last_name`, `addres
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_address`
+-- Estructura de tabla para la tabla `user_address`
 --
 
 CREATE TABLE `user_address` (
@@ -168,51 +174,51 @@ CREATE TABLE `user_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_address`
+-- Volcado de datos para la tabla `user_address`
 --
 
 INSERT INTO `user_address` (`user_id`, `address_id`) VALUES
 (20, 8);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `address`
+-- Indices de la tabla `address`
 --
 ALTER TABLE `address`
   ADD PRIMARY KEY (`address_id`);
 
 --
--- Indexes for table `custom_products`
+-- Indices de la tabla `custom_products`
 --
 ALTER TABLE `custom_products`
   ADD PRIMARY KEY (`custom_product_id`);
 
 --
--- Indexes for table `custom_products_components`
+-- Indices de la tabla `custom_products_components`
 --
 ALTER TABLE `custom_products_components`
   ADD PRIMARY KEY (`custom_product_id`,`component_id`),
   ADD KEY `component_id` (`component_id`);
 
 --
--- Indexes for table `orders`
+-- Indices de la tabla `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `order_prebuilt`
+-- Indices de la tabla `order_prebuilt`
 --
 ALTER TABLE `order_prebuilt`
   ADD PRIMARY KEY (`order_id`,`prebuilt_id`),
   ADD KEY `prebuilt_id` (`prebuilt_id`);
 
 --
--- Indexes for table `payment_method`
+-- Indices de la tabla `payment_method`
 --
 ALTER TABLE `payment_method`
   ADD PRIMARY KEY (`number`),
@@ -220,91 +226,91 @@ ALTER TABLE `payment_method`
   ADD KEY `user_id_2` (`user_id`);
 
 --
--- Indexes for table `products`
+-- Indices de la tabla `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Indexes for table `users`
+-- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `user_address`
+-- Indices de la tabla `user_address`
 --
 ALTER TABLE `user_address`
   ADD PRIMARY KEY (`user_id`,`address_id`),
   ADD KEY `address_id` (`address_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `address`
+-- AUTO_INCREMENT de la tabla `address`
 --
 ALTER TABLE `address`
   MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `custom_products`
+-- AUTO_INCREMENT de la tabla `custom_products`
 --
 ALTER TABLE `custom_products`
   MODIFY `custom_product_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `payment_method`
+-- AUTO_INCREMENT de la tabla `payment_method`
 --
 ALTER TABLE `payment_method`
   MODIFY `number` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `custom_products_components`
+-- Filtros para la tabla `custom_products_components`
 --
 ALTER TABLE `custom_products_components`
   ADD CONSTRAINT `custom_products_components_ibfk_1` FOREIGN KEY (`custom_product_id`) REFERENCES `custom_products` (`custom_product_id`),
   ADD CONSTRAINT `custom_products_components_ibfk_2` FOREIGN KEY (`component_id`) REFERENCES `products` (`product_id`);
 
 --
--- Constraints for table `orders`
+-- Filtros para la tabla `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `order_prebuilt`
+-- Filtros para la tabla `order_prebuilt`
 --
 ALTER TABLE `order_prebuilt`
   ADD CONSTRAINT `order_prebuilt_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
   ADD CONSTRAINT `order_prebuilt_ibfk_2` FOREIGN KEY (`prebuilt_id`) REFERENCES `products` (`product_id`);
 
 --
--- Constraints for table `payment_method`
+-- Filtros para la tabla `payment_method`
 --
 ALTER TABLE `payment_method`
   ADD CONSTRAINT `payment_method_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `user_address`
+-- Filtros para la tabla `user_address`
 --
 ALTER TABLE `user_address`
   ADD CONSTRAINT `user_address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
