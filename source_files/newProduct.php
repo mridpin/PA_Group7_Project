@@ -16,18 +16,66 @@ This structure is a WIP, so you can edit it as much as your want.
         //OPTION 1 : Website will change form with the button to go to different selec windows (Maybe save the current build in session variable to always have it)
         //OPTION 2: We list all of the components directly instead of having to navigate through windows
         $components = getAllComponents();
+        
 
         function firstForm() {
 
-
+            $hdCode = "CP_HD";
+            $ramCode = "CP_RAM";
+            $mbCode = "CP_MB";
+            
+            //Hardrive Segment
             $result = "<form action='newProduct.php' method='POST'>"
-                    . "<select name='hd'>";
+                    . "Main Hard Drive: <select name='hd'>";
 
-            for ($j = 0; $j < sizeof($components); $j++) {
-                $result .= "<option value='" . $components[$j] . "'>" . $components[$j] . "</option>";
+            
+            
+            $singleComponent = getSingleComponents($hdCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
             }
-            $result .= "<br>"
-                    . "<input type='submit' name='firstForm' value='Enviar'>"
+            
+            //Second Hardrive Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Second Hard Drive: <select name='shd'>"
+                    ."<option value='-' name='-'>-</option>"; 
+   
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            
+             //RAM Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "RAM: <select name='ram'>"; 
+            
+           
+            $singleComponent = getSingleComponents($ramCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //MotherBoard Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "MotherBoard: <select name='motherBoard'>"; 
+            
+            
+            $singleComponent = getSingleComponents($mbCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            
+            
+            $result .="</select>" 
+                    ."<br/>"
+                    . "<input type='submit' name='firstForm' value='Next'>"
                     . "</form>";
 
             echo $result;
@@ -43,9 +91,13 @@ This structure is a WIP, so you can edit it as much as your want.
             if ($query) {
 
                 $i = 0;
-
+                /*
+                 * We only get the name and the price, if we also get the stock
+                 * there may be another order currenty in progress.
+                 */
                 while ($raw_Components = mysqli_fetch_array($query)) {
-                    $result[$i] = $raw_Components["name"];
+                    $result[$i][0] = $raw_Components["name"];
+                    $result[$i][1] = $raw_Components["price"];
                     $i++;
                 }
 
@@ -62,9 +114,25 @@ This structure is a WIP, so you can edit it as much as your want.
 
         //Only gets the HDs in the components vector (components have the code CP and the HDs HD example: CP_HDxxxx)
 
-        function getHDs() {
+        function getSingleComponents($code) {
+            $result = [];
+            global $components;
+            $j=0;
+            for($i=0;$i<sizeof($components);$i++)
+            {
+                  if(strpos($components[$i][0],$code)!==false)
+                  {
+                      //TODO: Make a function that does this since it's going to be the same for all the components
+                      $result[$j][0]=substr($components[$i][0],3);
+                      $result[$j][1]=$components[$i][1];
+                  }
+            }
             
+            return $result;
         }
+        
+        
+        
         ?>
 
         <div>
@@ -90,10 +158,24 @@ This structure is a WIP, so you can edit it as much as your want.
             -->
             <h2>Select your products</h2>
 
-            <section></section>
+            <section>
+                
+                <?php
+                
+                if (!isset($_POST['firstForm'])) {
+                      firstForm();
+              }
+        
+                
+                ?>
+                
+                
+            </section>
 
 
         </div>
+        
+        <br/>
 
         <footer>Legal stuff goes here</footer>
 
