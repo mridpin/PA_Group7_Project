@@ -27,9 +27,9 @@ function accountDetails() {
 function showAccountDetails() {
     $info = accountDetails();
     $result = "";
-    $result .= "Name: <input class='details_input' type='text' name='username' value='" . $info["name"] . "' /><br />";
-    $result .= "Last Name: <input class='details_input' type='text' name='last_name' value='" . $info["last_name"] . "' /><br />";
-    $result .= "Email: <input class='details_input' type='email' name='email' value='" . $info["email"] . "' /><br />";
+    $result .= "Name: <input class='details_input' type='text' name='username' value='" . $info["name"] ."' required='required' /><br />";
+    $result .= "Last Name: <input class='details_input' type='text' name='last_name' value='" . $info["last_name"] . "' required='required' /><br />";
+    $result .= "Email: <input class='details_input' type='email' name='email' value='" . $info["email"] . "' required='required' /><br />";
 
     return $result;
 }
@@ -76,8 +76,8 @@ function printAddressDetails() {
         // This prevents malicious users from trampling with the other user's addresses by F12 and modifiying the value of the form submissions.
         // Now they can only screw with their own addresses
         $result .= "<form method='post' action='addresses.php'><input type='hidden' name='address_number' value='" . $i . "' />" .
-                "<input class='details_button' id='update_address_button' type='submit' value='Update Address' name='update_address'/>" .
-                "<input class='details_button' id='delete_address_button' type='submit' value='Delete Address' name='delete_address'/></form><br />";
+                "<input class='details_button' type='submit' value='Update Address' name='update_address'/>" .
+                "<input class='details_button' type='submit' value='Delete Address' name='delete_address'/></form><br />";
         $result .= "</ul></li>";
         $_SESSION["address_to_modify"][$i] = $address;
         $i++;
@@ -90,6 +90,8 @@ function printAddressDetails() {
     <head>
         <meta charset="UTF-8">
         <title>Account Information</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/jquery-validation/jquery.validate.js"></script>
     </head>
     <body>
 
@@ -132,7 +134,7 @@ function printAddressDetails() {
                 } else {
                     // If update successful, close connection and reload the page                    
                     mysqli_close($link);
-                    header("Refresh:0");
+                    header("Location: logout.php");
                 }
             }
         } else if (isset($_POST["delete_account_submit"])) {
@@ -181,7 +183,7 @@ function printAddressDetails() {
                         ?>
                         <input type="submit" name="submitAccountDetails" value="Update Account" />
                     </form>
-
+                    <script src="js/form_manager.js"></script>
                 </section>
 
                 <section class="information_section" id="addresses_section">
@@ -191,6 +193,9 @@ function printAddressDetails() {
                         echo printAddressDetails();
                         ?>  
                     </ol>
+                    <form method="POST" action="addresses.php" >
+                        <input type="submit" name="add_address" value="Add addreess" class="details_button" id="add_address_button" />
+                    </form>
                 </section>
 
                 <section>

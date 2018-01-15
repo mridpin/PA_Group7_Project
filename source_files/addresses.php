@@ -4,7 +4,6 @@ include 'functions.php';
 require_once 'functions.php';
 
 checkSession();
-
 ?>
 
 
@@ -12,6 +11,8 @@ checkSession();
     <head>
         <meta charset="UTF-8">
         <title>Account Information</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/jquery-validation/jquery.validate.js"></script>
     </head>
     <body>
 
@@ -25,7 +26,7 @@ checkSession();
         <?php
         printWelcome();
 
-        if (isset($_POST['submit_address'])) {
+        if (isset($_POST['submit_address']) || isset($_POST['submit_new_address'])) {
             $error = [];
             // Check fields for errors:
             if (!preg_match("/^[[:alnum:]]+$/", $_POST["zipCode"])) {
@@ -49,22 +50,42 @@ checkSession();
                 $street = mysqli_real_escape_string($link, $_POST['street']);
                 $number = mysqli_real_escape_string($link, $_POST['number']);
                 $country = mysqli_real_escape_string($link, $_POST['country']);
-
-                $sql = "UPDATE address set zip_code='" . $zip . "', country='" . $country . "', street='" . $street . "', number='" . $number . "' WHERE address_id='" . $_SESSION["address"]["address_id"] . "'";
-                $result = mysqli_query($link, $sql);
-                if (!$result) {
-                    mysqli_close($link);
-                    die("UPDATE ADDRESS QUERY ERROR: PLEASE CONTACT SITE ADMIN");
-                } else {
-                    mysqli_close($link);
-                    header("Location: account.php");
+                if (isset($_POST['submit_address'])) {
+                    $sql = "UPDATE address set zip_code='" . $zip . "', country='" . $country . "', street='" . $street . "', number='" . $number . "' WHERE address_id='" . $_SESSION["address"]["address_id"] . "'";
+                    $result = mysqli_query($link, $sql);
+                    if (!$result) {
+                        mysqli_close($link);
+                        die("UPDATE ADDRESS QUERY ERROR: PLEASE CONTACT SITE ADMIN");
+                    } else {
+                        mysqli_close($link);
+                        header("Location: account.php");
+                    }
+                } else if (isset($_POST['submit_new_address'])) {
+                    // If the create new address was clicked, insert a new address an a new user_address connection
+                    $sql = "INSERT INTO address (zip_code, country, street, number) values ('" . $zip . "', '" . $country . "', '" . $street . "', '" . $number . "')";
+                    $result = mysqli_query($link, $sql);
+                    if (!$result) {
+                        mysqli_close($link);
+                        die("INSERT ADDRESS QUERY ERROR: PLEASE CONTACT SITE ADMIN");
+                    } else {
+                        $address_id = mysqli_insert_id($link);
+                        $sql2 = "INSERT INTO user_address (user_id, address_id) values ('" . $_SESSION["user_id"] . "', '" . $address_id . "')";
+                        $result2 = mysqli_query($link, $sql2);
+                        if (!$result2) {
+                            mysqli_close($link);
+                            die("INSERT USER_ADDRESS QUERY ERROR: PLEASE CONTACT SITE ADMIN");
+                        } else {
+                            mysqli_close($link);
+                            header("Location: account.php");
+                        }
+                    }
                 }
             }
         } else if (isset($_POST['delete_address'])) {
             // Get the address to delete from this user's addresses. Cascade FK will delete it from user_address too
             $addressIndex = $_POST["address_number"];
             $_SESSION["address"] = $_SESSION["address_to_modify"][$addressIndex];
-            
+
             $link = createConnection();
             $sql = "DELETE FROM address WHERE address_id='" . $_SESSION["address"]["address_id"] . "'";
             $result = mysqli_query($link, $sql);
@@ -102,11 +123,11 @@ checkSession();
 
                 <section class="information_section" id="addresses_section">
                     <h3>My Address</h3>
-                    <form action="addresses.php" method="POST">
+                    <form class="address_form" id="register_account_form" action="addresses.php" method="POST">
                         <br/>
-                        ZIP Code: <input name="zipCode" type="number" value="<?php echo $zip; ?>" required/>
-                        Country: <select name="country" required>
-                            <option value="" selected disabled hidden>CHOOSE A COUNTRY</option>
+                        ZIP Code: <input name="zipCode" type="number" value="<?php echo $zip; ?>" required='required'/>
+                        Country: <select name="country" required='required'>
+                            <option value="" selected="selected" disabled="disabled" hidden="hidden">CHOOSE A COUNTRY</option>
                             <option value="AFG">Afghanistan</option>
                             <option value="ALA">Åland Islands</option>
                             <option value="ALB">Albania</option>
@@ -359,12 +380,21 @@ checkSession();
                         </select>
                         <br/>
                         <br/>
-                        Street: <input name="street" type="text" value="<?php echo $street; ?>" required/>
-                        Number: <input name="number" type="number" value="<?php echo $number; ?>" required/>
+                        Street: <input name="street" type="text" value="<?php echo $street; ?>" required='required'/>
+                        Number: <input name="number" type="number" value="<?php echo $number; ?>" required='required'/>
                         <br/>
                         <br/>
-                        <input name="submit_address" type="submit" value="Update Address" required/>
+                        <?php
+                        // Only display the update address button if the user hasnt clicked "add address" buttonbefore
+                        if (isset($_POST["add_address"])) {
+                            echo "";
+                        } else {
+                            echo "<input name='submit_address' type='submit' value='Update Address' />";
+                        }
+                        ?>
+                        <input name="submit_new_address" type="submit" value="Add as new" />
                     </form>
+                    <script src="js/form_manager.js"></script>
                 </section>
             </article>
 

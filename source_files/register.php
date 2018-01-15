@@ -9,20 +9,19 @@ and open the template in the editor.
 session_start();
 include 'functions.php';
 require_once 'functions.php';
-
 ?>
 
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Register</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/jquery-validation/jquery.validate.js"></script>
     </head>
     <body>
         <header>
             <div>
-
                 <a href="index.php"><p>Insert Logo Here</p></a>
-
             </div>
         </header>
 
@@ -111,20 +110,19 @@ require_once 'functions.php';
                 echo printErrorMessage($error);
             }
             ?>
-            <form action="register.php" method="POST">
+            <form class="user_form" id="register_account_form" action="register.php" method="POST">
+                Username: <input name="username" type="text" required='required' />
+                Password: <input name="password" type="password" required='required'/>
+                <br/>
+                <br/>
+                Last Name: <input name="lastName" type="text" required='required'/>
+                Email: <input name="email" type="email" required='required'/>
 
-                Username: <input name="username" type="text" required/>
-                Password: <input name="password" type="password" required/>
-                <br/>
-                <br/>
-                Last Name: <input name="lastName" type="text" required/>
-                Email: <input name="email" type="email" required/>
-                <br/>
-                <br/>
-                <br/>
-                ZIP Code: <input name="zipCode" type="number" required/>
-                <!-- Instead select field with countries from a DB table?-->
-                Country: <select name="country" required>
+            <br/>
+            <br/>
+                ZIP Code: <input name="zipCode" type="number" required='required'/>
+                Country: <select name="country" required='required'>
+                    <option value="" selected="selected" disabled="disabled" hidden="hidden">CHOOSE A COUNTRY</option>
                     <option value="AFG">Afghanistan</option>
                     <option value="ALA">Åland Islands</option>
                     <option value="ALB">Albania</option>
@@ -377,13 +375,13 @@ require_once 'functions.php';
                 </select>
                 <br/>
                 <br/>
-                Street: <input name="street" type="text" required/>
-                Number: <input name="number" type="number" required/>
+                Street: <input name="street" type="text" required='required'/>
+                Number: <input name="number" type="number" required='required'/>
                 <br/>
                 <br/>
-                <input name="submit" type="submit" value="Register" required/>
-
+                <input name="submit" type="submit" value="Register" required='required'/>                
             </form>
+            <script src="js/form_manager.js"></script>
             <?php
         }
         ?>
