@@ -70,7 +70,7 @@ function printAddressDetails() {
         $result .= "<li class='details_li'>Zipcode: " . $address["zip_code"] . "</li>";
         $result .= "<li class='details_li'>Street: " . $address["street"] . "</li>";
         $result .= "<li class='details_li'>Number: " . $address["number"] . "</li>";
-        $result .= "<li class='details_li'>Country: " . $address["country"] . "</li>";
+        $result .= "<li class='details_li'>Country: " . getCountryName($address["country"]) . "</li>";
         // We cannot sent the address_id as a form submission, because it will be visible by the users. 
         // Instead, we sent the index of the address from the user's own addresses
         // This prevents malicious users from trampling with the other user's addresses by F12 and modifiying the value of the form submissions.
