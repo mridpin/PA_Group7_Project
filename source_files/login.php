@@ -85,6 +85,7 @@ session_start();
                     mysqli_free_result($query);
                     mysqli_close($con);
                     $_SESSION["user"] = $user;
+                    $_SESSION["type"] = $aux["type"];
                     header("Location: " . $_SESSION["origin"]);
                 } else {
                     mysqli_free_result($query);
