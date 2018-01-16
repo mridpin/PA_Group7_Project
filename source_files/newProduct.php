@@ -18,21 +18,22 @@ This structure is a WIP, so you can edit it as much as your want.
         $components = getAllComponents();
         
 
-        function firstForm() {
+        function computerForm() {
 
-            $hdCode = "CP_HD";
-            $ramCode = "CP_RAM";
-            $mbCode = "CP_MB";
-            $cpuCode = "CP_CPU";
-            $gpuCode="CP_GPU";
-            $osCode="CP_OS";
-            $csCode="CP_CS";
-            $msCode="PB_MS";
-            $mnCode="PB_MN";
-            $kbCode="PB_KB";
+            $hdCode = "CP_PC_HD";
+            $ramCode = "CP_PC_RAM";
+            $mbCode = "CP_PC_MB";
+            $cpuCode = "CP_PC_CPU";
+            $gpuCode="CP_PC_GPU";
+            $osCode="CP_PC_OS";
+            $csCode="CP_PC_CS";
+            $msCode="PB_PC_MS";
+            $mnCode="PB_PC_MN";
+            $kbCode="PB_PC_KB";
             
             //Hardrive Segment
-            $result = "<form action='newProduct.php' method='POST'>"
+            $result = "<h2>Select your Computer Components</h2>"
+                    ."<form action='newProduct.php' method='POST'>"
                     . "Main Hard Drive: <select name='hd'>";
 
             
@@ -81,7 +82,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .="</select>"
                     ."<br/>"
                     ."<br/>"
-                    . "GPU: <select name='cgpu'>";
+                    . "GPU: <select name='gpu'>";
             
             $singleComponent = getSingleComponents($gpuCode); 
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -167,14 +168,178 @@ This structure is a WIP, so you can edit it as much as your want.
                 $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
             }
             
-            //TODO: Add OS Option
             
             $result .="</select>" 
                     ."<br/>"
-                    . "<input type='submit' name='firstForm' value='Next'>"
+                    . "<input type='submit' name='firstForm' value='Make order'>"
                     . "</form>";
 
             //TODO: Add total amount of selected components
+            
+            echo $result;
+        }
+        
+        function phoneForm()
+        {
+            
+            $scCode = "CP_PH_SC";
+            $cpuCode = "CP_PH_CPU";
+            $ramCode = "CP_PH_RAM";
+            $hdCode = "CP_PH_HD";
+            $gpuCode="CP_PH_GPU";
+            $bdCode="CP_PH_BD";
+            $osCode="CP_PH_OS";
+            $fcCode="CP_PH_FASTCHARGING";
+            $hpCode="CP_PH_JACK";
+            $nfcCode="CP_PH_NFC";
+            $cmCode="CP_PH_CM";
+            $usbCode="CP_PH_USB";
+            $wrCode="CP_PH_WIRELESS";
+            $frCode="CP_PH_FINGER";
+            $btCode="CP_PH_BT";
+            
+            //Screen Segment
+            $result = "<h2>Select your Phone Components</h2>"
+                    ."<form action='newProduct.php' method='POST'>"
+                    . "Screen: <select name='screen'>";
+
+            
+            
+            $singleComponent = getSingleComponents($scCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //CPU Hardrive Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "CPU: <select name='cpu'>";
+            
+            $singleComponent = getSingleComponents($cpuCode); 
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+             //RAM Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "RAM: <select name='ram'>"; 
+            
+           
+            $singleComponent = getSingleComponents($ramCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+             //HD Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Storage: <select name='hd'>"; 
+            
+           
+            $singleComponent = getSingleComponents($hdCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //GPU Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "GPU: <select name='gpu'>";
+            
+            $singleComponent = getSingleComponents($gpuCode); 
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //Camera Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Camera: <select name='camera'>";
+            
+            $singleComponent = getSingleComponents($cmCode); 
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //Baterry Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Battery: <select name='battery'>";
+            
+            $singleComponent = getSingleComponents($btCode); 
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //USB Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "USB: <select name='usb'>";
+            
+            $singleComponent = getSingleComponents($usbCode); 
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //Body Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Body: <select name='body'>";
+            
+            $singleComponent = getSingleComponents($bdCode); 
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //OS Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Operating System: <select name='os'>";
+            
+            $singleComponent = getSingleComponents($osCode); 
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //Extra Components
+            $result.="</select>"
+                    . "<h4>Additional Components</h4>";
+            
+            $result .="<br/>" 
+                    ."Fast Charging? ($". getSingleComponents($fcCode)[0][1].")<input type='checkbox' name='fcharging' value='fchargin'><br/><br/>"
+                    ."Headphone Jack? ($". getSingleComponents($hpCode)[0][1].")<input type='checkbox' name='headphone' value='headphone'><br/><br/>"
+                    ."NFC? ($". getSingleComponents($nfcCode)[0][1].")<input type='checkbox' name='nfc' value='nfc'><br/><br/>"
+                    ."Wireless Charging? ($". getSingleComponents($wrCode)[0][1].")<input type='checkbox' name='wireless' value='wireless'><br/><br/>"
+                    ."Fingerprint Reader? ($". getSingleComponents($frCode)[0][1].")<input type='checkbox' name='finger' value='finger'><br/><br/>";
+            
+            $result .="<input type='submit' name='firstForm' value='Make order'>"
+                    . "</form>";
+            
+            
+            
+            echo $result;
+            
+            
+        }
+        
+        //TODO: Figure out a way to display all Prebuilt product effectively (not with a select, maybe like on php test)
+        function productForm()
+        {
+            $pbCode="PB";
+            
+            $products = getSingleComponents($pbCode);
+            
+            $result = "<h2>Select your Products</h2>";
             
             echo $result;
         }
@@ -220,7 +385,7 @@ This structure is a WIP, so you can edit it as much as your want.
             {
                   if(strpos($components[$i][0],$code)!==false)
                   {
-                      $result[$j][0]=substr($components[$i][0],3);
+                      $result[$j][0]=substr($components[$i][0],6);
                       $result[$j][1]=$components[$i][1];
                       $j++;
                   }
@@ -251,18 +416,21 @@ This structure is a WIP, so you can edit it as much as your want.
         -->
         <div>
 
-            <!--
-                TODO: This might change depending on the product that we chose previously
-            -->
-            <h2>Select your products</h2>
-
             <section>
                 
                 <?php
                 
-                if (!isset($_POST['firstForm'])) {
-                      firstForm();
-              }
+                if (isset($_POST['computer'])) {
+                      computerForm();
+                }
+                else if (isset($_POST['phone']))
+                {
+                      phoneForm();
+                }
+                else
+                {
+                    productForm();
+                }
         
                 
                 ?>
