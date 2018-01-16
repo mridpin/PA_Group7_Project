@@ -25,6 +25,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $mbCode = "CP_MB";
             $cpuCode = "CP_CPU";
             $gpuCode="CP_GPU";
+            $osCode="CP_OS";
             $csCode="CP_CS";
             $msCode="PB_MS";
             $mnCode="PB_MN";
@@ -95,6 +96,19 @@ This structure is a WIP, so you can edit it as much as your want.
             
             
             $singleComponent = getSingleComponents($mbCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //OS Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Operating System: <select name='os'>"
+                    ."<option value='-' name='-'>-</option>"; 
+            
+            
+            $singleComponent = getSingleComponents($osCode);     
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
                 $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
             }
@@ -208,6 +222,7 @@ This structure is a WIP, so you can edit it as much as your want.
                   {
                       $result[$j][0]=substr($components[$i][0],3);
                       $result[$j][1]=$components[$i][1];
+                      $j++;
                   }
             }
             
