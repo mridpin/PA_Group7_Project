@@ -19,7 +19,10 @@ This structure is a WIP, so you can edit it as much as your want.
         
 
         function computerForm() {
-
+            
+            //TODO: Add a CD option and a Display port option
+            
+            
             $hdCode = "CP_PC_HD";
             $ramCode = "CP_PC_RAM";
             $mbCode = "CP_PC_MB";
