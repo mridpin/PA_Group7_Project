@@ -76,7 +76,7 @@ This structure is a WIP, so you can edit it as much as your want.
                 $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
             }
             
-            //GPU Hardrive Segment
+            //GPU Segment
             $result .="</select>"
                     ."<br/>"
                     ."<br/>"
@@ -153,7 +153,7 @@ This structure is a WIP, so you can edit it as much as your want.
                 $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
             }
             
-            
+            //TODO: Add OS Option
             
             $result .="</select>" 
                     ."<br/>"
@@ -206,7 +206,6 @@ This structure is a WIP, so you can edit it as much as your want.
             {
                   if(strpos($components[$i][0],$code)!==false)
                   {
-                      //TODO: Make a function that does this since it's going to be the same for all the components
                       $result[$j][0]=substr($components[$i][0],3);
                       $result[$j][1]=$components[$i][1];
                   }
