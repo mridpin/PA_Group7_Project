@@ -20,9 +20,6 @@ This structure is a WIP, so you can edit it as much as your want.
 
         function computerForm() {
             
-            //TODO: Add a CD option and a Display port option
-            
-            
             $hdCode = "CP_PC_HD";
             $ramCode = "CP_PC_RAM";
             $mbCode = "CP_PC_MB";
@@ -33,6 +30,9 @@ This structure is a WIP, so you can edit it as much as your want.
             $msCode="PB_PC_MS";
             $mnCode="PB_PC_MN";
             $kbCode="PB_PC_KB";
+            $dsCode="CP_PC_DS";
+            $ddCode="CP_PC_DD";
+            $usbCode="CP_PC_USB";
             
             //Hardrive Segment
             $result = "<h2>Select your Computer Components</h2>"
@@ -103,6 +103,59 @@ This structure is a WIP, so you can edit it as much as your want.
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
                 $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
             }
+            
+            //Display port Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Main Display Port: <select name='mDS'>"; 
+            
+            
+            $singleComponent = getSingleComponents($dsCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //Second Display Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Second Display port: <select name='sDS'>"
+                    ."<option value='-' name='-'>-</option>"; 
+   
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            //USB Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "USB Port: <select name='usb'>"
+                    ."<option value='-' name='-'>-</option>"; 
+            
+            
+            $singleComponent = getSingleComponents($usbCode);     
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
+            $result.="</select>"
+                    ."<br/>"
+                    . "<br/>"
+                    ."Number of USB Ports: <input type='number' name='nusb' min='1' value='1'/>";
+            
+            //Disk Drive Segment
+            $result .="</select>"
+                    ."<br/>"
+                    ."<br/>"
+                    . "Disk Drive: <select name='diskDrive'>";
+            
+            $singleComponent = getSingleComponents($ddCode); 
+            for ($i = 0; $i < sizeof($singleComponent); $i++) {
+                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $". $singleComponent[$i][1]."</option>";
+            }
+            
             
             //OS Segment
             $result .="</select>"
