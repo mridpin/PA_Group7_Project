@@ -212,21 +212,21 @@ function printAddressDetails() {
                 <section>
                     <h3>Admin Actions</h3>
 
-                    <form action="manageProduct.php.php" method="POST">
+                    <form action="manageProduct.php" method="POST">
 
                         <br/>
                         <input name="newProduct" type="submit" value="New Product"/>
 
                     </form>
 
-                    <form action="manageProduct.php.php" method="POST">
+                    <form action="manageProduct.php" method="POST">
 
                         <br/>
                         <input name="editProduct" type="submit" value="Edit Product"/>
 
                     </form>
 
-                    <form action="manageProduct.php.php" method="POST">
+                    <form action="manageProduct.php" method="POST">
 
                         <br/>
                         <input name="deleteProduct" type="submit" value="Delete Product"/>

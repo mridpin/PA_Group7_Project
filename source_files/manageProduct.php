@@ -10,30 +10,151 @@ This structure is a WIP, so you can edit it as much as your want.
     <body>
         <?php
         include 'functions.php';
-	require_once 'functions.php';
+        require_once 'functions.php';
+
+        //TODO: First number input to know how many products we are going to add, for now only 1 at a time 
+        function newProduct() {
+            ?>
+            <h3>Complete the following form to add a new product:</h3>
+        <form method="POST" action="manageProduct.php">
+                <table border="1">
+                    <tr>
+                        <th><b>Type of product</b></th>
+                        <th><b>Product Category</b></th>
+                        <th><b>Name</b></th>
+                        <th><b>Stock</b></th>
+                        <th><b>Price per unit</b></th>
+                    </tr>
+                    <tr>
+                        <td><select name="type">
+                                <option value="CP_">Component</option>
+                                <option value="PB_">Product</option>
+                            </select>
+                        </td>
+                        <td><select name="category">
+                                <option value="-">-</option>
+                                <option value="PC_">PC</option>
+                                <option value="PH_">Phone</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="name" placeholder="Enter the Product name"/>
+                        </td>
+                        <td>
+                            <input type="number" name="stock" value="1" min="1"/>
+                        </td>
+                        <td>
+                            <input type="text" name="pru" placeholder="Enter the product's price "/>
+                        </td>
+                        
+                    </tr>
+                </table>
+            
+                <input type="submit" name="submitNewProduct" value="Submit">
+            </form>
+
+
+            <?php
+        }
+
+        function addNewProduct()
+        {
+            $error = [];
+            
+            if (!isset($_POST["name"]) || $_POST["name"] == "") {
+                $error[] = "Name can't be empty";
+            }
+            if (!isset($_POST["stock"]) || $_POST["stock"]<=0 || !filter_var($_POST["stock"],FILTER_VALIDATE_INT)) {
+                $error[] = "Stock can't be empty or less than 0 and can't contain letters";
+            }
+            if (!isset($_POST["pru"]) || $_POST["pru"]<=0 || !filter_var($_POST["pru"],FILTER_VALIDATE_FLOAT)) {
+                $error[] = "Price per unit can't be empty or less than 0 and can't contain letters";
+            }
+            
+            //No errors were found
+            if(empty($error))
+            {
+                
+                $link = createConnection();
+                // Sanitize all inputs
+                $name = mysqli_real_escape_string($link, $_POST['name']);
+                $stock = mysqli_real_escape_string($link, $_POST['stock']);
+                $pru = mysqli_real_escape_string($link, $_POST['pru']);
+                $type = $_POST['type'];
+                $category = $_POST['category'];
+                
+                //Different code name depending on what we want to insert
+                $finalName="";
+                if($type=="CP_")
+                {
+                    $finalName = $type.$category.$name;
+                }
+                else
+                {
+                    $finalName = $type.$name;
+                }
+                
+                $sql1 = "INSERT INTO products (name,stock,price) VALUES ('" . $finalName . "', '" .$stock . "', '" . $pru . "')";
+                $result1 = mysqli_query($link, $sql1);
+                
+                //Product already exists
+                if(!$result1)
+                {
+                    $error[] = "Product already registered";
+                    mysqli_close($link);
+                }
+                else {
+                    // If insert successful, close connection and go to account page                   
+                    mysqli_close($link);
+                    header("Location: account.php");
+                }
+                
+                
+                
+            }           
+             if (isset($error)) {
+                echo printErrorMessage($error);
+            }
+            
+            
+        }
+
+
+
         ?>
-        
+
         <div>
-            
+
             <a href="index.php"><p>Insert Logo Here</p></a>
-            
+
         </div>
-        
+
         <!--
         
         Depending on what we choose, we are shown a different form
         
         -->
         <div>
+
             
-            <h3>Select and Option</h3>
+
+            <?php
+            
+            if (isset($_POST['newProduct'])) {
+                newProduct();
+            }
+            else  if (isset($_POST['submitNewProduct']))
+            {
+                addNewProduct();
+            }
             
             
-            
-            
+            ?>
+
+
         </div>
-        
+
         <footer>Legal stuff goes here</footer>
-        
+
     </body>
 </html>
