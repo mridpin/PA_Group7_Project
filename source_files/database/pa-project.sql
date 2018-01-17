@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-01-2018 a las 22:16:10
+-- Tiempo de generación: 17-01-2018 a las 19:07:08
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -127,9 +127,9 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`product_id`, `name`, `stock`, `price`) VALUES
 (1, 'CP_PC_HD250GB', 5, 50),
 (2, 'CP_PC_RAMDDR2GB', 3, 30),
-(3, 'PB_PS4500GB', 5, 300),
+(3, 'PB_X_PS4500GB', 5, 300),
 (4, 'CP_PC_MBASUS', 2, 100),
-(5, 'PB_XBOXONE500GB', 1, 300),
+(5, 'PB_X_XBOXONE500GB', 1, 300),
 (6, 'CP_PC_CPUi7', 2, 500),
 (7, 'CP_PC_GPUNVIDIAGTX800', 7, 230),
 (8, 'CP_PC_CSCOOLERMASTER', 10, 40),
@@ -164,7 +164,9 @@ INSERT INTO `products` (`product_id`, `name`, `stock`, `price`) VALUES
 (39, 'CP_PC_USB3.0', 30, 10),
 (40, 'CP_PC_USBC', 20, 20),
 (41, 'CP_PC_DDDVD', 20, 10),
-(42, 'CP_PC_DDCD', 20, 5);
+(42, 'CP_PC_DDCD', 20, 5),
+(46, 'CP_PC_CPUi5', 1, 150),
+(47, 'PB_X_TV40', 3, 300);
 
 -- --------------------------------------------------------
 
@@ -187,7 +189,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `type`, `name`, `password`, `last_name`, `address`, `email`) VALUES
-(1, 'user', 'Mike', '$2y$10$33T7801.WlhAzLbMViJ4LedCHuXrcVe6pbN5o3a9IYSzYlFTRat5u', 'Hunt', 1, 'mikehunt@gmail.com'),
+(1, 'admin', 'Mike', '$2y$10$33T7801.WlhAzLbMViJ4LedCHuXrcVe6pbN5o3a9IYSzYlFTRat5u', 'Hunt', 1, 'mikehunt@gmail.com'),
 (17, 'user', 'manuel', '$2y$10$LrpjhxMNIYVg4TYKPRSxr.bV2dx9dvWWqSjf.u7owJsOVsXDM/yP.', 'qweqweqwe', 0, 'qweqweqeqe@asdasd.com'),
 (20, 'user', 'mridpin@alu.upo.es', '$2y$10$kMAin/G.sAZHrtHtN44ZqeiA8tQouyVUZlJRQQf5Xg66Xw7FH1NOu', 'qweqweqwe', 0, 'mridpin@alu.upo.eeees');
 
@@ -302,7 +304,7 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
