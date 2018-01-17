@@ -38,11 +38,6 @@ This structure is a WIP, so you can edit it as much as your want.
                             aux=1;
                             break;
                         }
-                        case "searchName":
-                        {
-                            aux=2;
-                            break;
-                        }
                     }
 
                 // Loop through all table rows, and hide those who don't match the search query
@@ -59,9 +54,8 @@ This structure is a WIP, so you can edit it as much as your want.
                     }
                 }
             }
-            
-            
         </script>
+        
         <?php
         include 'functions.php';
         require_once 'functions.php';
@@ -161,7 +155,6 @@ This structure is a WIP, so you can edit it as much as your want.
             $result = "<h3>Search the products you wish to edit:</h3>
                 <input type='text' id='searchType' onkeyup='searchFunction(this)' placeholder='Search by Type'>
                 <input type='text' id='searchCategory' onkeyup='searchFunction(this)' placeholder='Search by Category'>
-                <input type='text' id='searchName' onkeyup='searchFunction(this)' placeholder='Search by Name'>
                 <table id ='productTable' border='1'>
                     <tr>
                         <th><b>Type of product</b></th>
