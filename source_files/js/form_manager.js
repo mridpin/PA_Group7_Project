@@ -8,7 +8,7 @@ $(document).ready(function () {
         focusCleanup: true,
         rules: {
             username: {
-                minlength: 2  
+                minlength: 2
             },
             password: {
                 minlength: 8
@@ -38,7 +38,7 @@ $(document).ready(function () {
             },
             email: {
                 required: "We need your email address to contact you",
-                email: "Your email address must be in the format of name@domain.com"
+                email: "Email must be in the format name@domain.com"
             },
             zipCode: {
                 required: "A valid zipcode is needed for shipping",
@@ -50,9 +50,22 @@ $(document).ready(function () {
                 minlength: jQuery.validator.format("Street too short!"),
             },
             number: "A valid zipcode is needed for shipping",
-        }
+        },
+        // Place the error message between the label and the input and paint it red
+        errorPlacement: function (error, element) {
+            error.insertBefore(element);
+            error.addClass("w3-text-white");
+            error.addClass("w3-red");
+        },
+        // Hightlight the input red when errors and remove them when valid
+        highlight: function (element) {
+            $(element).addClass("w3-border-red");
+        },
+        unhighlight: function (element) {
+            $(element).removeClass("w3-border-red");
+        },
     });
-    $(".account_form").validate({
+    $("#account_form").validate({
         focusCleanup: true,
         rules: {
             username: {
@@ -66,7 +79,7 @@ $(document).ready(function () {
             username: {
                 required: "Please specify your name",
                 minlength: jQuery.validator.format("Name too short!"),
-            },            
+            },
             last_name: {
                 required: "Please specify your last name",
                 minlength: jQuery.validator.format("Last name too short!"),
@@ -75,9 +88,22 @@ $(document).ready(function () {
                 required: "We need your email address to contact you",
                 email: "Your email address must be in the format of name@domain.com"
             },
-        }
+        },
+        // Place the error message between the label and the input and paint it red
+        errorPlacement: function (error, element) {
+            error.insertBefore(element);
+            error.addClass("w3-text-white");
+            error.addClass("w3-red");
+        },
+        // Hightlight the input red when errors and remove them when valid
+        highlight: function (element) {
+            $(element).addClass("w3-border-red");
+        },
+        unhighlight: function (element) {
+            $(element).removeClass("w3-border-red");
+        },
     });
-    $(".address_form").validate({
+    $("#address_form").validate({
         focusCleanup: true,
         rules: {
             street: {
@@ -98,6 +124,19 @@ $(document).ready(function () {
                 minlength: jQuery.validator.format("Street too short!"),
             },
             number: "A valid zipcode is needed for shipping",
-        }
+        },
+        // Place the error message between the label and the input and paint it red
+        errorPlacement: function (error, element) {
+            error.insertBefore(element);
+            error.addClass("w3-text-white");
+            error.addClass("w3-red");
+        },
+        // Hightlight the input red when errors and remove them when valid
+        highlight: function (element) {
+            $(element).addClass("w3-border-red");
+        },
+        unhighlight: function (element) {
+            $(element).removeClass("w3-border-red");
+        },
     });
 });
