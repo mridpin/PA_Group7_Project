@@ -237,6 +237,12 @@ function printAddressDetails() {
                 <?php
                 
                     }
+                    else
+                    {
+                       echo "<section>
+                    <h3>Order History</h3>
+                     </section>"; 
+                    }
                     
                  ?>
                         

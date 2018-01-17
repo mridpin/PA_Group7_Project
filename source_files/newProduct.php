@@ -400,36 +400,7 @@ This structure is a WIP, so you can edit it as much as your want.
             echo $result;
         }
 
-        //Gets all of the components in the DB
-        function getAllComponents() {
-
-            $con = createConnection();
-            $sentencia = "SELECT * FROM products";
-            $query = mysqli_query($con, $sentencia);
-
-            if ($query) {
-
-                $i = 0;
-                /*
-                 * We only get the name and the price, if we also get the stock
-                 * there may be another order currenty in progress.
-                 */
-                while ($raw_Components = mysqli_fetch_array($query)) {
-                    $result[$i][0] = $raw_Components["name"];
-                    $result[$i][1] = $raw_Components["price"];
-                    $i++;
-                }
-
-                mysqli_free_result($query);
-                mysqli_close($con);
-            } else {
-                mysqli_close($con);
-                die("ERROR: No se ha podido ejecutar la sentencia");
-            }
-
-
-            return $result;
-        }
+        
 
         //Gets a particular component depending on the code given as parameter variable
 

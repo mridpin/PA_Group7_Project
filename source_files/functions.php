@@ -554,4 +554,32 @@ function printWelcome() {
     }
 }
 
+//Gets all of the components in the DB
+function getAllComponents() {
+
+    $con = createConnection();
+    $sentencia = "SELECT * FROM products";
+    $query = mysqli_query($con, $sentencia);
+
+    if ($query) {
+
+        $i = 0;
+        while ($raw_Components = mysqli_fetch_array($query)) {
+            $result[$i][0] = $raw_Components["name"];
+            $result[$i][1] = $raw_Components["price"];
+            $result[$i][2] = $raw_Components["stock"];
+            $i++;
+        }
+
+        mysqli_free_result($query);
+        mysqli_close($con);
+    } else {
+        mysqli_close($con);
+        die("ERROR: No se ha podido ejecutar la sentencia");
+    }
+
+
+    return $result;
+}
+
 ?>

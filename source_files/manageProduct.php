@@ -32,7 +32,7 @@ This structure is a WIP, so you can edit it as much as your want.
                             </select>
                         </td>
                         <td><select name="category">
-                                <option value="-">-</option>
+                                <option value="X_">-</option>
                                 <option value="PC_">PC</option>
                                 <option value="PH_">Phone</option>
                             </select>
@@ -84,15 +84,7 @@ This structure is a WIP, so you can edit it as much as your want.
                 $category = $_POST['category'];
                 
                 //Different code name depending on what we want to insert
-                $finalName="";
-                if($type=="CP_")
-                {
-                    $finalName = $type.$category.$name;
-                }
-                else
-                {
-                    $finalName = $type.$name;
-                }
+                $finalName=$type.$category.$name;;
                 
                 $sql1 = "INSERT INTO products (name,stock,price) VALUES ('" . $finalName . "', '" .$stock . "', '" . $pru . "')";
                 $result1 = mysqli_query($link, $sql1);
@@ -118,6 +110,88 @@ This structure is a WIP, so you can edit it as much as your want.
             
             
         }
+        
+        function editProduct()
+        {
+            $result="<h3>Search the products you wish to edit:</h3>
+                <table border='1'>
+                    <tr>
+                        <th><b>Type of product</b></th>
+                        <th><b>Product Category</b></th>
+                        <th><b>Name</b></th>
+                        <th><b>Stock</b></th>
+                        <th><b>Price per unit</b></th>
+                        <th><b>Action</b></th>
+                    </tr>";
+            
+            $components = getAllComponents();
+            
+            
+            for($i=0;$i<sizeof($components);$i++)
+            {
+                $product = $components[$i];
+                    $result.="<tr>"
+                            . "<td><select name='type'>";
+                    
+                    $name = explode("_", $product[0]);
+                    
+                    
+                    //Component or normal product
+                    if($name[0]=="CP")
+                    {
+                        $result.="<option value='CP_'>Component</option>";
+                    }
+                    else
+                    {
+                        $result.="<option value='PB_'>Product</option>";
+                    }
+                    
+                    $result.="</select></td>";
+                    
+                    //Category
+                    
+                     $result.="<td><select name='type'>";
+                     
+                     if($name[1]=="PC")
+                    {
+                        $result.="<option value='PC_'>PC</option>";
+                    }
+                    else  if($name[1]=="PH")
+                    {
+                        $result.="<option value='PH_'>Phone</option>";
+                    }
+                    else
+                    {
+                        $result.="<option value='X_'>-</option>";
+                    }
+                    
+                    $result.="</select></td>";
+                    //Name
+                    
+                    $result.="<td>"
+                            . "<input type='text' name='name' value='".$name[2]."'/>"
+                            . "</td>";
+                                       
+                    //Stock
+                    $result.="<td>"
+                            . "<input type='text' name='stock' value='".$product[2]."'/>"
+                            . "</td>";
+                    
+                    //Price per unit
+                    $result.="<td>"
+                            . "<input type='text' name='pru' value='".$product[1]."'/>"
+                            . "</td>";
+                    
+                    //Last option
+                    //TODO: When clicked, Update DB
+                    $result.="<td>"
+                            . " <button type='button' name='".$product[0]."'>Edit Product</button>"
+                            . "</td>";
+            }
+            $result.="</table>";
+            
+            echo $result;
+        }
 
 
 
@@ -131,7 +205,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
         <!--
         
-        Depending on what we choose, we are shown a different form
+        Depending on what we chose, we are shown a different form
         
         -->
         <div>
@@ -146,6 +220,10 @@ This structure is a WIP, so you can edit it as much as your want.
             else  if (isset($_POST['submitNewProduct']))
             {
                 addNewProduct();
+            }
+            else if (isset($_POST['editProduct']))
+            {
+                editProduct();
             }
             
             
