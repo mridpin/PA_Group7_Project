@@ -14,15 +14,16 @@ session_start();
     <head>
         <meta charset="UTF-8">
         <title>Users Login</title>
+        <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
-    <body>
+    <body class="w3-light-grey">
 
 
-        <div>
+        <header class="w3-teal w3-text-white w3-container w3-center">
 
             <a href="index.php"><p>Insert Logo Here</p></a>
 
-        </div>
+        </header>
 
         <?php
 
@@ -30,35 +31,28 @@ session_start();
             ?>
 
 
-            <div>
-
-                <h2>Please enter your login credentials</h2>
-
-            </div>
-
-            <div>
-
-                <form action="login.php" method="POST">
-
-                    Email: <input name="username" type="text"/>
-                    <br/>
-                    <br/>
-                    Password: <input name="password" type="password"/>
-                    <br/>
-                    <br/>
-                    <input name="login" type="submit" value="Submit"/>
-
-                </form>
-
-                <form action="register.php" method="GET">
-
-                    <br/>
-                    <input name="submit" type="submit" value="Register"/>
-
-                </form>
-
-
-            </div>
+            <article class="w3-container w3-margin w3-display-middle">
+                <section class="w3-card">
+                    <div class="w3-teal w3-text-white w3-container w3-center">
+                        <h2>Welcome to PC GalaxyNova</h2>
+                    </div>
+                    <div class="w3-container w3-padding-16 w3-white">
+                        <form action="login.php" method="POST">
+                            Email: <input class="w3-input w3-hover-grey" name="username" type="text"/>
+                            <br/>
+                            <br/>
+                            Password: <input class="w3-input w3-hover-grey" name="password" type="password"/>
+                            <br/>
+                            <br/>
+                            <input class="w3-block w3-button w3-teal" name="login" type="submit" value="Submit"/>
+                        </form>
+                        <form action="register.php" method="GET">
+                            <br/>
+                            <input class="w3-block w3-button w3-teal" name="submit" type="submit" value="Register"/>
+                        </form>
+                    </div>
+                </section>
+            </article>
 
 
             <?php
@@ -109,7 +103,7 @@ session_start();
 
         <br />
 
-        <footer>Legal stuff goes here</footer>
-
+        <footer class="w3-container w3-bottom w3-teal">Legal stuff goes here</footer>
+ 
     </body>
 </html>
