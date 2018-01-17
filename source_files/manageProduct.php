@@ -45,7 +45,6 @@ This structure is a WIP, so you can edit it as much as your want.
 
                     td = tr[i].getElementsByTagName("td")[aux];
                     if (td) {
-                        //Name searchBox doesn't work right with textContent but it does with innerHTML
                         if (td.textContent.toUpperCase().indexOf(filter) > -1) {
                             tr[i].style.display = "";
                         } else {
