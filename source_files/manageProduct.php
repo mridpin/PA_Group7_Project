@@ -28,26 +28,7 @@ This structure is a WIP, so you can edit it as much as your want.
             
             <h3>Select and Option</h3>
             
-            <form action="manageProduct.php.php" method="POST">
-
-                    <br/>
-                    <input name="submit" type="submit" value="New Product"/>
-
-            </form>
             
-            <form action="manageProduct.php.php" method="POST">
-
-                    <br/>
-                    <input name="submit" type="submit" value="Edit Product"/>
-
-            </form>
-            
-            <form action="manageProduct.php.php" method="POST">
-
-                    <br/>
-                    <input name="submit" type="submit" value="Delete Product"/>
-
-            </form>
             
             
         </div>

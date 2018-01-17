@@ -27,7 +27,7 @@ function accountDetails() {
 function showAccountDetails() {
     $info = accountDetails();
     $result = "";
-    $result .= "Name: <input class='details_input' type='text' name='username' value='" . $info["name"] ."' required='required' /><br />";
+    $result .= "Name: <input class='details_input' type='text' name='username' value='" . $info["name"] . "' required='required' /><br />";
     $result .= "Last Name: <input class='details_input' type='text' name='last_name' value='" . $info["last_name"] . "' required='required' /><br />";
     $result .= "Email: <input class='details_input' type='email' name='email' value='" . $info["email"] . "' required='required' /><br />";
 
@@ -201,6 +201,45 @@ function printAddressDetails() {
                 <section>
                     <h3>Payment Methods</h3>
                 </section>
+
+                <?php
+                
+                    //If we are admin, we are shown admin options
+                
+                    if($_SESSION["type"]=="admin")
+                    {
+                ?>
+                <section>
+                    <h3>Admin Actions</h3>
+
+                    <form action="manageProduct.php.php" method="POST">
+
+                        <br/>
+                        <input name="newProduct" type="submit" value="New Product"/>
+
+                    </form>
+
+                    <form action="manageProduct.php.php" method="POST">
+
+                        <br/>
+                        <input name="editProduct" type="submit" value="Edit Product"/>
+
+                    </form>
+
+                    <form action="manageProduct.php.php" method="POST">
+
+                        <br/>
+                        <input name="deleteProduct" type="submit" value="Delete Product"/>
+
+                    </form>
+                </section>
+                        
+                <?php
+                
+                    }
+                    
+                 ?>
+                        
 
                 <section>
                     <h3>Delete Account</h3>

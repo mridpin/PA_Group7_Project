@@ -548,7 +548,7 @@ function checkSession($location = "login") {
 function printWelcome() {
     if (isset($_SESSION["user"])) {
         echo "Welcome back, " . $_SESSION["user"] . "!";
-        echo "<div class='linkToAccount'><a href='account.php'>My Account</a></div>";
+        echo "<div class='linkToAccount'><a href='account.php'>My Account</a><a href='logout.php'>Logout</a></div>";
     } else {
         echo "<a href='login.php'><p>Login/Register</p></a>";
     }
