@@ -30,12 +30,12 @@ This structure is a WIP, so you can edit it as much as your want.
                     {
                         case "searchType":
                         {
-                            aux=0;
+                            aux=1;
                             break;
                         }
                         case "searchCategory":
                         {
-                            aux=1;
+                            aux=2;
                             break;
                         }
                     }
@@ -156,6 +156,7 @@ This structure is a WIP, so you can edit it as much as your want.
                 <input type='text' id='searchCategory' onkeyup='searchFunction(this)' placeholder='Search by Category'>
                 <table id ='productTable' border='1'>
                     <tr>
+                        <th><b>Product ID</b></th>
                         <th><b>Type of product</b></th>
                         <th><b>Product Category</b></th>
                         <th><b>Name</b></th>
@@ -169,7 +170,11 @@ This structure is a WIP, so you can edit it as much as your want.
 
             for ($i = 0; $i < sizeof($components); $i++) {
                 $product = $components[$i];
+                
+                
+                
                 $result .= "<tr>"
+                        ."<td>".$product[3]."</td>"
                         . "<td><select name='type'>";
 
                 $name = explode("_", $product[0]);

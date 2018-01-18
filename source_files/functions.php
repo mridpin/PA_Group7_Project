@@ -568,6 +568,7 @@ function getAllComponents() {
             $result[$i][0] = $raw_Components["name"];
             $result[$i][1] = $raw_Components["price"];
             $result[$i][2] = $raw_Components["stock"];
+            $result[$i][3] = $raw_Components["product_id"];
             $i++;
         }
 
