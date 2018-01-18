@@ -470,7 +470,7 @@ This structure is a WIP, so you can edit it as much as your want.
         
         <br/>
 
-        <footer>Legal stuff goes here</footer>
+        <?php include("footer.php"); ?>
 
     </body>
 </html>

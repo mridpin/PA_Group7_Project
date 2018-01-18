@@ -48,7 +48,7 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
 
         </div>
 
-        <footer>Legal stuff goes here</footer>
+        <?php include("footer.php"); ?>
 
     </body>
 </html>

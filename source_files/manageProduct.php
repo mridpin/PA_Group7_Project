@@ -224,7 +224,7 @@ This structure is a WIP, so you can edit it as much as your want.
         
 
         function searchProduct() {
-            $result = "<h3>Search the products you wish to edit:</h3>
+            $result = "<h3>Search the products you wish to perfom the action on:</h3>
                 <input type='text' id='searchType' onkeyup='searchFunction(this)' placeholder='Search by Type'>
                 <input type='text' id='searchCategory' onkeyup='searchFunction(this)' placeholder='Search by Category'>
                 <table id ='productTable' border='1'>
@@ -352,7 +352,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
         </div>
 
-        <footer>Legal stuff goes here</footer>
+        <?php include("footer.php"); ?>
 
     </body>
 </html>
