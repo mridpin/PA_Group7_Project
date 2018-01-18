@@ -10,7 +10,7 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
     </head>
     <body>
         <div>
-            <a href="index.php"><p>Insert Logo Here</p></a>
+            <?php include("header.php"); ?>
         </div>
 
         <div class="userMenu">
@@ -18,6 +18,7 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
             if (isset($_SESSION["user"])) {
                 echo "Welcome back, " . $_SESSION["user"] . "!";
                 echo "<div class='linkToAccount'><a href='account.php'>My Account</a></div>";
+                echo "<div class='linkToAccount'><a href='logout.php'>Logout</a></div>";
             } else {
                 echo "<a href='login.php'><p>Login/Register</p></a>";
             }

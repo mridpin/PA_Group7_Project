@@ -427,7 +427,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
         <div>
 
-            <a href="index.php"><p>Insert Logo Here</p></a>
+           <?php include("header.php"); ?>
 
         </div>
 
