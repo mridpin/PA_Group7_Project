@@ -1,0 +1,1 @@
+<footer class="w3-container w3-bottom w3-teal">Legal stuff goes here</footer>

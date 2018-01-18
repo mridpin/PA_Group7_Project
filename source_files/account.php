@@ -27,9 +27,9 @@ function accountDetails() {
 function showAccountDetails() {
     $info = accountDetails();
     $result = "";
-    $result .= "Name: <input class='details_input' type='text' name='username' value='" . $info["name"] . "' required='required' /><br />";
-    $result .= "Last Name: <input class='details_input' type='text' name='last_name' value='" . $info["last_name"] . "' required='required' /><br />";
-    $result .= "Email: <input class='details_input' type='email' name='email' value='" . $info["email"] . "' required='required' /><br />";
+    $result .= "Name: <input class='w3-input w3-hover-grey' type='text' name='username' value='" . $info["name"] . "' required='required' /><br />";
+    $result .= "Last Name: <input class='w3-input w3-hover-grey' type='text' name='last_name' value='" . $info["last_name"] . "' required='required' /><br />";
+    $result .= "Email: <input class='w3-input w3-hover-grey' type='email' name='email' value='" . $info["email"] . "' required='required' /><br />";
 
     return $result;
 }
@@ -66,7 +66,7 @@ function printAddressDetails() {
     $result = "";
     $i = 0;
     foreach ($info as $address) {
-        $result .= "<li><ul class='address_list'>";
+        $result .= "<li><ul class='w3-ul'>";
         $result .= "<li class='details_li'>Zipcode: " . $address["zip_code"] . "</li>";
         $result .= "<li class='details_li'>Street: " . $address["street"] . "</li>";
         $result .= "<li class='details_li'>Number: " . $address["number"] . "</li>";
@@ -76,8 +76,8 @@ function printAddressDetails() {
         // This prevents malicious users from trampling with the other user's addresses by F12 and modifiying the value of the form submissions.
         // Now they can only screw with their own addresses
         $result .= "<form method='post' action='addresses.php'><input type='hidden' name='address_number' value='" . $i . "' />" .
-                "<input class='details_button' type='submit' value='Update Address' name='update_address'/>" .
-                "<input class='details_button' type='submit' value='Delete Address' name='delete_address'/></form><br />";
+                "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' value='Update Address' name='update_address'/>" .
+                "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar w3-cell' style='width:50%' type='submit' value='Delete Address' name='delete_address'/></form><br />";
         $result .= "</ul></li>";
         $_SESSION["address_to_modify"][$i] = $address;
         $i++;
@@ -94,8 +94,7 @@ function printAddressDetails() {
         <script src="js/jquery-validation/jquery.validate.js"></script>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
-    <body>
-
+    <body class="w3-light-grey">
 
         <?php
         include("header.php");
@@ -168,29 +167,33 @@ function printAddressDetails() {
                 echo printErrorMessage($error);
             }
             ?>
-            <article class="mainArticle" id="accountInfoArticle">
+            <article class="w3-container w3-threequarter w3-right" id="accountInfoArticle">
                 <h2>Account Information</h2>
 
-                <section class="information_section" id="personal_details_section">
-                    <h3>My Personal Information</h3>
-                    <form id="personal_details_form" class="account_form" method="post" action="account.php">
+                <section class="w3-card" id="personal_details_section">
+                    <div class="w3-teal w3-text-white w3-container w3-center">
+                        <h3>My personal information</h3>
+                    </div>
+                    <form id="personal_details_form" class="w3-container w3-padding-16 w3-white" method="post" action="account.php">
                         <?php
                         echo showAccountDetails();
                         ?>
-                        <input type="submit" name="submitAccountDetails" value="Update Account" />
+                        <input class="w3-block w3-button w3-teal" type="submit" name="submitAccountDetails" value="Update Account" />
                     </form>
                     <script src="js/form_manager.js"></script>
                 </section>
 
-                <section class="information_section" id="addresses_section">
-                    <h3>My Addresses</h3>
-                    <ol class="addresses_list">
+                <section class="w3-card" id="addresses_section">
+                    <div class="w3-teal w3-text-white w3-container w3-center">
+                        <h3>My addresses</h3>
+                    </div>
+                    <ol class="w3-ul">
                         <?php
                         echo printAddressDetails();
                         ?>  
                     </ol>
-                    <form method="POST" action="addresses.php" >
-                        <input type="submit" name="add_address" value="Add addreess" class="details_button" id="add_address_button" />
+                    <form class="w3-container w3-padding-16 w3-white" method="post" action="addresses.php" >
+                        <input class="w3-block w3-button w3-teal" type="submit" name="add_address" value="Add addreess" class="details_button" id="add_address_button" />
                     </form>
                 </section>
 
@@ -199,49 +202,43 @@ function printAddressDetails() {
                 </section>
 
                 <?php
-                
-                    //If we are admin, we are shown admin options
-                
-                    if($_SESSION["type"]=="admin")
-                    {
-                ?>
-                <section>
-                    <h3>Admin Actions</h3>
+                //If we are admin, we are shown admin options
 
-                    <form action="manageProduct.php" method="POST">
+                if ($_SESSION["type"] == "admin") {
+                    ?>
+                    <section>
+                        <h3>Admin Actions</h3>
 
-                        <br/>
-                        <input name="newProduct" type="submit" value="New Product"/>
+                        <form action="manageProduct.php" method="POST">
 
-                    </form>
+                            <br/>
+                            <input name="newProduct" type="submit" value="New Product"/>
 
-                    <form action="manageProduct.php" method="POST">
+                        </form>
 
-                        <br/>
-                        <input name="editProduct" type="submit" value="Edit Product"/>
+                        <form action="manageProduct.php" method="POST">
 
-                    </form>
+                            <br/>
+                            <input name="editProduct" type="submit" value="Edit Product"/>
 
-                    <form action="manageProduct.php" method="POST">
+                        </form>
 
-                        <br/>
-                        <input name="deleteProduct" type="submit" value="Delete Product"/>
+                        <form action="manageProduct.php" method="POST">
 
-                    </form>
-                </section>
-                        
-                <?php
-                
-                    }
-                    else
-                    {
-                       echo "<section>
+                            <br/>
+                            <input name="deleteProduct" type="submit" value="Delete Product"/>
+
+                        </form>
+                    </section>
+
+                    <?php
+                } else {
+                    echo "<section>
                     <h3>Order History</h3>
-                     </section>"; 
-                    }
-                    
-                 ?>
-                        
+                     </section>";
+                }
+                ?>
+
 
                 <section>
                     <h3>Delete Account</h3>
@@ -262,7 +259,7 @@ function printAddressDetails() {
         }
         ?>
 
-        <footer>Legal stuff goes here</footer>
+        <?php include("footer.php"); ?>
 
     </body>
 </html>

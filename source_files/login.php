@@ -13,14 +13,11 @@ session_start();
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
     <body class="w3-light-grey">
-        <header class="w3-teal w3-text-white w3-container w3-center">
-            <a href="index.php"><p>Insert Logo Here</p></a>
-        </header>
-
+        <?php include("header.php"); ?>
         <?php
         function loginForm() {
             ?>
-        
+
             <article class="w3-container w3-margin w3-display-middle w3-mobile">
                 <section class="w3-card">
                     <div class="w3-teal w3-text-white w3-container w3-center">
@@ -93,7 +90,7 @@ session_start();
 
         <br />
 
-        <footer class="w3-container w3-bottom w3-teal">Legal stuff goes here</footer>
- 
+        <?php include("footer.php"); ?>
+
     </body>
 </html>

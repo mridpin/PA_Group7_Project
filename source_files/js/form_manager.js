@@ -65,7 +65,7 @@ $(document).ready(function () {
             $(element).removeClass("w3-border-red");
         },
     });
-    $("#account_form").validate({
+    $("#personal_details_form").validate({
         focusCleanup: true,
         rules: {
             username: {

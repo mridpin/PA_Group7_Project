@@ -21,9 +21,7 @@ require_once 'functions.php';
     </head>
     <body class="w3-light-grey">
     <body class="w3-light-grey">
-        <header class="w3-teal w3-text-white w3-container w3-center">
-            <a href="index.php"><p>Insert Logo Here</p></a>
-        </header>
+        <?php include("header.php");?>
         <article class="w3-container w3-margin w3-display-middle w3-mobile">
             <section class="w3-card">
                 <div class="w3-teal w3-text-white w3-container w3-center">
@@ -113,7 +111,7 @@ require_once 'functions.php';
                     ?>
                     <form class="w3-container w3-padding-16 w3-white" id="register_account_form" action="register.php" method="POST">
                         <label>Email: </label><input class="w3-input w3-hover-grey" name="email" type="email" required='required'/>                        
-                        Password: <input class="w3-input w3-hover-grey" name="password" type="password" required='required'/>
+                        <label>Password: </label><input class="w3-input w3-hover-grey" name="password" type="password" required='required'/>
                         <br/>
                         <label>Name: </label><input class="w3-input w3-hover-grey" name="username" type="text" required='required' />
                         <label>Last Name: </label><input class="w3-input w3-hover-grey" name="lastName" type="text" required='required'/> 
@@ -383,6 +381,6 @@ require_once 'functions.php';
                 <br>
             </section>
         </article>
-        <footer class="w3-container w3-bottom w3-teal">Legal stuff goes here</footer>
+       <?php include("footer.php"); ?>
     </body>
 </html>
