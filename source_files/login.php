@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-This structure is a WIP, so you can edit it as much as your want.
-TODO: If incorrect credentials, still show login form
--->
 
 <?php
 include 'functions.php';
@@ -12,7 +8,7 @@ session_start();
 
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8"></meta>
         <title>Users Login</title>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
@@ -31,18 +27,18 @@ session_start();
                         <h2>Welcome to PC GalaxyNova</h2>
                     </div>
                     <div class="w3-container w3-padding-16 w3-white">
-                        <form action="login.php" method="POST">
-                            Email: <input class="w3-input w3-hover-grey" name="username" type="text"/>
+                        <form action="login.php" method="post">
+                            <label>Email: </label><input class="w3-input w3-hover-grey" name="username" type="text" />
                             <br/>
                             <br/>
-                            Password: <input class="w3-input w3-hover-grey" name="password" type="password"/>
+                            <label>Password: </label><input class="w3-input w3-hover-grey" name="password" type="password" />
                             <br/>
                             <br/>
-                            <input class="w3-block w3-button w3-teal" name="login" type="submit" value="Submit"/>
+                            <input class="w3-block w3-button w3-teal" name="login" type="submit" value="Submit" />
                         </form>
-                        <form action="register.php" method="GET">
+                        <form action="register.php" method="get">
                             <br/>
-                            <input class="w3-block w3-button w3-teal" name="submit" type="submit" value="Register"/>
+                            <input class="w3-block w3-button w3-teal" name="submit" type="submit" value="Register" />
                         </form>
                     </div>
                 </section>

@@ -10,9 +10,7 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
     </head>
     <body>
         <div>
-
             <a href="index.php"><p>Insert Logo Here</p></a>
-
         </div>
 
         <div class="userMenu">

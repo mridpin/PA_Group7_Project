@@ -96,14 +96,9 @@ function printAddressDetails() {
     </head>
     <body>
 
-        <div>
-
-            <a href="index.php"><p>Insert Logo Here</p></a>
-
-
-        </div>
 
         <?php
+        include("header.php");
         printWelcome();
 
         if (isset($_POST['submitAccountDetails'])) {
