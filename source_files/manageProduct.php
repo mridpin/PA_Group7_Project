@@ -105,17 +105,7 @@ This structure is a WIP, so you can edit it as much as your want.
         }
 
         function addNewProduct() {
-            $error = [];
-
-            if (!isset($_POST["name"]) || $_POST["name"] == "") {
-                $error[] = "Name can't be empty";
-            }
-            if (!isset($_POST["stock"]) || $_POST["stock"] <= 0 || !filter_var($_POST["stock"], FILTER_VALIDATE_INT)) {
-                $error[] = "Stock can't be empty or less than 0 and can't contain letters";
-            }
-            if (!isset($_POST["pru"]) || $_POST["pru"] <= 0 || !filter_var($_POST["pru"], FILTER_VALIDATE_FLOAT)) {
-                $error[] = "Price per unit can't be empty or less than 0 and can't contain letters";
-            }
+            $error = valideProduct();
 
             //No errors were found
             if (empty($error)) {
@@ -149,8 +139,63 @@ This structure is a WIP, so you can edit it as much as your want.
                 echo printErrorMessage($error);
             }
         }
+        
+        //Used to validate product for edit and add Product
+        function validateProduct()
+        {
+            $error = [];
+            
+            if (!isset($_POST["name"]) || $_POST["name"] == "") {
+                $error[] = "Name can't be empty";
+            }
+            if (!isset($_POST["stock"]) || $_POST["stock"] <= 0 || !filter_var($_POST["stock"], FILTER_VALIDATE_INT)) {
+                $error[] = "Stock can't be empty or less than 0 and can't contain letters";
+            }
+            if (!isset($_POST["pru"]) || $_POST["pru"] <= 0 || !filter_var($_POST["pru"], FILTER_VALIDATE_FLOAT)) {
+                $error[] = "Price per unit can't be empty or less than 0 and can't contain letters";
+            }
+            
+            return $error;
+        }
+        
+        function editProduct()
+        {
+            $error = validateProduct();
+            
+            if (empty($error)) {
 
-        function editProduct() {
+                $link = createConnection();
+                // Sanitize all inputs
+                $name = mysqli_real_escape_string($link, $_POST['name']);
+                $stock = mysqli_real_escape_string($link, $_POST['stock']);
+                $pru = mysqli_real_escape_string($link, $_POST['pru']);
+                $type = $_POST['type'];
+                $category = $_POST['category'];
+                $id = $_POST['id'];
+
+                //Different code name depending on what we want to insert
+                $finalName = $type . $category . $name;
+
+                $sql1 = "UPDATE products SET name='".$finalName."',stock=".$stock.",price=".$pru." WHERE product_id=".$id;
+                $result1 = mysqli_query($link, $sql1);
+
+                //Can't update product
+                if (!$result1) {
+                    $error[] = "CAN'T UPDATE PRODUCT";
+                    mysqli_close($link);
+                } else {
+                    // If edit, close connection and go to account page                   
+                    mysqli_close($link);
+                    header("Location: account.php");
+                }
+            }
+            if (isset($error)) {
+                echo printErrorMessage($error);
+            }
+            
+        }
+
+        function editProductForm() {
             $result = "<h3>Search the products you wish to edit:</h3>
                 <input type='text' id='searchType' onkeyup='searchFunction(this)' placeholder='Search by Type'>
                 <input type='text' id='searchCategory' onkeyup='searchFunction(this)' placeholder='Search by Category'>
@@ -171,10 +216,11 @@ This structure is a WIP, so you can edit it as much as your want.
             for ($i = 0; $i < sizeof($components); $i++) {
                 $product = $components[$i];
                 
+                $id = $product[3];
                 
-                
-                $result .= "<tr>"
-                        ."<td>".$product[3]."</td>"
+                $result .= "<form method='POST' action='manageProduct.php'><tr>"
+                        ."<td>".$id."</td>"
+                        ."<input type='hidden' value='".$id."' name='id'>" //We use this to know what product is selected
                         . "<td><select name='type'>";
 
                 $name = explode("_", $product[0]);
@@ -191,7 +237,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
                 //Category
 
-                $result .= "<td><select name='type'>";
+                $result .= "<td><select name='category'>";
 
                 if ($name[1] == "PC") {
                     $result .= "<option value='PC_'>PC</option>";
@@ -221,8 +267,9 @@ This structure is a WIP, so you can edit it as much as your want.
                 //Last option
                 //TODO: When clicked, Update DB
                 $result .= "<td>"
-                        . " <button type='button' name='" . $product[0] . "'>Edit Product</button>"
-                        . "</td>";
+                        . " <input type='submit' name='submitEditProduct' value='Edit Product'>"
+                        . "</td>"
+                        . "</form>";
             }
             $result .= "</table>";
 
@@ -250,9 +297,12 @@ This structure is a WIP, so you can edit it as much as your want.
                 newProduct();
             } else if (isset($_POST['submitNewProduct'])) {
                 addNewProduct();
-            } else if (isset($_POST['editProduct'])) {
+            } else if (isset($_POST['submitEditProduct'])) {
                 editProduct();
-            }
+            }else if (isset($_POST['editProduct'])) {
+                editProductForm();
+            } 
+            
             ?>
 
 
