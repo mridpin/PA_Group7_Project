@@ -105,7 +105,7 @@ This structure is a WIP, so you can edit it as much as your want.
         }
 
         function addNewProduct() {
-            $error = valideProduct();
+            $error = validateProduct();
 
             //No errors were found
             if (empty($error)) {
@@ -194,8 +194,36 @@ This structure is a WIP, so you can edit it as much as your want.
             }
             
         }
+        
+        function deleteProduct()
+        {
 
-        function editProductForm() {
+                $link = createConnection();
+                // Sanitize all inputs
+                $id = $_POST['id'];
+
+
+                $sql1 = "DELETE FROM products WHERE product_id=".$id;
+                $result1 = mysqli_query($link, $sql1);
+
+                //Can't update product
+                if (!$result1) {
+                    $error[] = "CAN'T DELETE PRODUCT";
+                    mysqli_close($link);
+                } else {
+                    // If edit, close connection and go to account page                   
+                    mysqli_close($link);
+                    header("Location: account.php");
+                }
+                if (isset($error)) {
+                echo printErrorMessage($error);
+            }
+                
+            
+        }
+        
+
+        function searchProduct() {
             $result = "<h3>Search the products you wish to edit:</h3>
                 <input type='text' id='searchType' onkeyup='searchFunction(this)' placeholder='Search by Type'>
                 <input type='text' id='searchCategory' onkeyup='searchFunction(this)' placeholder='Search by Category'>
@@ -209,6 +237,17 @@ This structure is a WIP, so you can edit it as much as your want.
                         <th><b>Price per unit</b></th>
                         <th><b>Action</b></th>
                     </tr>";
+            
+            
+            $button="submitDeleteProduct";
+            $buttonText="Delete Product";
+            
+            if (isset($_POST['editProduct']))
+            {
+                $button = "submitEditProduct";
+                $buttonText="Edit Product";
+            }
+            
 
             $components = getAllComponents();
 
@@ -266,8 +305,11 @@ This structure is a WIP, so you can edit it as much as your want.
 
                 //Last option
                 //TODO: When clicked, Update DB
+                
+                
+                
                 $result .= "<td>"
-                        . " <input type='submit' name='submitEditProduct' value='Edit Product'>"
+                        . " <input type='submit' name='".$button."' value='".$buttonText."'>"
                         . "</td>"
                         . "</form>";
             }
@@ -299,8 +341,10 @@ This structure is a WIP, so you can edit it as much as your want.
                 addNewProduct();
             } else if (isset($_POST['submitEditProduct'])) {
                 editProduct();
-            }else if (isset($_POST['editProduct'])) {
-                editProductForm();
+            }else if (isset($_POST['submitDeleteProduct'])) {
+                deleteProduct();
+            }else if (isset($_POST['editProduct']) || isset($_POST['deleteProduct'])) {
+                searchProduct();
             } 
             
             ?>
