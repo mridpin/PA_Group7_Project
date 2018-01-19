@@ -217,9 +217,13 @@ function printAddressDetails() {
                     </form>
                 </section>
 
-                <section id="payment_methods_section">
+                <section>
                     <h3>Payment Methods</h3>
+                    <form class="w3-container w3-padding-16 w3-white" method="POST" action="paymentMethods.php" >
+                        <input class="w3-block w3-button w3-teal" type="submit" name="add_paymentMethod" value="Add Payment Method" class="details_button" id="add_address_button" />
+                    </form>
                 </section>
+
 
                 <section id="order_history_section">
                     <h3>Payment Methods</h3>
