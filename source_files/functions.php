@@ -1,5 +1,6 @@
 <?php
 
+/* Returns true or false if a country code exists in the ISO list of country codes*/
 function doesCountryExist($countryCode) {
     $iso_array = array(
         'ABW' => 'Aruba',
@@ -255,6 +256,7 @@ function doesCountryExist($countryCode) {
     return array_key_exists($countryCode, $iso_array);
 }
 
+/* Returns a country's full name from the ISO country code*/ 
 function getCountryName($countryCode) {
     $iso_array = array(
         'ABW' => 'Aruba',
@@ -512,7 +514,7 @@ function getCountryName($countryCode) {
 }
 
 function printErrorMessage($errors) {
-    $res = "<p style='color:red'>";
+    $res = "<p class='w3-panel w3-red'>";
     if (isset($errors) && !empty($errors)) {
         foreach ($errors as $error) {
             $res = $res . $error . "<br />";
@@ -522,6 +524,7 @@ function printErrorMessage($errors) {
     return $res;
 }
 
+/* Creates a connection with the dabase and returns it*/
 function createConnection() {
     $con = mysqli_connect("localhost", "root", "");
     //Lo que yo quiero hacer:
@@ -537,20 +540,21 @@ function createConnection() {
     return $con;
 }
 
-// Check if session is up. If not, send user to login or to speciefied site
+// Check if session is up. If not, send user to login or to specified site
 function checkSession($location = "login") {
     if (!isset($_SESSION["user"])) {
         header("Location: $location.php");
     }
 }
 
-// Print a welcome message and account options
+// Print a welcome message and buttons to see account and logout. This function is called inside the <header> tag
 function printWelcome() {
     if (isset($_SESSION["user"])) {
         echo "Welcome back, " . $_SESSION["user"] . "!";
-        echo "<div class='linkToAccount'><a href='account.php'>My Account</a><a href='logout.php'>Logout</a></div>";
+        echo "<div><a href='account.php' class='w3-button w3-block'>My Account</a>".
+                "<a class='w3-button w3-block'  href='logout.php'>Logout</a></div>";
     } else {
-        echo "<a href='login.php'><p>Login/Register</p></a>";
+        echo "<a class='w3-button' href='login.php'><p>Login/Register</p></a>";
     }
 }
 

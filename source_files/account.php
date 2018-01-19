@@ -141,7 +141,6 @@ function printPaymentMethodDetails()
     <body class="w3-light-grey">
         <?php
         include("header.php");
-        printWelcome();
 
         if (isset($_POST['submitAccountDetails'])) {
             $error = [];
@@ -273,7 +272,7 @@ function printPaymentMethodDetails()
                     </ol>
                     
                     <form class="w3-container w3-padding-16 w3-white" method="POST" action="paymentMethods.php" >
-                        <input class="w3-block w3-button w3-teal" type="submit" name="add_paymentMethod" value="Add Payment Method" class="details_button" id="add_address_button" />
+                        <input class="w3-block w3-button w3-teal" type="submit" name="add_paymentMethod" value="Add Payment Method" class="details_button" id="add_paymethod_button" />
                     </form>
                 </section>
 
