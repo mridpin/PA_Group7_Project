@@ -114,10 +114,10 @@ function printPaymentMethodDetails() {
         $result .= "<li class='details_li'>Type: " . $paymentMethod["type"] . "</li>";
         $result .= "<li class='details_li'>Expiry Date: " . $paymentMethod["expiry_date"] . "</li>";
 
-        $result .= "<form method='post' action='paymentMethods.php'><input type='hidden' name='paymentMethod_number' value='" . $i . "' />" .
+        $result .= "</ul><form method='post' action='paymentMethods.php'><input type='hidden' name='paymentMethod_number' value='" . $i . "' />" .
                 "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' value='Update Payment Method' name='update_paymentMethod'/>" .
-                "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar w3-cell' style='width:50%' type='submit' value='Delete Payment Method' name='delete_paymentMethod'/></form><br />";
-        $result .= "</ul></li>";
+                "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar w3-cell' style='width:50%' type='submit' value='Delete Payment Method' name='delete_paymentMethod'/><br /></form>";
+        $result .= "</li>";
         $_SESSION["paymentMethod_to_modify"][$i] = $paymentMethod;
         $i++;
     }
@@ -230,7 +230,7 @@ function printPaymentMethodDetails() {
                     </figure>
                 </div>
 
-                <section class="w3-card w3-white" id="personal_details_section">
+                <section class="w3-card w3-white w3-section" id="personal_details_section">
                     <div class="w3-teal w3-text-white w3-container w3-center">
                         <h3>My personal information</h3>
                     </div>
@@ -243,7 +243,7 @@ function printPaymentMethodDetails() {
                     <script src="js/form_manager.js"></script>
                 </section>
 
-                <section class="w3-card w3-white" id="addresses_section">
+                <section class="w3-card w3-white w3-section" id="addresses_section">
                     <div class="w3-teal w3-text-white w3-container w3-center">
                         <h3>My addresses</h3>
                     </div>
@@ -257,7 +257,7 @@ function printPaymentMethodDetails() {
                     </form>
                 </section>
 
-                <section class="w3-card w3-white">
+                <section class="w3-card w3-white w3-section">
                     <div class="w3-teal w3-text-white w3-container w3-center">
                         <h3>My Payment Methods</h3>
                     </div>
@@ -273,50 +273,53 @@ function printPaymentMethodDetails() {
                 </section>
 
 
-                <section class="w3-card w3-white" id="order_history_section">
-                    <h3>Order history</h3>
+                <section class="w3-card w3-white w3-section" id="order_history_section">
+                    <div class="w3-teal w3-text-white w3-container w3-center">
+                        <h3>Order history</h3>                        
+                    </div>
+                    <br />
                 </section>
                 <?php
                 //If we are admin, we are shown admin options
 
                 if ($_SESSION["type"] == "admin") {
                     ?>
-                    <section class="w3-card w3-white" id="admin_actions_section">
-                    <div class="w3-teal w3-text-white w3-container w3-center">
-                        <h3>Admin Actions</h3>
-                    </div>
+                    <section class="w3-card w3-white w3-section" id="admin_actions_section">
+                        <div class="w3-teal w3-text-white w3-container w3-center">
+                            <h3>Admin Actions</h3>
+                        </div>
+                        <div class="w3-bar">
+                            <form action="manageProduct.php" method="post">
+                                <input class='w3-hover-teal w3-hover-text-white w3-button w3-bar-item w3-white w3-border-teal w3-bottombar w3-text-teal' style='width:33.3%' name="newProduct" type="submit" value="New Product"/>
+                            </form>
 
-                        <form action="manageProduct.php" method="post">
-                            <br/>
-                            <input name="newProduct" type="submit" value="New Product"/>
-                        </form>
+                            <form action="manageProduct.php" method="post">
+                                <input class='w3-hover-teal w3-hover-text-white w3-button w3-bar-item w3-white w3-border-teal w3-bottombar w3-text-teal' style='width:33.4%' name="editProduct" type="submit" value="Edit Product"/>
+                            </form>
 
-                        <form action="manageProduct.php" method="post">
-                            <br/>
-                            <input name="editProduct" type="submit" value="Edit Product"/>
-                        </form>
-
-                        <form action="manageProduct.php" method="post">
-                            <br/>
-                            <input name="deleteProduct" type="submit" value="Delete Product"/>
-                        </form>
+                            <form action="manageProduct.php" method="post">
+                                <input class='w3-hover-teal w3-hover-text-white w3-button w3-bar-item w3-white w3-border-teal w3-bottombar w3-text-teal' style='width:33.3%' name="deleteProduct" type="submit" value="Delete Product"/>
+                            </form>
+                        </div>
                     </section>
 
                     <?php
                 }
                 ?>
 
-                <section>
-                    <h3>Delete Account</h3>
+                <section class="w3-card w3-white w3-section" id="delete_account_section">
+                    <div class="w3-grey w3-text-black w3-container w3-center">
+                        <h3>Delete Account</h3>
+                    </div>
                     <?php
                     if (isset($error)) {
                         printErrorMessage($error);
                     }
                     ?> 
-                    <form id="delete_account_form" class="account_form" method="post" action="account.php">
-                        <div class="account_instructions" id="delete_account_instructions">To delete your account, please confirm your password: </div>
-                        <input type="password" name="delete_account_password" required="required"/>
-                        <input type="submit" name="delete_account_submit" value="Delete Account" />
+                    <form id="delete_account_form" class="w3-container w3-padding-16" method="post" action="account.php">
+                        <label class="account_instructions" id="delete_account_instructions">To delete your account, please confirm your password. This process is permanent and cannot be reversed: </label>
+                        <input class="w3-input w3-hover-grey" type="password" name="delete_account_password" required="required"/><br />
+                        <input class="w3-block w3-button w3-teal" type="submit" name="delete_account_submit" value="Delete Account" />
                     </form>
                 </section>
             </article>
