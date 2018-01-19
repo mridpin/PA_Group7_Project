@@ -25,13 +25,41 @@ checkSession();
         
         function addPaymentMethod()
         {
+            $link = createConnection();
+            
             $number = $_POST['cardNumber'];
             
-            $security_code = $_POST['cvv'];
+            $security_code = password_hash($_POST['cvv'], PASSWORD_DEFAULT);
             
+            $type = $_POST['type'];
             
+            $year = $_POST['year'];
             
-        }
+            $id =  $_SESSION["user_id"];
+            
+            $month = $_POST['month'];
+            
+            $finalDate = date('Y-m-d',strtotime($year."-".$month."-00"));
+            
+            $sql1 = "INSERT INTO payment_method (number,expiry_date,security_code,type,user_id) VALUES ('" . $number . "', '" . $finalDate . "', '" . $security_code . "', '".$type."', '".$id."')";
+                $result1 = mysqli_query($link, $sql1);
+
+                //Payment method already exists
+                if (!$result1) {
+                    $error[] = "Payment Method already registered";
+                    mysqli_close($link);
+                } else {
+                    // If insert successful, close connection and go to account page                   
+                    mysqli_close($link);
+                    header("Location: account.php");
+                }
+                
+                if (isset($error)) {
+                echo printErrorMessage($error);
+            }
+                
+            }
+            
         
         
         
@@ -81,10 +109,10 @@ checkSession();
                             <option value="12">December</option>
                         </select>
                         <select name="year" id="year">
-                            <option value="18"> 2018</option>
-                            <option value="19"> 2019</option>
-                            <option value="20"> 2020</option>
-                            <option value="21"> 2021</option>
+                            <option value="2018"> 2018</option>
+                            <option value="2019"> 2019</option>
+                            <option value="2020"> 2020</option>
+                            <option value="2021"> 2021</option>
                         </select>
                     </div>
                     <div class="form-group" id="credit_cards">
@@ -106,11 +134,14 @@ checkSession();
         
             <?php
         }
+        
+        print_r($_POST);
+        
         if (isset($_POST['newPayment'])) {
-
+            addPaymentMethod();
             
         }
-        if (isset($_POST['add_paymentMethod'])) {
+        else if (isset($_POST['add_paymentMethod'])) {
                 addPaymentForm();
             }
         

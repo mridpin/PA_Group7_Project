@@ -47,24 +47,29 @@ $(function() {
 
     confirmButton.click(function(e) {
 
-        e.preventDefault();
+        
 
         var isCardValid = $.payform.validateCardNumber(cardNumber.val());
         var isCvvValid = $.payform.validateCardCVC(CVV.val());
 
         if(owner.val().length < 5){
+            e.preventDefault();
             alert("Wrong owner name");
         } else if (!isCardValid) {
+                    e.preventDefault();
             alert("Wrong card number");
         } else if (!isCvvValid) {
+                    e.preventDefault();
             alert("Wrong CVV");
         } else if(todayDate > cardDate)
         {
+                    e.preventDefault();
             alert("This card has expired");
         }else
         {
             // Everything is correct. Add your form submission code here.
-            $(location).attr("href","paymentMethods.php");
+            var data = $('form').serialize();
+            $.post('url', data);
         }
     });
 });
