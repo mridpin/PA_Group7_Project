@@ -1,6 +1,10 @@
 $(function() {
 
     var owner = $('#owner');
+    var year = $('#year');
+    var month = $('#month');
+    var todayDate = new Date();
+    var cardDate = new Date(year,month);
     var cardNumber = $('#cardNumber');
     var cardNumberField = $('#card-number-field');
     var CVV = $("#cvv");
@@ -54,7 +58,11 @@ $(function() {
             alert("Wrong card number");
         } else if (!isCvvValid) {
             alert("Wrong CVV");
-        } else {
+        } else if(todayDate > cardDate)
+        {
+            alert("This card has expired");
+        }else
+        {
             // Everything is correct. Add your form submission code here.
             $(location).attr("href","paymentMethods.php");
         }

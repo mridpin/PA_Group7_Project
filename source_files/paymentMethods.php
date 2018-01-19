@@ -23,6 +23,16 @@ checkSession();
         printWelcome();
         
         
+        function addPaymentMethod()
+        {
+            $number = $_POST['cardNumber'];
+            
+            $security_code = $_POST['cvv'];
+            
+            
+            
+        }
+        
         
         
         function addPaymentForm()
@@ -37,20 +47,27 @@ checkSession();
                 <form method="POST" action="paymentMethods.php">
                     <div class="form-group owner">
                         <label for="owner">Owner</label>
-                        <input type="text" class="form-control" id="owner">
+                        <input type="text" class="form-control" name ="owner" id="owner">
                     </div>
                     <div class="form-group CVV">
                         <label for="cvv">CVV</label>
-                        <input type="text" class="form-control" id="cvv">
+                        <input type="text" class="form-control" name="cvv" id="cvv">
                     </div>
                     <div class="form-group" id="card-number-field">
                         <label for="cardNumber">Card Number</label>
-                        <input type="text" class="form-control" id="cardNumber">
+                        <input type="text" class="form-control" name="cardNumber" id="cardNumber">
                     </div>
-                    <div class="form-group" id="expiration-date">
+                    <div>
+                    <label>Type of card</label>
+                        <select name="type" id="type">
+                            <option value="credit">Credit </option>
+                            <option value="debit">Debit</option>
+                            <option value="prepaid">Prepaid</option>
+                        </select>
+                    </div>
+                    <div class="form-group" name="expiration-date" id="expiration-date">
                         <label>Expiration Date</label>
-                        <select>
-                            <option value="01">January</option>
+                        <select name="month" id="month">
                             <option value="02">February </option>
                             <option value="03">March</option>
                             <option value="04">April</option>
@@ -63,9 +80,7 @@ checkSession();
                             <option value="11">November</option>
                             <option value="12">December</option>
                         </select>
-                        <select>
-                            <option value="16"> 2016</option>
-                            <option value="17"> 2017</option>
+                        <select name="year" id="year">
                             <option value="18"> 2018</option>
                             <option value="19"> 2019</option>
                             <option value="20"> 2020</option>
