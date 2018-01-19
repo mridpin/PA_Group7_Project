@@ -255,10 +255,10 @@ checkSession();
 
                         $id = $product[3];
 
-                        $result .= "<form method='POST' action='manageProduct.php'><tr>"
-                                . "<td>" . $id . "</td>"
-                                . "<input type='hidden' value='" . $id . "' name='id'>" //We use this to know what product is selected
-                                . "<td><select name='type' class='w3-select w3-hover-light-grey'>";
+                        $result .= "<tr>"
+                                . "<td>" . $id . "<form method='POST' action='manageProduct.php' id='form_".$id."'>"
+                                . "<input type='hidden' value='" . $id . "' name='id'></form></td>" //We use this to know what product is selected
+                                . "<td><select name='type' class='w3-select w3-hover-light-grey' form='form_".$id."'>";
 
                         $name = explode("_", $product[0]);
 
@@ -274,7 +274,7 @@ checkSession();
 
                         //Category
 
-                        $result .= "<td><select name='category' class='w3-select w3-hover-light-grey' >";
+                        $result .= "<td><select name='category' class='w3-select w3-hover-light-grey' form='form_".$id."'>";
 
                         if ($name[1] == "PC") {
                             $result .= "<option value='PC_'>PC</option>";
@@ -288,17 +288,17 @@ checkSession();
                         //Name
 
                         $result .= "<td>"
-                                . "<input class='w3-input w3-hover-light-grey' type='text' name='name' value='" . $name[2] . "'/>"
+                                . "<input class='w3-input w3-hover-light-grey' type='text' name='name' value='" . $name[2] . "' form='form_".$id."'/>"
                                 . "</td>";
 
                         //Stock
                         $result .= "<td>"
-                                . "<input class='w3-input w3-hover-light-grey' type='text' name='stock' value='" . $product[2] . "'/>"
+                                . "<input class='w3-input' type='text' name='stock' value='" . $product[2] . "' form='form_".$id."'/>"
                                 . "</td>";
 
                         //Price per unit
                         $result .= "<td>"
-                                . "<input class='w3-input w3-hover-light-grey' type='text' name='pru' value='" . $product[1] . "'/>"
+                                . "<input class='w3-input' type='text' name='pru' value='" . $product[1] . "' form='form_".$id."'/>"
                                 . "</td>";
 
                         //Last option
@@ -307,9 +307,9 @@ checkSession();
 
 
                         $result .= "<td>"
-                                . " <input class='w3-button w3-teal w3-text-white' type='submit' name='" . $button . "' value='" . $buttonText . "'>"
-                                . "</td>"
-                                . "</form>";
+                                . " <input class='w3-button w3-teal w3-text-white' type='submit' name='" . $button . "' value='" . $buttonText . "' form='form_".$id."'>"
+                                . "</td>";
+                                //. "</form>";
                     }
                     $result .= "</table>";
 
