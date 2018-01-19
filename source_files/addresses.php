@@ -15,7 +15,7 @@ checkSession();
         <script src="js/jquery-validation/jquery.validate.js"></script>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
-    <body>
+    <body class="w3-light-grey">
         <?php include("header.php"); ?>
         <?php
         printWelcome();

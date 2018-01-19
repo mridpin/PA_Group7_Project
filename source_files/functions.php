@@ -1,5 +1,6 @@
 <?php
 
+/* Returns true or false if a country code exists in the ISO list of country codes*/
 function doesCountryExist($countryCode) {
     $iso_array = array(
         'ABW' => 'Aruba',
@@ -255,6 +256,7 @@ function doesCountryExist($countryCode) {
     return array_key_exists($countryCode, $iso_array);
 }
 
+/* Returns a country's full name from the ISO country code*/ 
 function getCountryName($countryCode) {
     $iso_array = array(
         'ABW' => 'Aruba',
@@ -512,7 +514,7 @@ function getCountryName($countryCode) {
 }
 
 function printErrorMessage($errors) {
-    $res = "<p style='color:red'>";
+    $res = "<p class='w3-panel w3-red'>";
     if (isset($errors) && !empty($errors)) {
         foreach ($errors as $error) {
             $res = $res . $error . "<br />";
@@ -522,6 +524,7 @@ function printErrorMessage($errors) {
     return $res;
 }
 
+/* Creates a connection with the dabase and returns it*/
 function createConnection() {
     $con = mysqli_connect("localhost", "root", "");
     //Lo que yo quiero hacer:
@@ -537,7 +540,7 @@ function createConnection() {
     return $con;
 }
 
-// Check if session is up. If not, send user to login or to speciefied site
+// Check if session is up. If not, send user to login or to specified site
 function checkSession($location = "login") {
     if (!isset($_SESSION["user"])) {
         header("Location: $location.php");
