@@ -62,7 +62,7 @@ function addressDetails() {
 
 //Function that uses a SQL query to get the current account payment methods. Returns an array of associative arrays: one for each payment method
 function paymentMethodDetails() {
-    $paymentMethod= [];
+    $paymentMethod = [];
     $link = createConnection();
     $sql = "SELECT * FROM payment_method WHERE user_id='" . $_SESSION["user_id"] . "'";
     $result1 = mysqli_query($link, $sql);
@@ -71,12 +71,11 @@ function paymentMethodDetails() {
         die("ERROR: There is an error in SELECT USER PAYMENT METHOD query");
     } else {
         while ($row = mysqli_fetch_array($result1)) {
-            
+
             $paymentMethod[] = $row;
-            
-            }
         }
-        
+    }
+
     return $paymentMethod;
 }
 
@@ -95,18 +94,17 @@ function printAddressDetails() {
         // Instead, we sent the index of the address from the user's own addresses
         // This prevents malicious users from trampling with the other user's addresses by F12 and modifiying the value of the form submissions.
         // Now they can only screw with their own addresses
-        $result .= "<form method='post' action='addresses.php'><input type='hidden' name='address_number' value='" . $i . "' />" .
+        $result .= "</ul><form method='post' action='addresses.php'><input type='hidden' name='address_number' value='" . $i . "' />" .
                 "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' value='Update Address' name='update_address'/>" .
-                "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar w3-cell' style='width:50%' type='submit' value='Delete Address' name='delete_address'/></form><br />";
-        $result .= "</ul></li>";
+                "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar w3-cell' style='width:50%' type='submit' value='Delete Address' name='delete_address'/></form>";
+        $result .= "</li>";
         $_SESSION["address_to_modify"][$i] = $address;
         $i++;
     }
     return $result;
 }
 
-function printPaymentMethodDetails()
-{
+function printPaymentMethodDetails() {
     $info = paymentMethodDetails();
     $result = "";
     $i = 0;
@@ -125,8 +123,6 @@ function printPaymentMethodDetails()
     }
     return $result;
 }
-
-
 ?>
 
 <html>
@@ -230,7 +226,7 @@ function printPaymentMethodDetails()
                         <h2><strong>Account Information</strong></h2>
                     </div>
                     <figure class="w3-container w3-center">
-                        <img src="img/logo3.png">
+                        <img src="img/logo3.png" alt="logo">
                     </figure>
                 </div>
 
@@ -270,7 +266,7 @@ function printPaymentMethodDetails()
                         echo printPaymentMethodDetails();
                         ?>  
                     </ol>
-                    
+
                     <form class="w3-container w3-padding-16 w3-white" method="POST" action="paymentMethods.php" >
                         <input class="w3-block w3-button w3-teal" type="submit" name="add_paymentMethod" value="Add Payment Method" class="details_button" id="add_paymethod_button" />
                     </form>
@@ -328,19 +324,17 @@ function printPaymentMethodDetails()
                     </form>
                 </section>
             </article>
+            <?php //include("footer.php"); ?>
             <script>
-                                            function w3_open() {
-                                                document.getElementById("account_nav").style.display = "block";
-                                            }
-                                            function w3_close() {
-                                                document.getElementById("account_nav").style.display = "none";
-                                            }
+                            function w3_open() {
+                                document.getElementById("account_nav").style.display = "block";
+                            }
+                            function w3_close() {
+                                document.getElementById("account_nav").style.display = "none";
+                            }
             </script>
             <?php
         }
         ?>
-
-        <?php include("footer.php"); ?>
-
     </body>
 </html>
