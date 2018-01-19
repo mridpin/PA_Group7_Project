@@ -63,11 +63,12 @@ $(function() {
             alert("Wrong CVV");
         } else if(todayDate > cardDate)
         {
+            //This prevents the form submiting
                     e.preventDefault();
             alert("This card has expired");
         }else
         {
-            // Everything is correct. Add your form submission code here.
+            // Everything is correct. We make sure the post data is sent
             var data = $('form').serialize();
             $.post('url', data);
         }

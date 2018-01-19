@@ -60,6 +60,24 @@ checkSession();
                 
             }
             
+            
+         function deletePaymentMethod()
+         {
+             // Get the address to delete from this user's addresses. Cascade FK will delete it from user_address too
+            $id = $_SESSION["user_id"];
+
+            $link = createConnection();
+            $sql = "DELETE FROM payment_method WHERE user_id='" .$id. "'";
+            $result = mysqli_query($link, $sql);
+            if (!$result) {
+                mysqli_close($link);
+                die("DELETE PAYMENT METHOD QUERY ERROR: PLEASE CONTACT SITE ADMIN");
+            } else {
+                mysqli_close($link);
+                header("Location: account.php");
+            }
+         }
+            
         
         
         
@@ -88,9 +106,9 @@ checkSession();
                     <div>
                     <label>Type of card</label>
                         <select name="type" id="type">
-                            <option value="credit">Credit </option>
-                            <option value="debit">Debit</option>
-                            <option value="prepaid">Prepaid</option>
+                            <option value="Credit">Credit </option>
+                            <option value="Debit">Debit</option>
+                            <option value="Prepaid">Prepaid</option>
                         </select>
                     </div>
                     <div class="form-group" name="expiration-date" id="expiration-date">
@@ -138,13 +156,14 @@ checkSession();
         print_r($_POST);
         
         if (isset($_POST['newPayment'])) {
-            addPaymentMethod();
-            
+            addPaymentMethod();         
         }
         else if (isset($_POST['add_paymentMethod'])) {
                 addPaymentForm();
             }
-        
+        else if (isset($_POST['delete_paymentMethod'])) {
+                deletePaymentMethod();
+            }
         ?>
         
         

@@ -60,6 +60,26 @@ function addressDetails() {
     return $addesses;
 }
 
+//Function that uses a SQL query to get the current account payment methods. Returns an array of associative arrays: one for each payment method
+function paymentMethodDetails() {
+    $paymentMethod= [];
+    $link = createConnection();
+    $sql = "SELECT * FROM payment_method WHERE user_id='" . $_SESSION["user_id"] . "'";
+    $result1 = mysqli_query($link, $sql);
+    if (!$result1) {
+        mysqli_close($link);
+        die("ERROR: There is an error in SELECT USER PAYMENT METHOD query");
+    } else {
+        while ($row = mysqli_fetch_array($result1)) {
+            
+            $paymentMethod[] = $row;
+            
+            }
+        }
+        
+    return $paymentMethod;
+}
+
 //Function that shows the current account information using the function accountDetails
 function printAddressDetails() {
     $info = addressDetails();
@@ -84,6 +104,29 @@ function printAddressDetails() {
     }
     return $result;
 }
+
+function printPaymentMethodDetails()
+{
+    $info = paymentMethodDetails();
+    $result = "";
+    $i = 0;
+    foreach ($info as $paymentMethod) {
+        $result .= "<li><ul class='w3-ul'>";
+        $result .= "<li class='details_li'>Number: " . $paymentMethod["number"] . "</li>";
+        $result .= "<li class='details_li'>Type: " . $paymentMethod["type"] . "</li>";
+        $result .= "<li class='details_li'>Expiry Date: " . $paymentMethod["expiry_date"] . "</li>";
+
+        $result .= "<form method='post' action='paymentMethods.php'><input type='hidden' name='paymentMethod_number' value='" . $i . "' />" .
+                "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' value='Update Payment Method' name='update_paymentMethod'/>" .
+                "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar w3-cell' style='width:50%' type='submit' value='Delete Payment Method' name='delete_paymentMethod'/></form><br />";
+        $result .= "</ul></li>";
+        $_SESSION["paymentMethod_to_modify"][$i] = $paymentMethod;
+        $i++;
+    }
+    return $result;
+}
+
+
 ?>
 
 <html>
@@ -220,7 +263,15 @@ function printAddressDetails() {
                 </section>
 
                 <section>
-                    <h3>Payment Methods</h3>
+                    <div class="w3-teal w3-text-white w3-container w3-center">
+                        <h3>My Payment Methods</h3>
+                    </div>
+                    <ol class="w3-ul">
+                        <?php
+                        echo printPaymentMethodDetails();
+                        ?>  
+                    </ol>
+                    
                     <form class="w3-container w3-padding-16 w3-white" method="POST" action="paymentMethods.php" >
                         <input class="w3-block w3-button w3-teal" type="submit" name="add_paymentMethod" value="Add Payment Method" class="details_button" id="add_address_button" />
                     </form>
