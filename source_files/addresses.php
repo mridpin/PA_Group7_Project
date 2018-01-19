@@ -13,16 +13,10 @@ checkSession();
         <title>Account Information</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="js/jquery-validation/jquery.validate.js"></script>
+        <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
     <body>
-
-        <div>
-
-            <a href="index.php"><p>Insert Logo Here</p></a>
-
-
-        </div>
-
+        <?php include("header.php"); ?>
         <?php
         printWelcome();
 
@@ -118,15 +112,23 @@ checkSession();
             }
             ?>
 
-            <article class="mainArticle" id="accountInfoArticle">
-                <h2>Account Information</h2>
+            <article class="w3-card w3-mobile" style="width:50%;margin:auto;">
+                <div class="w3-grey">
+                    <div class="w3-grey w3-text-black w3-container w3-center">
+                        <h2><strong>Account Information</strong></h2>
+                    </div>
+                    <figure class="w3-container w3-center">
+                        <a href="account.php" ><img src="img/logo3.png"></a>
+                    </figure>
+                </div>
 
-                <section class="information_section" id="addresses_section">
-                    <h3>My Address</h3>
-                    <form class="address_form" id="register_account_form" action="addresses.php" method="POST">
-                        <br/>
-                        ZIP Code: <input name="zipCode" type="number" value="<?php echo $zip; ?>" required='required'/>
-                        Country: <select name="country" required='required'>
+                <section>
+                    <div class="w3-teal w3-text-white w3-container">
+                        <h2>My address</h2>
+                    </div>
+                    <form class="w3-container w3-padding-16 w3-white" id="register_account_form" action="addresses.php" method="POST">
+                        <label>ZIP Code: </label><input class="w3-input w3-hover-grey" name="zipCode" type="number" required='required' value="<?php echo $zip; ?>"/>
+                        <label>Country: </label><select class="w3-select" name="country" required='required'>
                             <option value="" selected="selected" disabled="disabled" hidden="hidden">CHOOSE A COUNTRY</option>
                             <option value="AFG">Afghanistan</option>
                             <option value="ALA">Åland Islands</option>
@@ -378,21 +380,17 @@ checkSession();
                             <option value="ZMB">Zambia</option>
                             <option value="ZWE">Zimbabwe</option>
                         </select>
-                        <br/>
-                        <br/>
-                        Street: <input name="street" type="text" value="<?php echo $street; ?>" required='required'/>
-                        Number: <input name="number" type="number" value="<?php echo $number; ?>" required='required'/>
-                        <br/>
-                        <br/>
+                        <label>Street: </label><input class="w3-input w3-hover-grey" name="street" type="text" required='required' value="<?php echo $zip; ?>"/>
+                        <label>Number: </label><input class="w3-input w3-hover-grey" name="number" type="number" required='required' value="<?php echo $zip; ?>"/>
                         <?php
                         // Only display the update address button if the user hasnt clicked "add address" buttonbefore
                         if (isset($_POST["add_address"])) {
                             echo "";
                         } else {
-                            echo "<input name='submit_address' type='submit' value='Update Address' />";
+                            echo "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:49%' input name='submit_address' type='submit' value='Update Address' />";
                         }
                         ?>
-                        <input name="submit_new_address" type="submit" value="Add as new" />
+                        <input class="w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell" style="width:50%" name="submit_new_address" type="submit" value="Add as new" />
                     </form>
                     <script src="js/form_manager.js"></script>
                 </section>
@@ -401,8 +399,6 @@ checkSession();
             <?php
         }
         ?>
-
-        <footer>Legal stuff goes here</footer>
-
+        <?php include("footer.php"); ?>
     </body>
 </html>
