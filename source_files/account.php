@@ -137,7 +137,6 @@ function printPaymentMethodDetails() {
     <body class="w3-light-grey">
         <?php
         include("header.php");
-
         if (isset($_POST['submitAccountDetails'])) {
             $error = [];
             // Check fields for errors:

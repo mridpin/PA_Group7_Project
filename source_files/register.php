@@ -20,7 +20,6 @@ require_once 'functions.php';
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
     <body class="w3-light-grey">
-    <body class="w3-light-grey">
         <?php include("header.php");?>
         <article class="w3-container w3-mobile" style="width:35%;margin:auto;">
             <section class="w3-card-4">
