@@ -167,11 +167,12 @@ function printAddressDetails() {
                 echo printErrorMessage($error);
             }
             ?>
-            <nav class="w3-sidebar w3-bar-block w3-center w3-quarter w3-collapse" id="account_nav">
+            <nav class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left w3-quarter w3-cent" id="account_nav">
                 <div class="w3-teal w3-text-white w3-container">
                     <h4><strong>Details</strong></h4>
                 </div>
                 <div>
+                    <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
                     <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#personal_details_section">Personal details</a>
                     <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#addresses_section">My addresses</a>
                     <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#payment_methods_section">Payment methods</a>
@@ -180,9 +181,10 @@ function printAddressDetails() {
                 </div>
             </nav>
 
-            <article class="w3-container w3-threequarter w3-right" id="accountInfoArticle">
+            <article class="w3-container w3-threequarter w3-right w3-mobile" id="accountInfoArticle">
                 <div class="w3-grey">
                     <div class="w3-grey w3-text-black w3-container w3-center">
+                        <button class="w3-button w3-teal w3-xlarge w3-hide-large w3-left" onclick="w3_open()">&#9776;</button>
                         <h2><strong>Account Information</strong></h2>
                     </div>
                     <figure class="w3-container w3-center">
@@ -272,7 +274,14 @@ function printAddressDetails() {
                     </form>
                 </section>
             </article>
-
+            <script>
+                                            function w3_open() {
+                                                document.getElementById("account_nav").style.display = "block";
+                                            }
+                                            function w3_close() {
+                                                document.getElementById("account_nav").style.display = "none";
+                                            }
+            </script>
             <?php
         }
         ?>
