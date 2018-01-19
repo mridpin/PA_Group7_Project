@@ -22,8 +22,8 @@ require_once 'functions.php';
     <body class="w3-light-grey">
     <body class="w3-light-grey">
         <?php include("header.php");?>
-        <article class="w3-container w3-margin w3-display-middle w3-mobile">
-            <section class="w3-card">
+        <article class="w3-container w3-mobile" style="width:35%;margin:auto;">
+            <section class="w3-card-4">
                 <div class="w3-teal w3-text-white w3-container w3-center">
                     <h2>New client</h2>
                 </div>
