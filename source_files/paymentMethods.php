@@ -27,17 +27,17 @@ checkSession();
         {
             $link = createConnection();
             
-            $number = $_POST['cardNumber'];
+            $number = mysqli_real_escape_string($link,$_POST['cardNumber']);
             
-            $security_code = password_hash($_POST['cvv'], PASSWORD_DEFAULT);
+            $security_code = password_hash(mysqli_real_escape_string($link,$_POST['cvv']), PASSWORD_DEFAULT);
             
-            $type = $_POST['type'];
+            $type = mysqli_real_escape_string($link,$_POST['type']);
             
-            $year = $_POST['year'];
+            $year = mysqli_real_escape_string($link,$_POST['year']);
             
             $id =  $_SESSION["user_id"];
             
-            $month = $_POST['month'];
+            $month = mysqli_real_escape_string($link,$_POST['month']);
             
             $finalDate = date('Y-m-d',strtotime($year."-".$month."-00"));
             
@@ -77,11 +77,39 @@ checkSession();
                 header("Location: account.php");
             }
          }
+         
+         function updatePaymentMethod()
+         {
+              $link = createConnection();
+            
+            $number = mysqli_real_escape_string($link,$_POST['cardNumber']);
+            
+            $security_code = password_hash(mysqli_real_escape_string($link,$_POST['cvv']), PASSWORD_DEFAULT);
+            
+            $type = mysqli_real_escape_string($link,$_POST['type']);
+            
+            $year = mysqli_real_escape_string($link,$_POST['year']);
+            
+            $id =  $_SESSION["user_id"];
+            
+            $month = mysqli_real_escape_string($link,$_POST['month']);
+            
+            $finalDate = date('Y-m-d',strtotime($year."-".$month."-00"));
+                    $sql = "UPDATE payment_method set number='" . $number . "', expiry_date='" . $finalDate . "', security_code='" . $security_code . "', type='" . $type . "' WHERE user_id='" . $id . "'";
+                    $result = mysqli_query($link, $sql);
+                    if (!$result) {
+                        mysqli_close($link);
+                        die("UPDATE PAYMENT METHOD QUERY ERROR: PLEASE CONTACT SITE ADMIN");
+                    } else {
+                        mysqli_close($link);
+                        header("Location: account.php");
+                    }
+         }
             
         
         
         
-        function addPaymentForm()
+        function addPaymentForm($cardNumber)
         {
             
             ?>
@@ -101,7 +129,7 @@ checkSession();
                     </div>
                     <div class="form-group" id="card-number-field">
                         <label for="cardNumber">Card Number</label>
-                        <input type="text" class="form-control" name="cardNumber" id="cardNumber">
+                        <input type="text" class="form-control" value="<?php echo $cardNumber; ?>" name="cardNumber" id="cardNumber">
                     </div>
                     <div>
                     <label>Type of card</label>
@@ -131,6 +159,10 @@ checkSession();
                             <option value="2019"> 2019</option>
                             <option value="2020"> 2020</option>
                             <option value="2021"> 2021</option>
+                            <option value="2022"> 2022</option>
+                            <option value="2023"> 2023</option>
+                            <option value="2024"> 2024</option>
+                            <option value="2025"> 2025</option>
                         </select>
                     </div>
                     <div class="form-group" id="credit_cards">
@@ -139,7 +171,17 @@ checkSession();
                         <img src="img/amex.jpg" id="amex">
                     </div>
                     <div class="form-group" id="pay-now">
-                        <button type="submit" name="newPayment" class="btn btn-default" id="confirm-purchase">Confirm</button>
+                        
+                         <?php
+                        // Only display the update address button if the user hasnt clicked "add address" buttonbefore
+                        if (isset($_POST["add_paymentMethod"])) {
+                            echo "";
+                        } else {
+                            echo "<button class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:49%' input id='confirm-purchase' name='submit_paymentMethod' type='submit'>Update Payment Method</button>";
+                        }
+                        ?>
+                        
+                        <button type="submit" name="newPayment" class="btn btn-default" id="confirm-purchase">Add as new</button>
                     </div>
                 </form>
             </div>
@@ -153,13 +195,23 @@ checkSession();
             <?php
         }
         
-        print_r($_POST);
+        $cardNumber = "";
         
-        if (isset($_POST['newPayment'])) {
+        if (isset($_POST['paymentMethod_number'])) {
+            $paymentMethodIndex = $_POST["paymentMethod_number"];
+                $_SESSION["paymentMethod"] = $_SESSION["paymentMethod_to_modify"][$paymentMethodIndex];
+
+                $cardNumber = $_SESSION["paymentMethod"]["number"];
+                
+                addPaymentForm($cardNumber);
+                
+        }else if (isset($_POST['submit_paymentMethod'])) {
+            updatePaymentMethod();         
+        }else if (isset($_POST['newPayment'])) {
             addPaymentMethod();         
         }
         else if (isset($_POST['add_paymentMethod'])) {
-                addPaymentForm();
+                addPaymentForm($cardNumber);
             }
         else if (isset($_POST['delete_paymentMethod'])) {
                 deletePaymentMethod();
