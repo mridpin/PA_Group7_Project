@@ -544,13 +544,14 @@ function checkSession($location = "login") {
     }
 }
 
-// Print a welcome message and account options
+// Print a welcome message and buttons to see account and logout. This function is called inside the <header> tag
 function printWelcome() {
     if (isset($_SESSION["user"])) {
         echo "Welcome back, " . $_SESSION["user"] . "!";
-        echo "<div class='linkToAccount'><a href='account.php'>My Account</a><a href='logout.php'>Logout</a></div>";
+        echo "<div><a href='account.php' class='w3-button w3-block'>My Account</a>".
+                "<a class='w3-button w3-block'  href='logout.php'>Logout</a></div>";
     } else {
-        echo "<a href='login.php'><p>Login/Register</p></a>";
+        echo "<a class='w3-button' href='login.php'><p>Login/Register</p></a>";
     }
 }
 
