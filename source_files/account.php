@@ -230,7 +230,7 @@ function printPaymentMethodDetails() {
                     </figure>
                 </div>
 
-                <section class="w3-card" id="personal_details_section">
+                <section class="w3-card w3-white" id="personal_details_section">
                     <div class="w3-teal w3-text-white w3-container w3-center">
                         <h3>My personal information</h3>
                     </div>
@@ -243,7 +243,7 @@ function printPaymentMethodDetails() {
                     <script src="js/form_manager.js"></script>
                 </section>
 
-                <section class="w3-card" id="addresses_section">
+                <section class="w3-card w3-white" id="addresses_section">
                     <div class="w3-teal w3-text-white w3-container w3-center">
                         <h3>My addresses</h3>
                     </div>
@@ -257,7 +257,7 @@ function printPaymentMethodDetails() {
                     </form>
                 </section>
 
-                <section>
+                <section class="w3-card w3-white">
                     <div class="w3-teal w3-text-white w3-container w3-center">
                         <h3>My Payment Methods</h3>
                     </div>
@@ -273,8 +273,8 @@ function printPaymentMethodDetails() {
                 </section>
 
 
-                <section id="order_history_section">
-                    <h3>Payment Methods</h3>
+                <section class="w3-card w3-white" id="order_history_section">
+                    <h3>Order history</h3>
                 </section>
                 <?php
                 //If we are admin, we are shown admin options
@@ -324,7 +324,6 @@ function printPaymentMethodDetails() {
                     </form>
                 </section>
             </article>
-            <?php //include("footer.php"); ?>
             <script>
                             function w3_open() {
                                 document.getElementById("account_nav").style.display = "block";
@@ -336,5 +335,6 @@ function printPaymentMethodDetails() {
             <?php
         }
         ?>
+        <?php include("footer.php"); ?>
     </body>
 </html>

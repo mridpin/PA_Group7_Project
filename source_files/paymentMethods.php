@@ -140,7 +140,7 @@ checkSession();
 
                     <form class="w3-container w3-padding-16 w3-white" method="post" action="paymentMethods.php">
                         <div>
-                            <label>Owner</label>
+                            <label for="owner">Owner</label>
                             <input type="text" class="w3-input w3-hover-grey" name ="owner" id="owner">
                         </div>
                         <div class="form-group CVV">
@@ -186,9 +186,9 @@ checkSession();
                             </select>
                         </div>
                         <div class="form-group" id="credit_cards">
-                            <img src="img/visa.jpg" id="visa">
-                            <img src="img/mastercard.jpg" id="mastercard">
-                            <img src="img/amex.jpg" id="amex">
+                            <img src="img/visa.jpg" alt="Visa logo" id="visa">
+                            <img src="img/mastercard.jpg" alt="Mastercard logo" id="mastercard">
+                            <img src="img/amex.jpg" alt="Amex logo"id="amex">
                         </div>
                         <div class="form-group" id="pay-now">
                             <?php

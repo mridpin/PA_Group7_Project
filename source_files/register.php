@@ -381,6 +381,5 @@ require_once 'functions.php';
                 <br>
             </section>
         </article>
-       <?php include("footer.php"); ?>
     </body>
 </html>
