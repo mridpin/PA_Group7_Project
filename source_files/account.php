@@ -281,28 +281,24 @@ function printPaymentMethodDetails() {
 
                 if ($_SESSION["type"] == "admin") {
                     ?>
-                    <section id="admin_actions_section">
+                    <section class="w3-card w3-white" id="admin_actions_section">
+                    <div class="w3-teal w3-text-white w3-container w3-center">
                         <h3>Admin Actions</h3>
+                    </div>
 
-                        <form action="manageProduct.php" method="POST">
-
+                        <form action="manageProduct.php" method="post">
                             <br/>
                             <input name="newProduct" type="submit" value="New Product"/>
-
                         </form>
 
-                        <form action="manageProduct.php" method="POST">
-
+                        <form action="manageProduct.php" method="post">
                             <br/>
                             <input name="editProduct" type="submit" value="Edit Product"/>
-
                         </form>
 
-                        <form action="manageProduct.php" method="POST">
-
+                        <form action="manageProduct.php" method="post">
                             <br/>
                             <input name="deleteProduct" type="submit" value="Delete Product"/>
-
                         </form>
                     </section>
 

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<!--
-This structure is a WIP, so you can edit it as much as your want.
--->
+
 <html>
     <head>
         <meta charset="UTF-8">
