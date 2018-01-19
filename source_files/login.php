@@ -18,7 +18,7 @@ session_start();
         function loginForm() {
             ?>
 
-            <article class="w3-container w3-margin w3-display-middle w3-mobile">
+            <article class="w3-container w3-mobile" style="width:35%;margin:auto;">
                 <section class="w3-card">
                     <div class="w3-teal w3-text-white w3-container w3-center">
                         <h2>Welcome to PC GalaxyNova</h2>

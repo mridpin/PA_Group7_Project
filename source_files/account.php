@@ -94,8 +94,8 @@ function printAddressDetails() {
         <script src="js/jquery-validation/jquery.validate.js"></script>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
-    <body class="w3-light-grey">
 
+    <body class="w3-light-grey">
         <?php
         include("header.php");
         printWelcome();
@@ -167,8 +167,28 @@ function printAddressDetails() {
                 echo printErrorMessage($error);
             }
             ?>
+            <nav class="w3-sidebar w3-bar-block w3-center w3-quarter w3-collapse" id="account_nav">
+                <div class="w3-teal w3-text-white w3-container">
+                    <h4><strong>Details</strong></h4>
+                </div>
+                <div>
+                    <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#personal_details_section">Personal details</a>
+                    <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#addresses_section">My addresses</a>
+                    <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#payment_methods_section">Payment methods</a>
+                    <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#order_history_section">Personal details</a>
+                    <?php echo ($_SESSION["type"] == "admin") ? "<a class='w3-hover-teal w3-hover-text-white w3-bar-item w3-button' href='#admin_actions_section'>Admin Menu</a>" : "" ?>
+                </div>
+            </nav>
+
             <article class="w3-container w3-threequarter w3-right" id="accountInfoArticle">
-                <h2>Account Information</h2>
+                <div class="w3-grey">
+                    <div class="w3-grey w3-text-black w3-container w3-center">
+                        <h2><strong>Account Information</strong></h2>
+                    </div>
+                    <figure class="w3-container w3-center">
+                        <img src="img/logo3.png">
+                    </figure>
+                </div>
 
                 <section class="w3-card" id="personal_details_section">
                     <div class="w3-teal w3-text-white w3-container w3-center">
@@ -197,16 +217,19 @@ function printAddressDetails() {
                     </form>
                 </section>
 
-                <section>
+                <section id="payment_methods_section">
                     <h3>Payment Methods</h3>
                 </section>
 
+                <section id="order_history_section">
+                    <h3>Payment Methods</h3>
+                </section>
                 <?php
                 //If we are admin, we are shown admin options
 
                 if ($_SESSION["type"] == "admin") {
                     ?>
-                    <section>
+                    <section id="admin_actions_section">
                         <h3>Admin Actions</h3>
 
                         <form action="manageProduct.php" method="POST">
@@ -232,13 +255,8 @@ function printAddressDetails() {
                     </section>
 
                     <?php
-                } else {
-                    echo "<section>
-                    <h3>Order History</h3>
-                     </section>";
                 }
                 ?>
-
 
                 <section>
                     <h3>Delete Account</h3>
