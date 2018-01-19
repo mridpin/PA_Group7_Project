@@ -241,9 +241,6 @@ checkSession();
                 deletePaymentMethod();
             }
         ?>
-        
-        
-=======
         }
 
         function addPaymentForm() {
