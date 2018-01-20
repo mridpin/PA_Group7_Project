@@ -18,8 +18,6 @@ checkSession();
     <body class="w3-light-grey">
         <?php include("header.php"); ?>
         <?php
-        printWelcome();
-
         if (isset($_POST['submit_address']) || isset($_POST['submit_new_address'])) {
             $error = [];
             // Check fields for errors:

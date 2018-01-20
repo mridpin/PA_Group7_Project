@@ -188,15 +188,15 @@ function showOrderHistory() {
     //var_dump($orders);
     $res .= "<ol class='w3-ul'>";
     foreach ($orders as $order) {
-        $res .= "<li class='w3-cyan'><h4>Date: ".$order["delivery_date"]."</h4>Total: $".$order["total"]."</li>";
+        $res .= "<li class='w3-cyan'><h4>Date: " . $order["delivery_date"] . "</h4>Total: $" . $order["total"] . "</li>";
         $articles = getArticlesForOrder($order["order_id"]);
         $res .= "<li><ul class='w3-ul'>";
         foreach ($articles as $article) {
             $res .= "<li class='w3-blue'><h6>Item: </h6></li>";
-            $res .= "<li><ul class='w3-ul'>"; 
+            $res .= "<li><ul class='w3-ul'>";
             $components = getAllComponentsForArticle($article["custom_product_id"]);
-            foreach ($components as $component) {  
-                $res .= "<li>".getComponentName($component["name"])."</li>";             
+            foreach ($components as $component) {
+                $res .= "<li>" . getComponentName($component["name"]) . "</li>";
             }
             $res .= "</li></ul>";
         }
@@ -217,75 +217,75 @@ function showOrderHistory() {
     </head>
 
     <body class="w3-light-grey">
-<?php
-include("header.php");
-if (isset($_POST['submitAccountDetails'])) {
-    $error = [];
-    // Check fields for errors:
-    if (!isset($_POST["username"]) || $_POST["username"] == "") {
-        $error[] = "Name can't be empty";
-    }
-    if (!isset($_POST["last_name"]) || $_POST["last_name"] == "") {
-        $error[] = "Last name can't be empty";
-    }
-    if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-        $error[] = "Email not valid";
-    }
+        <?php
+        include("header.php");
+        if (isset($_POST['submitAccountDetails'])) {
+            $error = [];
+            // Check fields for errors:
+            if (!isset($_POST["username"]) || $_POST["username"] == "") {
+                $error[] = "Name can't be empty";
+            }
+            if (!isset($_POST["last_name"]) || $_POST["last_name"] == "") {
+                $error[] = "Last name can't be empty";
+            }
+            if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                $error[] = "Email not valid";
+            }
 
-    if (empty($error)) {
-        $link = createConnection();
-        // Sanitize all inputs
-        $name = mysqli_real_escape_string($link, $_POST['username']);
-        $lastName = mysqli_real_escape_string($link, $_POST['last_name']);
-        $email = mysqli_real_escape_string($link, $_POST['email']);
-        $sql1 = "UPDATE users SET name='" . $name . "', last_name='" . $lastName . "', email='" . $email . "' WHERE user_id='" . $_SESSION["user_id"] . "'";
-        $result1 = mysqli_query($link, $sql1);
+            if (empty($error)) {
+                $link = createConnection();
+                // Sanitize all inputs
+                $name = mysqli_real_escape_string($link, $_POST['username']);
+                $lastName = mysqli_real_escape_string($link, $_POST['last_name']);
+                $email = mysqli_real_escape_string($link, $_POST['email']);
+                $sql1 = "UPDATE users SET name='" . $name . "', last_name='" . $lastName . "', email='" . $email . "' WHERE user_id='" . $_SESSION["user_id"] . "'";
+                $result1 = mysqli_query($link, $sql1);
 
-        // Update query
-        if (!$result1) {
-            $error[] = "Email already registered";
-            mysqli_close($link);
-        } else {
-            // If update successful, close connection and reload the page                    
-            mysqli_close($link);
-            header("Location: logout.php");
-        }
-    }
-} else if (isset($_POST["delete_account_submit"])) {
-    $error = [];
-    $link = createConnection();
-    // Sanitize all inputs
-    $password = mysqli_real_escape_string($link, $_POST['delete_account_password']);
-    $sql = "SELECT * FROM users WHERE user_id='" . $_SESSION["user_id"] . "'";
-    $result = mysqli_query($link, $sql);
-
-    if (!$result) {
-        mysqli_close($link);
-        die("ERROR: There is an error in the PASSWORD SQL query. Please contact site admin");
-    } else {
-        $row = mysqli_fetch_array($result);
-        // If passwords match, delete the user
-        if (password_verify($password, $row["password"])) {
-            $sql = "DELETE FROM users WHERE user_id='" . $_SESSION["user_id"] . "'";
+                // Update query
+                if (!$result1) {
+                    $error[] = "Email already registered";
+                    mysqli_close($link);
+                } else {
+                    // If update successful, close connection and reload the page                    
+                    mysqli_close($link);
+                    header("Location: logout.php");
+                }
+            }
+        } else if (isset($_POST["delete_account_submit"])) {
+            $error = [];
+            $link = createConnection();
+            // Sanitize all inputs
+            $password = mysqli_real_escape_string($link, $_POST['delete_account_password']);
+            $sql = "SELECT * FROM users WHERE user_id='" . $_SESSION["user_id"] . "'";
             $result = mysqli_query($link, $sql);
 
             if (!$result) {
                 mysqli_close($link);
-                die("ERROR: There is an error in the DELETE USER SQL query. Please contact site admin");
+                die("ERROR: There is an error in the PASSWORD SQL query. Please contact site admin");
             } else {
-                header("Location: logout.php");
-            }
-        } else {
-            $error[] = "Delete failed: Wrong Password";
-        }
-    }
-}
+                $row = mysqli_fetch_array($result);
+                // If passwords match, delete the user
+                if (password_verify($password, $row["password"])) {
+                    $sql = "DELETE FROM users WHERE user_id='" . $_SESSION["user_id"] . "'";
+                    $result = mysqli_query($link, $sql);
 
-if (!isset($_POST['submit']) || !empty($error)) {
-    if (isset($error)) {
-        echo printErrorMessage($error);
-    }
-    ?>
+                    if (!$result) {
+                        mysqli_close($link);
+                        die("ERROR: There is an error in the DELETE USER SQL query. Please contact site admin");
+                    } else {
+                        header("Location: logout.php");
+                    }
+                } else {
+                    $error[] = "Delete failed: Wrong Password";
+                }
+            }
+        }
+
+        if (!isset($_POST['submit']) || !empty($error)) {
+            if (isset($error)) {
+                echo printErrorMessage($error);
+            }
+            ?>
             <nav class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left w3-quarter w3-cent" id="account_nav">
                 <div class="w3-teal w3-text-white w3-container">
                     <h4><strong>Details</strong></h4>
@@ -295,8 +295,8 @@ if (!isset($_POST['submit']) || !empty($error)) {
                     <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#personal_details_section">Personal details</a>
                     <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#addresses_section">My addresses</a>
                     <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#payment_methods_section">Payment methods</a>
-                    <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#order_history_section">Personal details</a>
-    <?php echo ($_SESSION["type"] == "admin") ? "<a class='w3-hover-teal w3-hover-text-white w3-bar-item w3-button' href='#admin_actions_section'>Admin Menu</a>" : "" ?>
+                    <a class="w3-hover-teal w3-hover-text-white w3-bar-item w3-button" href="#order_history_section">Order History</a>
+                    <?php echo ($_SESSION["type"] == "admin") ? "<a class='w3-hover-teal w3-hover-text-white w3-bar-item w3-button' href='#admin_actions_section'>Admin Menu</a>" : "" ?>
                 </div>
             </nav>
 
@@ -316,9 +316,9 @@ if (!isset($_POST['submit']) || !empty($error)) {
                         <h3>My personal information</h3>
                     </div>
                     <form id="personal_details_form" class="w3-container w3-padding-16 w3-white" method="post" action="account.php">
-    <?php
-    echo showAccountDetails();
-    ?>
+                        <?php
+                        echo showAccountDetails();
+                        ?>
                         <input class="w3-block w3-button w3-teal" type="submit" name="submitAccountDetails" value="Update Account" />
                     </form>
                     <script src="js/form_manager.js"></script>
@@ -329,23 +329,23 @@ if (!isset($_POST['submit']) || !empty($error)) {
                         <h3>My addresses</h3>
                     </div>
                     <ol class="w3-ul">
-    <?php
-    echo printAddressDetails();
-    ?>  
+                        <?php
+                        echo printAddressDetails();
+                        ?>  
                     </ol>
                     <form class="w3-container w3-padding-16 w3-white" method="post" action="addresses.php" >
                         <input class="w3-block w3-button w3-teal" type="submit" name="add_address" value="Add addreess" class="details_button" id="add_address_button" />
                     </form>
                 </section>
 
-                <section class="w3-card w3-white w3-section">
+                <section class="w3-card w3-white w3-section" id="payment_methods_section">
                     <div class="w3-teal w3-text-white w3-container w3-center">
                         <h3>My Payment Methods</h3>
                     </div>
                     <ol class="w3-ul">
-    <?php
-    echo printPaymentMethodDetails();
-    ?>  
+                        <?php
+                        echo printPaymentMethodDetails();
+                        ?>  
                     </ol>
 
                     <form class="w3-container w3-padding-16 w3-white" method="POST" action="paymentMethods.php" >
@@ -358,13 +358,13 @@ if (!isset($_POST['submit']) || !empty($error)) {
                     <div class="w3-teal w3-text-white w3-container w3-center">
                         <h3>Order history</h3>                        
                     </div>
-    <?php echo showOrderHistory(); ?>
+                    <?php echo showOrderHistory(); ?>
                 </section>
-                    <?php
-                    //If we are admin, we are shown admin options
+                <?php
+                //If we are admin, we are shown admin options
 
-                    if ($_SESSION["type"] == "admin") {
-                        ?>
+                if ($_SESSION["type"] == "admin") {
+                    ?>
                     <section class="w3-card w3-white w3-section" id="admin_actions_section">
                         <div class="w3-teal w3-text-white w3-container w3-center">
                             <h3>Admin Actions</h3>
@@ -384,19 +384,19 @@ if (!isset($_POST['submit']) || !empty($error)) {
                         </div>
                     </section>
 
-        <?php
-    }
-    ?>
+                    <?php
+                }
+                ?>
 
                 <section class="w3-card w3-white w3-section" id="delete_account_section">
                     <div class="w3-grey w3-text-black w3-container w3-center">
                         <h3>Delete Account</h3>
                     </div>
-    <?php
-    if (isset($error)) {
-        printErrorMessage($error);
-    }
-    ?> 
+                    <?php
+                    if (isset($error)) {
+                        printErrorMessage($error);
+                    }
+                    ?> 
                     <form id="delete_account_form" class="w3-container w3-padding-16" method="post" action="account.php">
                         <label class="account_instructions" id="delete_account_instructions">To delete your account, please confirm your password. This process is permanent and cannot be reversed: </label>
                         <input class="w3-input w3-hover-grey" type="password" name="delete_account_password" required="required"/><br />
@@ -412,9 +412,9 @@ if (!isset($_POST['submit']) || !empty($error)) {
                                 document.getElementById("account_nav").style.display = "none";
                             }
             </script>
-    <?php
-}
-?>
+            <?php
+        }
+        ?>
         <?php include("footer.php"); ?>
     </body>
 </html>

@@ -2,17 +2,22 @@
 <!--
 This structure is a WIP, so you can edit it as much as your want.
 -->
+<?php
+include 'functions.php';
+require_once 'functions.php';
+session_start();
+?>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>New Order</title>
+        <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
-    <body>
-        <?php
-        include 'functions.php';
-        require_once 'functions.php';
-        session_start();
 
+    <body class="w3-light-grey">
+        <?php include("header.php"); ?>
+
+        <?php
         define("COMPUTER_BUILD_LENGTH", 16);
         //We first get all the components and depending on the form we are on we filter it
         //OPTION 1 : Website will change form with the button to go to different selec windows (Maybe save the current build in session variable to always have it)
@@ -36,9 +41,9 @@ This structure is a WIP, so you can edit it as much as your want.
             $usbCode = "CP_PC_USB";
 
             //Hardrive Segment
-            $result = "<h2>Select your Computer Components</h2>"
-                    . "<form action='newProduct.php' method='POST'>"
-                    . "Main Hard Drive: <select name='hd'>";
+            $result = "<div class='w3-teal w3-text-white w3-container'><h2>Select your Computer Components</h2></div>"
+                    . "<form class='w3-container w3-padding-16 w3-white' action='newProduct.php' method='POST'>"
+                    . "Main Hard Drive: <select class='w3-select' name='hd'>";
 
 
 
@@ -51,7 +56,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Second Hard Drive: <select name='shd'>"
+                    . "Second Hard Drive: <select class='w3-select' name='shd'>"
                     . "<option value='-' name='-'>-</option>";
 
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -62,7 +67,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "CPU: <select name='cpu'>";
+                    . "CPU: <select class='w3-select' name='cpu'>";
 
             $singleComponent = getSingleComponents($cpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -74,7 +79,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "RAM: <select name='ram'>";
+                    . "RAM: <select class='w3-select' name='ram'>";
 
 
             $singleComponent = getSingleComponents($ramCode);
@@ -86,7 +91,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "GPU: <select name='gpu'>";
+                    . "GPU: <select class='w3-select' name='gpu'>";
 
             $singleComponent = getSingleComponents($gpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -97,7 +102,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "MotherBoard: <select name='motherBoard'>";
+                    . "MotherBoard: <select class='w3-select' name='motherBoard'>";
 
 
             $singleComponent = getSingleComponents($mbCode);
@@ -109,7 +114,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Main Display Port: <select name='mDS'>";
+                    . "Main Display Port: <select class='w3-select' name='mDS'>";
 
 
             $singleComponent = getSingleComponents($dsCode);
@@ -121,7 +126,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Second Display port: <select name='sDS'>"
+                    . "Second Display port: <select class='w3-select' name='sDS'>"
                     . "<option value='-' name='-'>-</option>";
 
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -132,7 +137,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "USB Port: <select name='usb'>"
+                    . "USB Port: <select class='w3-select' name='usb'>"
                     . "<option value='-' name='-'>-</option>";
 
 
@@ -150,7 +155,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Disk Drive: <select name='diskDrive'>";
+                    . "Disk Drive: <select class='w3-select' name='diskDrive'>";
 
             $singleComponent = getSingleComponents($ddCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -162,7 +167,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Operating System: <select name='os'>"
+                    . "Operating System: <select class='w3-select' name='os'>"
                     . "<option value='-' name='-'>-</option>";
 
 
@@ -175,7 +180,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Case: <select name='case'>";
+                    . "Case: <select class='w3-select' name='case'>";
 
 
             $singleComponent = getSingleComponents($csCode);
@@ -190,7 +195,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             //Keyboard Segment
             $result .= "<br/>"
-                    . "Keyboard: <select name='keyboard'>"
+                    . "Keyboard: <select class='w3-select' name='keyboard'>"
                     . "<option value='-' name='-'>-</option>";
 
 
@@ -203,7 +208,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Mouse: <select name='mouse'>"
+                    . "Mouse: <select class='w3-select' name='mouse'>"
                     . "<option value='-' name='-'>-</option>";
 
 
@@ -216,7 +221,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Monitor: <select name='monitor'>"
+                    . "Monitor: <select class='w3-select' name='monitor'>"
                     . "<option value='-' name='-'>-</option>";
 
 
@@ -229,7 +234,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<input type='hidden' name='computer' value='computer'>"
-                    . "<input type='submit' name='firstForm' value='Make order'>"
+                    . "<input class='w3-block w3-button w3-teal' type='submit' name='firstForm' value='Make order'>"
                     . "</form>";
 
             //TODO: Add total amount of selected components
@@ -256,9 +261,9 @@ This structure is a WIP, so you can edit it as much as your want.
             $btCode = "CP_PH_BT";
 
             //Screen Segment
-            $result = "<h2>Select your Phone Components</h2>"
-                    . "<form action='newProduct.php' method='POST'>"
-                    . "Screen: <select name='screen'>";
+            $result = "<div class='w3-teal w3-text-white w3-container'><h2>Select your Phone Components</h2></div>"
+                    . "<form class='w3-container w3-padding-16 w3-white' action='newProduct.php' method='POST'>"
+                    . "Screen: <select class='w3-select' name='screen'>";
 
 
 
@@ -271,7 +276,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "CPU: <select name='cpu'>";
+                    . "CPU: <select class='w3-select' name='cpu'>";
 
             $singleComponent = getSingleComponents($cpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -282,7 +287,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "RAM: <select name='ram'>";
+                    . "RAM: <select class='w3-select' name='ram'>";
 
 
             $singleComponent = getSingleComponents($ramCode);
@@ -294,7 +299,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Storage: <select name='hd'>";
+                    . "Storage: <select class='w3-select' name='hd'>";
 
 
             $singleComponent = getSingleComponents($hdCode);
@@ -306,7 +311,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "GPU: <select name='gpu'>";
+                    . "GPU: <select class='w3-select' name='gpu'>";
 
             $singleComponent = getSingleComponents($gpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -317,7 +322,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Camera: <select name='camera'>";
+                    . "Camera: <select class='w3-select' name='camera'>";
 
             $singleComponent = getSingleComponents($cmCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -328,7 +333,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Battery: <select name='battery'>";
+                    . "Battery: <select class='w3-select' name='battery'>";
 
             $singleComponent = getSingleComponents($btCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -339,7 +344,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "USB: <select name='usb'>";
+                    . "USB: <select class='w3-select' name='usb'>";
 
             $singleComponent = getSingleComponents($usbCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -350,7 +355,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Body: <select name='body'>";
+                    . "Body: <select class='w3-select' name='body'>";
 
             $singleComponent = getSingleComponents($bdCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -361,7 +366,7 @@ This structure is a WIP, so you can edit it as much as your want.
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
-                    . "Operating System: <select name='os'>";
+                    . "Operating System: <select class='w3-select' name='os'>";
 
             $singleComponent = getSingleComponents($osCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
@@ -370,17 +375,17 @@ This structure is a WIP, so you can edit it as much as your want.
 
             //Extra Components
             $result .= "</select>";
-//                    . "<h4>Additional Components</h4>";
-//
-//            $result .= "<br/>"
-//                    . "Fast Charging? ($" . getSingleComponents($fcCode)[0][1] . ")<input type='checkbox' name='fcharging' value='fchargin'><br/><br/>"
-//                    . "Headphone Jack? ($" . getSingleComponents($hpCode)[0][1] . ")<input type='checkbox' name='headphone' value='headphone'><br/><br/>"
-//                    . "NFC? ($" . getSingleComponents($nfcCode)[0][1] . ")<input type='checkbox' name='nfc' value='nfc'><br/><br/>"
-//                    . "Wireless Charging? ($" . getSingleComponents($wrCode)[0][1] . ")<input type='checkbox' name='wireless' value='wireless'><br/><br/>"
-//                    . "Fingerprint Reader? ($" . getSingleComponents($frCode)[0][1] . ")<input type='checkbox' name='finger' value='finger'><br/><br/>";
+            //                    . "<h4>Additional Components</h4>";
+            //
+        //            $result .= "<br/>"
+            //                    . "Fast Charging? ($" . getSingleComponents($fcCode)[0][1] . ")<input type='checkbox' name='fcharging' value='fchargin'><br/><br/>"
+            //                    . "Headphone Jack? ($" . getSingleComponents($hpCode)[0][1] . ")<input type='checkbox' name='headphone' value='headphone'><br/><br/>"
+            //                    . "NFC? ($" . getSingleComponents($nfcCode)[0][1] . ")<input type='checkbox' name='nfc' value='nfc'><br/><br/>"
+            //                    . "Wireless Charging? ($" . getSingleComponents($wrCode)[0][1] . ")<input type='checkbox' name='wireless' value='wireless'><br/><br/>"
+            //                    . "Fingerprint Reader? ($" . getSingleComponents($frCode)[0][1] . ")<input type='checkbox' name='finger' value='finger'><br/><br/>";
 
             $result .= "<input type='hidden' name='phone' value='phone'>"
-                    . "<input type='submit' name='firstForm' value='Make order'>"
+                    . "<input class='w3-block w3-button w3-teal' type='submit' name='firstForm' value='Make order'>"
                     . "</form>";
 
 
@@ -554,14 +559,14 @@ This structure is a WIP, so you can edit it as much as your want.
 
         function saveToCart() {
             $result = "";
-            // Count the items in the cart
+// Count the items in the cart
             if (isset($_SESSION["cart"])) {
                 $n = count($_SESSION["cart"]) + 1;
             } else {
                 $n = 0;
             }
             if (isset($_POST["computer"])) {
-                // Separate each item into id, name and price
+// Separate each item into id, name and price
                 if ($_POST["hd"] !== "-") {
                     $item = explode("_", $_POST["hd"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
@@ -646,7 +651,7 @@ This structure is a WIP, so you can edit it as much as your want.
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
                 }
             } else if (isset($_POST["phone"])) {
-                // Separate each item into id, name and price
+// Separate each item into id, name and price
                 if ($_POST["screen"] !== "-") {
                     $item = explode("_", $_POST["screen"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
@@ -685,13 +690,12 @@ This structure is a WIP, so you can edit it as much as your want.
             return $result;
         }
         ?>
-        <?php include("header.php"); ?>
         <!--
         This div is to select the components of the product (see document Vision de la apliacion)
         for reference.
         -->
-        <article>
-            <section>
+        <article class="w3-card w3-mobile" style="width:50%;margin:auto;"">
+            <section >
                 <?php
                 if (isset($_POST["firstForm"])) {
                     saveToCart();
