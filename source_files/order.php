@@ -14,7 +14,14 @@ session_start();
         <h2>Your order</h2>
         <ul>
             <?php
-            if (isset($_SESSION["cart"]) && (isset($_GET["submit"]))) {
+            if (isset($_GET["submit_cancel"])) {
+                unset($_SESSION["cart"]);
+                header("Location: index.php");
+            } else if (isset($_GET["delete_submit"])) {
+                $index = $_GET["delete_item"];
+                unset($_SESSION["cart"][$index]);
+                header("Location: order.php");
+            } else if (isset($_SESSION["cart"]) && (isset($_GET["submit"]))) {
                 //process the order using the data in the session variable
                 $link = createConnection();
                 $totalPrice = 0.0;
@@ -44,7 +51,7 @@ session_start();
                     die("ERROR IN INSERT ORDERS QUERY: PLEASE CONTACT SITE ADMIN");
                 } else {
                     $order_id = mysqli_insert_id($link);
-                    foreach ($_SESSION["cart"] as $index => $article) {                        
+                    foreach ($_SESSION["cart"] as $index => $article) {
                         $sql = "INSERT INTO custom_products (quantity) VALUES ('" . $order_id . "')";
                         $result = mysqli_query($link, $sql);
                         if (!$result) {
@@ -52,7 +59,7 @@ session_start();
                             die("ERROR IN INSERT CUSTOM PRODUCT: PLEASE CONTACT SITE ADMIN");
                         } else {
                             $custom_product_id = mysqli_insert_id($link);
-                            foreach ($article as $id => $component) {                                
+                            foreach ($article as $id => $component) {
                                 $safeid = mysqli_real_escape_string($link, $id);
                                 $sql = "INSERT INTO custom_products_components (custom_product_id, component_id) VALUES ('" . $custom_product_id . "', '" . $safeid . "')";
                                 $result = mysqli_query($link, $sql);
@@ -64,28 +71,32 @@ session_start();
                         }
                     }
                 }
-                header ("Location: index.php");
+                header("Location: index.php");
             } else if (isset($_SESSION["cart"])) {
+                $_SESSION["origin"] = $_SERVER['PHP_SELF'];
+                checkSession();
                 // Print the form to confirm order
-                $form = "<form method='get' action='order.php' id='confirm'>";
-                $form .= "</form>";
+                $result = "<form method='get' action='order.php' id='confirm'>";
+                $result .= "</form>";
                 var_dump($_SESSION["cart"]);
-                $result = "";
                 // For each article in the cart
                 foreach ($_SESSION["cart"] as $index => $article) {
                     $result .= "<li><table>";
                     foreach ($article as $id => $component) {
                         foreach ($component as $name => $price) {
-                            $result .= "<tr><td>" . $name . "</td><td>" . $price . "</td></tr>";
+                            $result .= "<tr><td>" . $name . "</td><td>" . $price . "</td>";
                         }
-                    }
-                    $result .= "</table></li>";
+                    }                    
+                    $result .= "</table>";
+                    $result .= "<input type='submit' name='delete_submit' value='Delete' form='confirm' />";
+                    $result .= "<input type='hidden' name='delete_item' value='" . $index . "' form='confirm' /></li>";
                 }
                 // Print the cart content
-                echo $result;
+                //echo $result;
 
-                $form .= "<input type='submit' name='submit' value='Confirm Order' form='confirm' />";
-                echo $form;
+                $result .= "<input type='submit' name='submit' value='Confirm Order' form='confirm' />";
+                $result .= "<input type='submit' name='submit_cancel' value='Cancel Order' form='confirm' />";
+                echo $result;
             }
             ?>
         </ul>
