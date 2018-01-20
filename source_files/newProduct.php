@@ -264,7 +264,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($scCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //CPU Hardrive Segment
@@ -275,7 +275,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($cpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //RAM Segment
@@ -287,7 +287,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($ramCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //HD Segment
@@ -299,7 +299,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($hdCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //GPU Segment
@@ -310,7 +310,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($gpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Camera Segment
@@ -321,7 +321,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($cmCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Baterry Segment
@@ -332,7 +332,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($btCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //USB Segment
@@ -343,7 +343,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($usbCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Body Segment
@@ -354,7 +354,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($bdCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //OS Segment
@@ -365,21 +365,22 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($osCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Extra Components
-            $result .= "</select>"
-                    . "<h4>Additional Components</h4>";
+            $result .= "</select>";
+//                    . "<h4>Additional Components</h4>";
+//
+//            $result .= "<br/>"
+//                    . "Fast Charging? ($" . getSingleComponents($fcCode)[0][1] . ")<input type='checkbox' name='fcharging' value='fchargin'><br/><br/>"
+//                    . "Headphone Jack? ($" . getSingleComponents($hpCode)[0][1] . ")<input type='checkbox' name='headphone' value='headphone'><br/><br/>"
+//                    . "NFC? ($" . getSingleComponents($nfcCode)[0][1] . ")<input type='checkbox' name='nfc' value='nfc'><br/><br/>"
+//                    . "Wireless Charging? ($" . getSingleComponents($wrCode)[0][1] . ")<input type='checkbox' name='wireless' value='wireless'><br/><br/>"
+//                    . "Fingerprint Reader? ($" . getSingleComponents($frCode)[0][1] . ")<input type='checkbox' name='finger' value='finger'><br/><br/>";
 
-            $result .= "<br/>"
-                    . "Fast Charging? ($" . getSingleComponents($fcCode)[0][1] . ")<input type='checkbox' name='fcharging' value='fchargin'><br/><br/>"
-                    . "Headphone Jack? ($" . getSingleComponents($hpCode)[0][1] . ")<input type='checkbox' name='headphone' value='headphone'><br/><br/>"
-                    . "NFC? ($" . getSingleComponents($nfcCode)[0][1] . ")<input type='checkbox' name='nfc' value='nfc'><br/><br/>"
-                    . "Wireless Charging? ($" . getSingleComponents($wrCode)[0][1] . ")<input type='checkbox' name='wireless' value='wireless'><br/><br/>"
-                    . "Fingerprint Reader? ($" . getSingleComponents($frCode)[0][1] . ")<input type='checkbox' name='finger' value='finger'><br/><br/>";
-
-            $result .= "<input type='submit' name='firstForm' value='Make order'>"
+            $result .= "<input type='hidden' name='phone' value='phone'>"
+                    . "<input type='submit' name='firstForm' value='Make order'>"
                     . "</form>";
 
 
@@ -426,6 +427,7 @@ This structure is a WIP, so you can edit it as much as your want.
                 $n = 0;
             }
             var_dump($n);
+
             if (isset($_POST["computer"])) {
                 // Separate each item into name and id
                 if ($_POST["hd"] !== "-") {
@@ -549,7 +551,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             return $result;
         }
-        
+
         function saveToCart() {
             $result = "";
             // Count the items in the cart
@@ -630,7 +632,7 @@ This structure is a WIP, so you can edit it as much as your want.
                     $item = explode("_", $_POST["case"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
                 }
-                
+
                 if ($_POST["keyboard"] !== "-") {
                     $item = explode("_", $_POST["keyboard"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
@@ -643,8 +645,43 @@ This structure is a WIP, so you can edit it as much as your want.
                     $item = explode("_", $_POST["monitor"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
                 }
+            } else if (isset($_POST["phone"])) {
+                // Separate each item into id, name and price
+                if ($_POST["screen"] !== "-") {
+                    $item = explode("_", $_POST["screen"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+
+                if ($_POST["cpu"] !== "-") {
+                    $item = explode("_", $_POST["cpu"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                if ($_POST["ram"] !== "-") {
+                    $item = explode("_", $_POST["ram"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                if ($_POST["hd"] !== "-") {
+                    $item = explode("_", $_POST["hd"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                if ($_POST["gpu"] !== "-") {
+                    $item = explode("_", $_POST["gpu"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+//                if ($_POST["camera"] !== "-") {
+//                    $item = explode("_", $_POST["camera"]);
+//                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+//                }
+                if ($_POST["body"] !== "-") {
+                    $item = explode("_", $_POST["body"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                if ($_POST["os"] !== "-") {
+                    $item = explode("_", $_POST["os"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
             }
-            
+
             return $result;
         }
         ?>

@@ -74,6 +74,7 @@ session_start();
                         }
                     }
                 }
+                mysqli_close($link);
                 unset($_SESSION["cart"]);
                 header("Location: index.php");
             } else if (isset($_SESSION["cart"])) {
