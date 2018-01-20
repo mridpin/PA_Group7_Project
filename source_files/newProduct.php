@@ -11,7 +11,9 @@ This structure is a WIP, so you can edit it as much as your want.
         <?php
         include 'functions.php';
         require_once 'functions.php';
+        session_start();
 
+        define("COMPUTER_BUILD_LENGTH", 16);
         //We first get all the components and depending on the form we are on we filter it
         //OPTION 1 : Website will change form with the button to go to different selec windows (Maybe save the current build in session variable to always have it)
         //OPTION 2: We list all of the components directly instead of having to navigate through windows
@@ -42,7 +44,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($hdCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Second Hardrive Segment
@@ -53,7 +55,7 @@ This structure is a WIP, so you can edit it as much as your want.
                     . "<option value='-' name='-'>-</option>";
 
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //CPU Hardrive Segment
@@ -64,7 +66,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($cpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
 
@@ -77,7 +79,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($ramCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //GPU Segment
@@ -88,7 +90,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($gpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //MotherBoard Segment
@@ -100,7 +102,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($mbCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Display port Segment
@@ -112,7 +114,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($dsCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Second Display Segment
@@ -123,7 +125,7 @@ This structure is a WIP, so you can edit it as much as your want.
                     . "<option value='-' name='-'>-</option>";
 
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //USB Segment
@@ -136,7 +138,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($usbCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             $result .= "</select>"
@@ -152,7 +154,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($ddCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
 
@@ -166,7 +168,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($osCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Case Segment
@@ -178,7 +180,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($csCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Extra elements
@@ -194,7 +196,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($kbCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Mouse Segment
@@ -207,7 +209,7 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($msCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
             //Monitor Segment
@@ -220,12 +222,13 @@ This structure is a WIP, so you can edit it as much as your want.
 
             $singleComponent = getSingleComponents($mnCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][2] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
 
             $result .= "</select>"
                     . "<br/>"
+                    . "<input type='hidden' name='computer' value='computer'>"
                     . "<input type='submit' name='firstForm' value='Make order'>"
                     . "</form>";
 
@@ -402,12 +405,245 @@ This structure is a WIP, so you can edit it as much as your want.
             $j = 0;
             for ($i = 0; $i < sizeof($components); $i++) {
                 if (strpos($components[$i][0], $code) !== false) {
-                    $result[$j][0] = substr($components[$i][0], 6);
-                    $result[$j][1] = $components[$i][1];
+                    $result[$j][0] = substr($components[$i][0], 6); // component name
+                    $result[$j][1] = $components[$i][1]; // component price
+                    $result[$j][2] = $components[$i][3]; // product_id
                     $j++;
                 }
             }
 
+            return $result;
+        }
+
+        // Prints a summary of the selected elements and saves it as a session variable
+        function notinuse() {
+            $result = "";
+            // Count the items in the cart
+            if (isset($_SESSION["cart"])) {
+                $n = count($_SESSION["cart"]) + 1;
+            } else {
+                $n = 0;
+            }
+            var_dump($n);
+            if (isset($_POST["computer"])) {
+                // Separate each item into name and id
+                if ($_POST["hd"] !== "-") {
+                    $hdd = explode("_", $_POST["hd"]);
+                    $result .= "<tr><td>HDD 1</td><td>" . $hdd[0] . "</td></tr>";
+                    $_SESSION["cart"][$n][$hdd[1]] = $hdd[0];
+                } else {
+                    $result .= "<tr><td>HDD 1</td><td>" . $_POST["hd"] . "</td></tr>";
+                }
+
+                if ($_POST["shd"] !== "-") {
+                    $hdd2 = explode("_", $_POST["shd"]);
+                    $result .= "<tr><td>HDD 2</td><td>" . $hdd2[0] . "</td></tr>";
+                    $_SESSION["cart"][$n][$hdd2[1]] = $hdd2[0];
+                } else {
+                    $result .= "<tr><td>HDD 2</td><td>" . $_POST["shd"] . "</td></tr>";
+                }
+                if ($_POST["cpu"] !== "-") {
+                    $item = explode("_", $_POST["cpu"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                    $result .= "<tr><td>CPU</td><td>" . $_SESSION["cart"][$n][$item[1]] . "</td></tr>";
+                } else {
+                    $result .= "<tr><td>CPU</td><td>" . $_POST["cpu"] . "</td></tr>";
+                }
+                if ($_POST["ram"] !== "-") {
+                    $item = explode("_", $_POST["ram"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                    $result .= "<tr><td>RAM</td><td>" . $_SESSION["cart"][$n][$item[1]] . "</td></tr>";
+                } else {
+                    $result .= "<tr><td>RAM</td><td>" . $_POST["ram"] . "</td></tr>";
+                }
+                if ($_POST["gpu"] !== "-") {
+                    $item = explode("_", $_POST["gpu"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                    $result .= "<tr><td>GPU</td><td>" . $_SESSION["cart"][$n][$item[1]] . "</td></tr>";
+                } else {
+                    $result .= "<tr><td>GPU</td><td>" . $_POST["gpu"] . "</td></tr>";
+                }
+                if ($_POST["motherBoard"] !== "-") {
+                    $item = explode("_", $_POST["motherBoard"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                    $result .= "<tr><td>Motherboard</td><td>" . $_SESSION["cart"][$n][$item[1]] . "</td></tr>";
+                } else {
+                    $result .= "<tr><td>Motherboard</td><td>" . $_POST["motherBoard"] . "</td></tr>";
+                }
+//                if ($_POST["mDS"] !== "-") {
+//                    $item = explode("_", $_POST["mDS"]);
+//                    $_SESSION["cart"][$item[1]] = $item[0];
+//                    $result .= "<tr><td>Main Display Port</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
+//                } else {
+//                    $result .= "<tr><td>Main Display Port</td><td>" . $_POST["mDS"] . "</td></tr>";
+//                }
+//                if ($_POST["sDS"] !== "-") {
+//                    $item = explode("_", $_POST["sDS"]);
+//                    $_SESSION["cart"][$item[1]] = $item[0];
+//                    $result .= "<tr><td>Secondary Display Port</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
+//                } else {
+//                    $result .= "<tr><td>Secondary Display Port</td><td>" . $_POST["sDS"] . "</td></tr>";
+//                }
+//                if ($_POST["usb"] !== "-") {
+//                    $item = explode("_", $_POST["usb"]);
+//                    $_SESSION["cart"][$item[1]] = $item[0];
+//                    $result .= "<tr><td>USB</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";                    
+//                } else {
+//                    $result .= "<tr><td>USB</td><td>" . $_POST["usb"] . "</td></tr>";
+//                }
+//                if ($_POST["nusb"] !== "-") {
+//                    $item = explode("_", $_POST["nusb"]);
+//                    $_SESSION["cart"][$item[1]] = $item[0];
+//                    $result .= "<tr><td>Number of USBs</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
+//                    
+//                } else {
+//                    $result .= "<tr><td>Number of USBs</td><td>" . $_POST["nusb"] . "</td></tr>";
+//                }
+//
+//                if ($_POST["diskDrive"] !== "-") {
+//                    $item = explode("_", $_POST["diskDrive"]);
+//                    $_SESSION["cart"][$item[1]] = $item[0];
+//                    $result .= "<tr><td>Disk drive</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
+//                } else {
+//                    $result .= "<tr><td>Disk drive</td><td>" . $_POST["diskDrive"] . "</td></tr>";
+//                }
+                if ($_POST["os"] !== "-") {
+                    $item = explode("_", $_POST["os"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                    $result .= "<tr><td>Operating System</td><td>" . $_SESSION["cart"][$n][$item[1]] . "</td></tr>";
+                } else {
+                    $result .= "<tr><td>Operating System</td><td>" . $_POST["os"] . "</td></tr>";
+                }
+                if ($_POST["case"] !== "-") {
+                    $item = explode("_", $_POST["case"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                    $result .= "<tr><td>Case</td><td>" . $_SESSION["cart"][$n][$item[1]] . "</td></tr>";
+                } else {
+                    $result .= "<tr><td>Case</td><td>" . $_POST["case"] . "</td></tr>";
+                }
+
+
+                if ($_POST["keyboard"] !== "-") {
+                    $item = explode("_", $_POST["keyboard"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                    $result .= "<tr><td>Keyboard</td><td>" . $_SESSION["cart"][$n][$item[1]] . "</td></tr>";
+                } else {
+                    $result .= "<tr><td>Keyboard</td><td>" . $_POST["keyboard"] . "</td></tr>";
+                }
+                if ($_POST["mouse"] !== "-") {
+                    $item = explode("_", $_POST["mouse"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                    $result .= "<tr><td>Mouse</td><td>" . $_SESSION["cart"][$n][$item[1]] . "</td></tr>";
+                } else {
+                    $result .= "<tr><td>Mouse</td><td>" . $_POST["mouse"] . "</td></tr>";
+                }
+                if ($_POST["monitor"] !== "-") {
+                    $item = explode("_", $_POST["monitor"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                    $result .= "<tr><td>Monitor</td><td>" . $_SESSION["cart"][$n][$item[1]] . "</td></tr>";
+                } else {
+                    $result .= "<tr><td>Monitor</td><td>" . $_POST["monitor"] . "</td></tr>";
+                }
+            }
+
+            return $result;
+        }
+        
+        function saveToCart() {
+            $result = "";
+            // Count the items in the cart
+            if (isset($_SESSION["cart"])) {
+                $n = count($_SESSION["cart"]) + 1;
+            } else {
+                $n = 0;
+            }
+            if (isset($_POST["computer"])) {
+                // Separate each item into name and id
+                if ($_POST["hd"] !== "-") {
+                    $hdd = explode("_", $_POST["hd"]);
+                    $_SESSION["cart"][$n][$hdd[1]] = $hdd[0];
+                }
+
+                if ($_POST["shd"] !== "-") {
+                    $hdd2 = explode("_", $_POST["shd"]);
+                    $_SESSION["cart"][$n][$hdd2[1]] = $hdd2[0];
+                }
+                if ($_POST["cpu"] !== "-") {
+                    $item = explode("_", $_POST["cpu"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                }
+                if ($_POST["ram"] !== "-") {
+                    $item = explode("_", $_POST["ram"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                }
+                if ($_POST["gpu"] !== "-") {
+                    $item = explode("_", $_POST["gpu"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                }
+                if ($_POST["motherBoard"] !== "-") {
+                    $item = explode("_", $_POST["motherBoard"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                }
+//                if ($_POST["mDS"] !== "-") {
+//                    $item = explode("_", $_POST["mDS"]);
+//                    $_SESSION["cart"][$item[1]] = $item[0];
+//                    $result .= "<tr><td>Main Display Port</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
+//                } else {
+//                    $result .= "<tr><td>Main Display Port</td><td>" . $_POST["mDS"] . "</td></tr>";
+//                }
+//                if ($_POST["sDS"] !== "-") {
+//                    $item = explode("_", $_POST["sDS"]);
+//                    $_SESSION["cart"][$item[1]] = $item[0];
+//                    $result .= "<tr><td>Secondary Display Port</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
+//                } else {
+//                    $result .= "<tr><td>Secondary Display Port</td><td>" . $_POST["sDS"] . "</td></tr>";
+//                }
+//                if ($_POST["usb"] !== "-") {
+//                    $item = explode("_", $_POST["usb"]);
+//                    $_SESSION["cart"][$item[1]] = $item[0];
+//                    $result .= "<tr><td>USB</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";                    
+//                } else {
+//                    $result .= "<tr><td>USB</td><td>" . $_POST["usb"] . "</td></tr>";
+//                }
+//                if ($_POST["nusb"] !== "-") {
+//                    $item = explode("_", $_POST["nusb"]);
+//                    $_SESSION["cart"][$item[1]] = $item[0];
+//                    $result .= "<tr><td>Number of USBs</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
+//                    
+//                } else {
+//                    $result .= "<tr><td>Number of USBs</td><td>" . $_POST["nusb"] . "</td></tr>";
+//                }
+//
+//                if ($_POST["diskDrive"] !== "-") {
+//                    $item = explode("_", $_POST["diskDrive"]);
+//                    $_SESSION["cart"][$item[1]] = $item[0];
+//                    $result .= "<tr><td>Disk drive</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
+//                } else {
+//                    $result .= "<tr><td>Disk drive</td><td>" . $_POST["diskDrive"] . "</td></tr>";
+//                }
+                if ($_POST["os"] !== "-") {
+                    $item = explode("_", $_POST["os"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                }
+                if ($_POST["case"] !== "-") {
+                    $item = explode("_", $_POST["case"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                }
+                
+                if ($_POST["keyboard"] !== "-") {
+                    $item = explode("_", $_POST["keyboard"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                }
+                if ($_POST["mouse"] !== "-") {
+                    $item = explode("_", $_POST["mouse"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                }
+                if ($_POST["monitor"] !== "-") {
+                    $item = explode("_", $_POST["monitor"]);
+                    $_SESSION["cart"][$n][$item[1]] = $item[0];
+                }
+            }
+            
             return $result;
         }
         ?>
@@ -419,6 +655,11 @@ This structure is a WIP, so you can edit it as much as your want.
         <article>
             <section>
                 <?php
+                if (isset($_POST["firstForm"])) {
+                    saveToCart();
+                    header("Location: index.php");
+                }
+
                 if (!isset($_POST["firstForm"])) {
                     if (isset($_POST['computer'])) {
                         computerForm();
