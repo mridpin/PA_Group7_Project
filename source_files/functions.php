@@ -559,6 +559,9 @@ function printWelcome() {
     } else {
         echo "<a class='w3-button' href='login.php'><p>Login/Register</p></a>";
     }
+    if (isset($_SESSION["cart"])) {
+       echo "<div><a href='order.php' class='w3-button w3-block'>Cart: " . count($_SESSION["cart"])."</a>";
+    }
 }
 
 //Gets all of the components in the DB

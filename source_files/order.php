@@ -43,13 +43,15 @@ session_start();
                     }
                 }
 
-                //Step 3: Add the prebuilt article to the database
-                $sql = "INSERT INTO orders (total, assembly_time, delivery_date, user_id) VALUES ('" . $totalPrice . "', '1', '1', '1')";
+                //Step 1: Add the order to the database
+                $date = date('jS \of F Y H:i:s');
+                $sql = "INSERT INTO orders (total, assembly_time, delivery_date, user_id) VALUES ('" . $totalPrice . "', '1', '".$date."', '".$_SESSION["user_id"]."')";
                 $result = mysqli_query($link, $sql);
                 if (!$result) {
                     mysqli_close($link);
                     die("ERROR IN INSERT ORDERS QUERY: PLEASE CONTACT SITE ADMIN");
                 } else {
+                    // Step2: Insert the new custom product
                     $order_id = mysqli_insert_id($link);
                     foreach ($_SESSION["cart"] as $index => $article) {
                         $sql = "INSERT INTO custom_products (quantity) VALUES ('" . $order_id . "')";
@@ -58,6 +60,7 @@ session_start();
                             mysqli_close($link);
                             die("ERROR IN INSERT CUSTOM PRODUCT: PLEASE CONTACT SITE ADMIN");
                         } else {
+                            // Step 3: insert the relation between custom product and componen
                             $custom_product_id = mysqli_insert_id($link);
                             foreach ($article as $id => $component) {
                                 $safeid = mysqli_real_escape_string($link, $id);
@@ -71,6 +74,7 @@ session_start();
                         }
                     }
                 }
+                unset($_SESSION["cart"]);
                 header("Location: index.php");
             } else if (isset($_SESSION["cart"])) {
                 $_SESSION["origin"] = $_SERVER['PHP_SELF'];
@@ -91,8 +95,6 @@ session_start();
                     $result .= "<input type='submit' name='delete_submit' value='Delete' form='confirm' />";
                     $result .= "<input type='hidden' name='delete_item' value='" . $index . "' form='confirm' /></li>";
                 }
-                // Print the cart content
-                //echo $result;
 
                 $result .= "<input type='submit' name='submit' value='Confirm Order' form='confirm' />";
                 $result .= "<input type='submit' name='submit_cancel' value='Cancel Order' form='confirm' />";

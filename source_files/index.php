@@ -7,6 +7,7 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
     <head>
         <meta charset="UTF-8">
         <title>Welcome</title>
+        <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
     <body>
         <div>
@@ -25,11 +26,11 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
             <form action="newProduct.php" method="POST">
                 <input type="submit" name="computer" value="Build a new computer"/>
             </form>
-            
+
             <form action="newProduct.php" method="POST">
                 <input type="submit" name="phone" value="Build a new phone"/>
             </form>
-            
+
             <form action="newProduct.php" method="POST">
                 <input type="submit" name="product" value="Buy a product"/>
             </form>
