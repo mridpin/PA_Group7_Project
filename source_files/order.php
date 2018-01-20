@@ -69,6 +69,7 @@ session_start();
                             // Step2: Insert the new custom product
                             $order_id = mysqli_insert_id($link);
                             foreach ($_SESSION["cart"] as $index => $article) {
+                                // "quantity" is being used as "order id" for this component
                                 $sql = "INSERT INTO custom_products (quantity) VALUES ('" . $order_id . "')";
                                 $result = mysqli_query($link, $sql);
                                 if (!$result) {
