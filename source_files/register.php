@@ -95,6 +95,7 @@ require_once 'functions.php';
                                     die("USER_ADDRESS QUERY ERROR: PLEASE CONTACT SITE ADMIN");
                                 } else {
                                     $_SESSION["user"] = $name;
+                                    $_SESSION["user_id"] = $user_id;
                                     $_SESSION["type"] = "user";
                                     mysqli_close($link);
                                     header("Location: " . $_SESSION["origin"]);
