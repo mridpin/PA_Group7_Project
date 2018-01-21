@@ -146,11 +146,6 @@ session_start();
                 $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
-            $result .= "</select>"
-                    . "<br/>"
-                    . "<br/>"
-                    . "Number of USB Ports: <input type='number' name='nusb' min='1' value='1'/>";
-
             //Disk Drive Segment
             $result .= "</select>"
                     . "<br/>"
@@ -230,14 +225,18 @@ session_start();
                 $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
-
+            
             $result .= "</select>"
                     . "<br/>"
+                    . "<br/>"
+                    . "Product Quantity: <input class ='w3-input w3-hover-grey' type='number' name='quantity' min='1' value='1'/> <br/>";
+
+            $result .="<br/>"
                     . "<input type='hidden' name='computer' value='computer'>"
                     . "<input class='w3-block w3-button w3-teal' type='submit' name='firstForm' value='Make order'>"
                     . "</form>";
-
-            //TODO: Add total amount of selected components
+            
+            
 
             echo $result;
         }
@@ -374,15 +373,43 @@ session_start();
             }
 
             //Extra Components
-            $result .= "</select>";
-            //                    . "<h4>Additional Components</h4>";
-            //
-        //            $result .= "<br/>"
-            //                    . "Fast Charging? ($" . getSingleComponents($fcCode)[0][1] . ")<input type='checkbox' name='fcharging' value='fchargin'><br/><br/>"
-            //                    . "Headphone Jack? ($" . getSingleComponents($hpCode)[0][1] . ")<input type='checkbox' name='headphone' value='headphone'><br/><br/>"
-            //                    . "NFC? ($" . getSingleComponents($nfcCode)[0][1] . ")<input type='checkbox' name='nfc' value='nfc'><br/><br/>"
-            //                    . "Wireless Charging? ($" . getSingleComponents($wrCode)[0][1] . ")<input type='checkbox' name='wireless' value='wireless'><br/><br/>"
-            //                    . "Fingerprint Reader? ($" . getSingleComponents($frCode)[0][1] . ")<input type='checkbox' name='finger' value='finger'><br/><br/>";
+            $result .= "</select>"
+                    . "<h4>Additional Components</h4>";
+            
+            //Fast Charging
+            
+            $singleComponent = getSingleComponents($fcCode);
+            
+                   $result .= "<br/>"
+                                . "Fast Charging? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='fastCharging' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
+                   
+            //Jack
+                   
+            $singleComponent = getSingleComponents($hpCode);       
+                   
+                    $result .= "<br/>"
+                            . "Headphone Jack? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='headphoneJack' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
+                    
+            //NFC
+              
+            $singleComponent = getSingleComponents($nfcCode); 
+            
+                    $result.= "<br/>"
+                            . "NFC? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='nfc' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
+            
+            //Wireless Charging        
+            
+            $singleComponent = getSingleComponents($wrCode); 
+                    
+                    $result.="<br/>"
+                            . "Wireless Charging? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='wirelessCharging' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
+                    
+            //Fingerprint
+                    
+             $singleComponent = getSingleComponents($frCode);         
+             
+                    $result.="<br/>"
+                            ."Fingerprint Reader? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='fingerprintReader' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
 
             $result .= "<input type='hidden' name='phone' value='phone'>"
                     . "<input class='w3-block w3-button w3-teal' type='submit' name='firstForm' value='Make order'>"
@@ -393,7 +420,6 @@ session_start();
             echo $result;
         }
 
-        //TODO: Figure out a way to display all Prebuilt product effectively (not with a select, maybe like on php test)
         function productForm() {
             $pbCode = "PB";
 
@@ -656,6 +682,31 @@ session_start();
                     $item = explode("_", $_POST["screen"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
                 }
+                
+                if (!empty($_POST["nfc"])) {
+                    $item = explode("_", $_POST["nfc"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                
+                if (!empty($_POST["wirelessCharging"])) {
+                    $item = explode("_", $_POST["wirelessCharging"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                
+                if (!empty($_POST["fingerprintReader"])) {
+                    $item = explode("_", $_POST["fingerprintReader"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                
+                if (!empty($_POST["headphoneJack"])) {
+                    $item = explode("_", $_POST["headphoneJack"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                
+                if (!empty($_POST["fastCharging"])) {
+                    $item = explode("_", $_POST["fastCharging"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
 
                 if ($_POST["cpu"] !== "-") {
                     $item = explode("_", $_POST["cpu"]);
@@ -685,6 +736,9 @@ session_start();
                     $item = explode("_", $_POST["os"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
                 }
+              /*  if ($_POST["quantity"] !== "-") {
+                    $_SESSION["cart"][$n]["quantity"] = $_POST["quantity"];
+                }*/
             }
 
             return $result;
