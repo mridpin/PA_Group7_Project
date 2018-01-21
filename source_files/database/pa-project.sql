@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-01-2018 a las 00:36:25
+-- Tiempo de generación: 22-01-2018 a las 00:54:24
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `grupopa0_db`
 --
+CREATE DATABASE IF NOT EXISTS `grupopa0_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `grupopa0_db`;
 
 -- --------------------------------------------------------
 
