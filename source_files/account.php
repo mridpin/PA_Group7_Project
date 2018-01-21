@@ -98,7 +98,7 @@ function getOrdersFromClient() {
 function getArticlesForOrder($order_id) {
     $link = createConnection();
     $articles = [];
-    $sql = "SELECT * FROM custom_products WHERE quantity='" . $order_id . "'";
+    $sql = "SELECT * FROM custom_products WHERE order_id='" . $order_id . "'";
     $result = mysqli_query($link, $sql);
     if (!$result) {
         mysqli_close($link);
@@ -141,10 +141,16 @@ function showOrderHistory() {
     // Step 1, get all the data
     $orders = getOrdersFromClient();
     //var_dump($orders);
+    
     $res .= "<ol class='w3-ul'>";
     foreach ($orders as $order) {
-        $res .= "<li class='w3-cyan'><h4>Date: " . $order["delivery_date"] . "</h4>Total: $" . $order["total"] . "</li>";
+        
+        $addresses = getAddressForOrder($order["address_id"]);
+        
+        $res .= "<li class='w3-cyan'><h4>Delivery Date: " . $order["delivery_date"] . "</h4><h4>Order Date:".$order["date"]."</h4>Total: $" . $order["total"] . "<br/>Payment Method: ".$order["payment_method_id"]."<br/>Delivery Address:".$addresses[0]["street"]."</li>";
+        
         $articles = getArticlesForOrder($order["order_id"]);
+        
         $res .= "<li><ul class='w3-ul'>";
         foreach ($articles as $article) {
             $res .= "<li class='w3-blue'><h6>Item: </h6></li>";

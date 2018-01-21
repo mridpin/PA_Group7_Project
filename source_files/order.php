@@ -69,8 +69,9 @@ session_start();
                         }
 
                         //Step 1: Add the order to the database
-                        $date = date('jS \of F Y H:i:s');
-                        $sql = "INSERT INTO orders (total, assembly_time, delivery_date, user_id) VALUES ('" . $totalPrice . "', '1', '" . $date . "', '" . $_SESSION["user_id"] . "')";
+                        $date = date("Y-m-d");
+                        $deliveryDate = date("Y-m-d",strtotime("+7 day"));
+                        $sql = "INSERT INTO orders (total,date, delivery_date, user_id,payment_method_id,address_id) VALUES ('" . $totalPrice . "','".$date."','" . $deliveryDate . "','" . $_SESSION["user_id"] . "','".$_GET["paymentMethod"]."','".$_GET["address"]."')";
                         $result = mysqli_query($link, $sql);
                         if (!$result) {
                             mysqli_close($link);
@@ -78,9 +79,12 @@ session_start();
                         } else {
                             // Step2: Insert the new custom product
                             $order_id = mysqli_insert_id($link);
+                            //Used for quantity
+                            $i=0;
+                            
                             foreach ($_SESSION["cart"] as $index => $article) {
                                 // "quantity" is being used as "order id" for this component
-                                $sql = "INSERT INTO custom_products (quantity) VALUES ('" . $order_id . "')";
+                                $sql = "INSERT INTO custom_products (quantity,order_id) VALUES ('".$_SESSION["quantity"][$i]."','". $order_id . "')";
                                 $result = mysqli_query($link, $sql);
                                 if (!$result) {
                                     mysqli_close($link);
@@ -98,6 +102,7 @@ session_start();
                                         }
                                     }
                                 }
+                                $i++;
                             }
                         }
                         mysqli_close($link);
@@ -147,7 +152,7 @@ session_start();
                         }
                         else{
                             //Show all the available Payment Methods
-                        $result .="Payment Method: <select class='w3-select' name='paymentMethod'>";
+                        $result .="Payment Method: <select class='w3-select' name='paymentMethod' form='confirm'>";
                         
                                  for($i=0;$i<sizeof($paymentMethods);$i++)
                                  {
@@ -156,7 +161,7 @@ session_start();
                                  
                                  //Show all the available addresses
                         $result.="</select>"
-                                . "Address: <select class='w3-select' name='address'>";
+                                . "Address: <select class='w3-select' name='address' form='confirm'>";
                         
                                 for($i=0;$i<sizeof($paymentMethods);$i++)
                                  {

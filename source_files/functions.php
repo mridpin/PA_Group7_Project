@@ -569,6 +569,28 @@ function addressDetails() {
     return $addesses;
 }
 
+//Returns the address of an order
+function getAddressForOrder($address_id)
+{
+    $result = [];
+    
+    $link = createConnection();
+    $sql = "SELECT * FROM address WHERE address_id='" . $address_id . "'";
+    $result1 = mysqli_query($link, $sql);
+    if (!$result1) {
+        mysqli_close($link);
+        die("ERROR: There is an error in SELECT ORDER ADDRESS query");
+    } else {
+        while ($row = mysqli_fetch_array($result1)) {
+
+            $result[] = $row;
+        }
+    }
+
+    return $result;
+    
+}
+
 //Function that uses a SQL query to get the current account payment methods. Returns an array of associative arrays: one for each payment method
 function paymentMethodDetails() {
     $paymentMethod = [];
