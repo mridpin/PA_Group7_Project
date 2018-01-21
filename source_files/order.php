@@ -15,6 +15,8 @@ session_start();
         <article class="w3-card w3-mobile w3-margin-bottom" style="width:50%;margin:auto;">
             <section>
                 <?php
+                
+                //For some reason, if there are two types of products in the cart the second quantity is not right
                 $total = 0.0;
                 $auxTotal=0.0;
                 $i=0;

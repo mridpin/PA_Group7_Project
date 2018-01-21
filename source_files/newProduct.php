@@ -411,6 +411,10 @@ session_start();
                     $result.="<br/>"
                             ."Fingerprint Reader? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='fingerprintReader' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
 
+            $result.="<br/>"
+                    . "Product Quantity: <input class ='w3-input w3-hover-grey' type='number' name='quantity' min='1' value='1'/> <br/>";
+                    
+                    
             $result .= "<input type='hidden' name='phone' value='phone'>"
                     . "<input class='w3-block w3-button w3-teal' type='submit' name='firstForm' value='Make order'>"
                     . "</form>";
@@ -722,6 +726,9 @@ session_start();
                     $item = explode("_", $_POST["os"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
                 }
+                
+                //Quantity from the form
+                $_SESSION["quantity"][$n] = $_POST["quantity"];
                     
             }
 
