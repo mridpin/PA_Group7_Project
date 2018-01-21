@@ -24,6 +24,7 @@ session_start();
                         foreach ($component as $name => $price) {
                             $auxTotal += $price;                        }
                     }
+                    //After calculating the product cost, then we multiply it by the quantity
                     $auxTotal*=$_SESSION["quantity"][$i];
                     $total+=$auxTotal;
                     $i++;
@@ -118,6 +119,10 @@ session_start();
                                     $result .= "<tr><td>" . $name . "</td><td>" . $price . "</td>";
                                 }
                             }
+                            
+                            echo "i: ".$i;
+                            
+                            print_r($_SESSION["quantity"][$i]);
                             
                             $result.="<tr><td>QUANTITY</td><td>" .$_SESSION["quantity"][$i] . "</td>";
                             $i++;

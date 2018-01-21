@@ -657,7 +657,9 @@ session_start();
                 if ($_POST["monitor"] !== "-") {
                     $item = explode("_", $_POST["monitor"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
-                }               
+                }
+                
+                //Quantity from the form
                 $_SESSION["quantity"][$n] = $_POST["quantity"];
                 
             } else if (isset($_POST["phone"])) {
@@ -730,7 +732,7 @@ session_start();
         This div is to select the components of the product (see document Vision de la apliacion)
         for reference.
         -->
-        <article class="w3-card w3-mobile" style="width:50%;margin:auto;"">
+        <article class="w3-card w3-mobile" style="width:50%;margin:auto;">
             <section >
                 <?php
                 if (isset($_POST["firstForm"])) {
