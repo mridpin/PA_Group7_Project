@@ -618,43 +618,25 @@ session_start();
                     $item = explode("_", $_POST["motherBoard"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
                 }
-//                if ($_POST["mDS"] !== "-") {
-//                    $item = explode("_", $_POST["mDS"]);
-//                    $_SESSION["cart"][$item[1]] = $item[0];
-//                    $result .= "<tr><td>Main Display Port</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
-//                } else {
-//                    $result .= "<tr><td>Main Display Port</td><td>" . $_POST["mDS"] . "</td></tr>";
-//                }
-//                if ($_POST["sDS"] !== "-") {
-//                    $item = explode("_", $_POST["sDS"]);
-//                    $_SESSION["cart"][$item[1]] = $item[0];
-//                    $result .= "<tr><td>Secondary Display Port</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
-//                } else {
-//                    $result .= "<tr><td>Secondary Display Port</td><td>" . $_POST["sDS"] . "</td></tr>";
-//                }
-//                if ($_POST["usb"] !== "-") {
-//                    $item = explode("_", $_POST["usb"]);
-//                    $_SESSION["cart"][$item[1]] = $item[0];
-//                    $result .= "<tr><td>USB</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";                    
-//                } else {
-//                    $result .= "<tr><td>USB</td><td>" . $_POST["usb"] . "</td></tr>";
-//                }
-//                if ($_POST["nusb"] !== "-") {
-//                    $item = explode("_", $_POST["nusb"]);
-//                    $_SESSION["cart"][$item[1]] = $item[0];
-//                    $result .= "<tr><td>Number of USBs</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
-//                    
-//                } else {
-//                    $result .= "<tr><td>Number of USBs</td><td>" . $_POST["nusb"] . "</td></tr>";
-//                }
-//
-//                if ($_POST["diskDrive"] !== "-") {
-//                    $item = explode("_", $_POST["diskDrive"]);
-//                    $_SESSION["cart"][$item[1]] = $item[0];
-//                    $result .= "<tr><td>Disk drive</td><td>" . $_SESSION["cart"][$item[1]] . "</td></tr>";
-//                } else {
-//                    $result .= "<tr><td>Disk drive</td><td>" . $_POST["diskDrive"] . "</td></tr>";
-//                }
+                if ($_POST["mDS"] !== "-") {
+                    $item = explode("_", $_POST["mDS"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+     
+                if ($_POST["sDS"] !== "-") {
+                    $item = explode("_", $_POST["sDS"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                if ($_POST["usb"] !== "-") {
+                    $item = explode("_", $_POST["usb"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                
+
+                if ($_POST["diskDrive"] !== "-") {
+                    $item = explode("_", $_POST["diskDrive"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
                 if ($_POST["os"] !== "-") {
                     $item = explode("_", $_POST["os"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
