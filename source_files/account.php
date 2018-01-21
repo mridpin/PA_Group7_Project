@@ -34,51 +34,6 @@ function showAccountDetails() {
     return $result;
 }
 
-//Function that uses a SQL query to get the current account addresses. Returns an array of associative arrays: one for each address
-function addressDetails() {
-    $addesses = [];
-    $link = createConnection();
-    $sql = "SELECT * FROM user_address WHERE user_id='" . $_SESSION["user_id"] . "'";
-    $result1 = mysqli_query($link, $sql);
-    if (!$result1) {
-        mysqli_close($link);
-        die("ERROR: There is an error in SELECT USER ADDRESS query");
-    } else {
-        while ($row = mysqli_fetch_array($result1)) {
-            $sql = "SELECT * FROM address WHERE address_id='" . $row["address_id"] . "'";
-            $result2 = mysqli_query($link, $sql);
-            if (!$result2) {
-                mysqli_close($link);
-                die("ERROR: There is an error in SELECT ADDRESS query");
-            } else {
-                while ($row = mysqli_fetch_array($result2)) {
-                    $addesses[] = $row;
-                }
-            }
-        }
-    }
-    return $addesses;
-}
-
-//Function that uses a SQL query to get the current account payment methods. Returns an array of associative arrays: one for each payment method
-function paymentMethodDetails() {
-    $paymentMethod = [];
-    $link = createConnection();
-    $sql = "SELECT * FROM payment_method WHERE user_id='" . $_SESSION["user_id"] . "'";
-    $result1 = mysqli_query($link, $sql);
-    if (!$result1) {
-        mysqli_close($link);
-        die("ERROR: There is an error in SELECT USER PAYMENT METHOD query");
-    } else {
-        while ($row = mysqli_fetch_array($result1)) {
-
-            $paymentMethod[] = $row;
-        }
-    }
-
-    return $paymentMethod;
-}
-
 //Function that shows the current account information using the function accountDetails
 function printAddressDetails() {
     $info = addressDetails();
