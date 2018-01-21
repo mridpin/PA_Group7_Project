@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-01-2018 a las 11:35:15
+-- Tiempo de generación: 21-01-2018 a las 16:58:50
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -42,7 +42,8 @@ INSERT INTO `address` (`address_id`, `zip_code`, `country`, `street`, `number`) 
 (1, 99999, 'ESP', 'PENIS', 4),
 (6, 123123, 'AFG', 'qweqwwe', 123),
 (8, 123, 'ATA', 'qwewqweqwe', 123),
-(11, 234234, 'AUS', 'wfwewe', 32432);
+(11, 234234, 'AUS', 'wfwewe', 32432),
+(12, 123123, 'AZE', 'sdfsdfsd', 124124124);
 
 -- --------------------------------------------------------
 
@@ -52,7 +53,8 @@ INSERT INTO `address` (`address_id`, `zip_code`, `country`, `street`, `number`) 
 
 CREATE TABLE `custom_products` (
   `custom_product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -75,21 +77,11 @@ CREATE TABLE `custom_products_components` (
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `total` float NOT NULL,
-  `assembly_time` float NOT NULL,
+  `date` date NOT NULL,
   `delivery_date` date NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `order_prebuilt`
---
-
-CREATE TABLE `order_prebuilt` (
-  `order_id` int(11) NOT NULL,
-  `prebuilt_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `payment_method_id` varchar(256) NOT NULL,
+  `address_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -111,7 +103,7 @@ CREATE TABLE `payment_method` (
 --
 
 INSERT INTO `payment_method` (`number`, `expiry_date`, `security_code`, `type`, `user_id`) VALUES
-('4716 1089 9971 6531', '2018-01-31', '$2y$10$ERsfdE64JDKbk4JOMkw.NOudiFlcS//Sa99uIgoeRcgwAfcOFgiBi', 'Debit', 1);
+('4716 1089 9971 6531', '2017-01-31', '$2y$10$oagP1bteuB7wDc9LXTjHEe9pdxa6eh7ihedw8Hh7nNH5eF37XYUpS', 'Credit', 1);
 
 -- --------------------------------------------------------
 
@@ -197,7 +189,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `type`, `name`, `password`, `last_name`, `address`, `email`) VALUES
 (1, 'admin', 'Mike', '$2y$10$33T7801.WlhAzLbMViJ4LedCHuXrcVe6pbN5o3a9IYSzYlFTRat5u', 'Hunt', 1, 'mikehunt@gmail.com'),
 (17, 'user', 'manuel', '$2y$10$LrpjhxMNIYVg4TYKPRSxr.bV2dx9dvWWqSjf.u7owJsOVsXDM/yP.', 'qweqweqwe', 0, 'qweqweqeqe@asdasd.com'),
-(20, 'user', 'mridpin@alu.upo.es', '$2y$10$kMAin/G.sAZHrtHtN44ZqeiA8tQouyVUZlJRQQf5Xg66Xw7FH1NOu', 'qweqweqwe', 0, 'mridpin@alu.upo.eeees');
+(20, 'user', 'mridpin@alu.upo.es', '$2y$10$kMAin/G.sAZHrtHtN44ZqeiA8tQouyVUZlJRQQf5Xg66Xw7FH1NOu', 'qweqweqwe', 0, 'mridpin@alu.upo.eeees'),
+(21, 'user', 'dsfsdf', '$2y$10$vPYgP9SZnigKRk0j03hwS.C7vqaOvY4KK9em9bhMwx8.2Kuy6ja2.', 'dsffsdf', 0, 'suqmadiq@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -216,7 +209,8 @@ CREATE TABLE `user_address` (
 
 INSERT INTO `user_address` (`user_id`, `address_id`) VALUES
 (1, 11),
-(20, 8);
+(20, 8),
+(21, 12);
 
 --
 -- Índices para tablas volcadas
@@ -232,7 +226,8 @@ ALTER TABLE `address`
 -- Indices de la tabla `custom_products`
 --
 ALTER TABLE `custom_products`
-  ADD PRIMARY KEY (`custom_product_id`);
+  ADD PRIMARY KEY (`custom_product_id`),
+  ADD KEY `Constrain` (`order_id`);
 
 --
 -- Indices de la tabla `custom_products_components`
@@ -246,14 +241,9 @@ ALTER TABLE `custom_products_components`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Indices de la tabla `order_prebuilt`
---
-ALTER TABLE `order_prebuilt`
-  ADD PRIMARY KEY (`order_id`,`prebuilt_id`),
-  ADD KEY `prebuilt_id` (`prebuilt_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `payment_method_id` (`payment_method_id`),
+  ADD KEY `address_id` (`address_id`);
 
 --
 -- Indices de la tabla `payment_method`
@@ -291,7 +281,7 @@ ALTER TABLE `user_address`
 -- AUTO_INCREMENT de la tabla `address`
 --
 ALTER TABLE `address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `custom_products`
 --
@@ -311,10 +301,16 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `custom_products`
+--
+ALTER TABLE `custom_products`
+  ADD CONSTRAINT `Constrain` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `custom_products_components`
@@ -327,14 +323,9 @@ ALTER TABLE `custom_products_components`
 -- Filtros para la tabla `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
-
---
--- Filtros para la tabla `order_prebuilt`
---
-ALTER TABLE `order_prebuilt`
-  ADD CONSTRAINT `order_prebuilt_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
-  ADD CONSTRAINT `order_prebuilt_ibfk_2` FOREIGN KEY (`prebuilt_id`) REFERENCES `products` (`product_id`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_method` (`number`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `payment_method`
