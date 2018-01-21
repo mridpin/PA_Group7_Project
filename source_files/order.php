@@ -16,13 +16,20 @@ session_start();
             <section>
                 <?php
                 $total = 0.0;
+                $auxTotal=0.0;
+                $i=0;
                 foreach ($_SESSION["cart"] as $index => $article) {
                     // Calculate price                    
                     foreach ($article as $id => $component) {
                         foreach ($component as $name => $price) {
-                            $total += $price;                        }
+                            $auxTotal += $price;                        }
                     }
+                    $auxTotal*=$_SESSION["quantity"][$i];
+                    $total+=$auxTotal;
+                    $i++;
+                    $auxTotal=0.0;
                 }
+                
                 ?>
                 <div class="w3-teal w3-text-white w3-container">
                     <h2>Your order: $<?php echo $total?></h2>
@@ -100,6 +107,9 @@ session_start();
                         $result = "<form method='get' action='order.php' id='confirm'>";
                         $result .= "</form>";
                         // For each article in the cart
+                        
+                        $i=0;
+                        
                         foreach ($_SESSION["cart"] as $index => $article) {
                             $result .= "<li><table class='w3-table-all'>";
                             $result .= "<tr><th>Product name</th><th>Price ($)</th>";
@@ -108,6 +118,9 @@ session_start();
                                     $result .= "<tr><td>" . $name . "</td><td>" . $price . "</td>";
                                 }
                             }
+                            
+                            $result.="<tr><td>QUANTITY</td><td>" .$_SESSION["quantity"][$i] . "</td>";
+                            $i++;
                             $result .= "</table>";
                             $result .= "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar' type='submit' name='delete_submit' value='Delete Item' form='confirm' />";
                             $result .= "<input type='hidden' name='delete_item' value='" . $index . "' form='confirm' /></li>";

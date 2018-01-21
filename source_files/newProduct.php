@@ -328,7 +328,7 @@ session_start();
                 $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
             }
 
-            //Baterry Segment
+            //Batery Segment
             $result .= "</select>"
                     . "<br/>"
                     . "<br/>"
@@ -657,7 +657,9 @@ session_start();
                 if ($_POST["monitor"] !== "-") {
                     $item = explode("_", $_POST["monitor"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
-                }
+                }               
+                $_SESSION["quantity"][$n] = $_POST["quantity"];
+                
             } else if (isset($_POST["phone"])) {
 // Separate each item into id, name and price
                 if ($_POST["screen"] !== "-") {
@@ -706,10 +708,10 @@ session_start();
                     $item = explode("_", $_POST["gpu"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
                 }
-//                if ($_POST["camera"] !== "-") {
-//                    $item = explode("_", $_POST["camera"]);
-//                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
-//                }
+                if ($_POST["camera"] !== "-") {
+                    $item = explode("_", $_POST["camera"]);
+                    $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
                 if ($_POST["body"] !== "-") {
                     $item = explode("_", $_POST["body"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
@@ -718,9 +720,7 @@ session_start();
                     $item = explode("_", $_POST["os"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
                 }
-              /*  if ($_POST["quantity"] !== "-") {
-                    $_SESSION["cart"][$n]["quantity"] = $_POST["quantity"];
-                }*/
+                    
             }
 
             return $result;
