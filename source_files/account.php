@@ -159,6 +159,7 @@ function showOrderHistory() {
             foreach ($components as $component) {
                 $res .= "<li>" . getComponentName($component["name"]) . "</li>";
             }
+            $res.="<li>QUANTITY: ".$articles[0]["quantity"]."</li>";
             $res .= "</li></ul>";
         }
         $res .= "</li></ul>";

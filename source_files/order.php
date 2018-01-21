@@ -15,27 +15,26 @@ session_start();
         <article class="w3-card w3-mobile w3-margin-bottom" style="width:50%;margin:auto;">
             <section>
                 <?php
-                
                 //For some reason, if there are two types of products in the cart the second quantity is not right
                 $total = 0.0;
-                $auxTotal=0.0;
-                $i=0;
+                $auxTotal = 0.0;
+                $i = 0;
                 foreach ($_SESSION["cart"] as $index => $article) {
                     // Calculate price                    
                     foreach ($article as $id => $component) {
                         foreach ($component as $name => $price) {
-                            $auxTotal += $price;                        }
+                            $auxTotal += $price;
+                        }
                     }
                     //After calculating the product cost, then we multiply it by the quantity
-                    $auxTotal*=$_SESSION["quantity"][$i];
-                    $total+=$auxTotal;
+                    $auxTotal *= $_SESSION["quantity"][$i];
+                    $total += $auxTotal;
                     $i++;
-                    $auxTotal=0.0;
+                    $auxTotal = 0.0;
                 }
-                
                 ?>
                 <div class="w3-teal w3-text-white w3-container">
-                    <h2>Your order: $<?php echo $total?></h2>
+                    <h2>Your order: $<?php echo $total ?></h2>
                 </div>
                 <ul class="w3-ul">
                     <?php
@@ -50,6 +49,11 @@ session_start();
                         //process the order using the data in the session variable
                         $link = createConnection();
                         $totalPrice = 0.0;
+
+                        $total = 0.0;
+                        $auxTotal = 0.0;
+                        $i = 0;
+
                         // We get the price from the database info and not the form, for security
                         foreach ($_SESSION["cart"] as $index => $article) {
                             // Step 1: Calculate price
@@ -63,15 +67,20 @@ session_start();
                                     die("ERROR IN SELECT PRODUCTS QUERY: PLEASE CONTACT SITE ADMIN");
                                 } else {
                                     $item = mysqli_fetch_array($query);
-                                    $totalPrice += $item["price"];
+                                    $auxTotal += $item["price"];
                                 }
                             }
+
+                            $auxTotal *= $_SESSION["quantity"][$i];
+                            $total += $auxTotal;
+                            $i++;
+                            $auxTotal = 0.0;
                         }
 
                         //Step 1: Add the order to the database
                         $date = date("Y-m-d");
-                        $deliveryDate = date("Y-m-d",strtotime("+7 day"));
-                        $sql = "INSERT INTO orders (total,date, delivery_date, user_id,payment_method_id,address_id) VALUES ('" . $totalPrice . "','".$date."','" . $deliveryDate . "','" . $_SESSION["user_id"] . "','".$_GET["paymentMethod"]."','".$_GET["address"]."')";
+                        $deliveryDate = date("Y-m-d", strtotime("+7 day"));
+                        $sql = "INSERT INTO orders (total,date, delivery_date, user_id,payment_method_id,address_id) VALUES ('" . $total . "','" . $date . "','" . $deliveryDate . "','" . $_SESSION["user_id"] . "','" . $_GET["paymentMethod"] . "','" . $_GET["address"] . "')";
                         $result = mysqli_query($link, $sql);
                         if (!$result) {
                             mysqli_close($link);
@@ -80,11 +89,11 @@ session_start();
                             // Step2: Insert the new custom product
                             $order_id = mysqli_insert_id($link);
                             //Used for quantity
-                            $i=0;
-                            
+                            $i = 0;
+
                             foreach ($_SESSION["cart"] as $index => $article) {
                                 // "quantity" is being used as "order id" for this component
-                                $sql = "INSERT INTO custom_products (quantity,order_id) VALUES ('".$_SESSION["quantity"][$i]."','". $order_id . "')";
+                                $sql = "INSERT INTO custom_products (quantity,order_id) VALUES ('" . $_SESSION["quantity"][$i] . "','" . $order_id . "')";
                                 $result = mysqli_query($link, $sql);
                                 if (!$result) {
                                     mysqli_close($link);
@@ -115,9 +124,9 @@ session_start();
                         $result = "<form method='get' action='order.php' id='confirm'>";
                         $result .= "</form>";
                         // For each article in the cart
-                        
-                        $i=0;
-                        
+
+                        $i = 0;
+
                         foreach ($_SESSION["cart"] as $index => $article) {
                             $result .= "<li><table class='w3-table-all'>";
                             $result .= "<tr><th>Product name</th><th>Price ($)</th>";
@@ -126,50 +135,45 @@ session_start();
                                     $result .= "<tr><td>" . $name . "</td><td>" . $price . "</td>";
                                 }
                             }
-                            
+
                             //echo "i: ".$i;
-                            
                             //print_r($_SESSION["quantity"][$i]);
-                            
-                            $result.="<tr><td>QUANTITY</td><td>" .$_SESSION["quantity"][$i] . "</td>";
+
+                            $result .= "<tr><td>QUANTITY</td><td>" . $_SESSION["quantity"][$i] . "</td>";
                             $i++;
                             $result .= "</table>";
                             $result .= "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar' type='submit' name='delete_submit' value='Delete Item' form='confirm' />";
                             $result .= "<input type='hidden' name='delete_item' value='" . $index . "' form='confirm' /></li>";
                         }
                         $result .= "<p class='w3-panel' >Total price: <strong>$" . $total . "</strong></p>";
-                        
+
                         //Cant continue with order if there isnt a payment method or a address
-                        
+
                         $paymentMethods = paymentMethodDetails();
                         $addresses = addressDetails();
-                        
+
                         //print_r($paymentMethods);
-                        
-                        if(empty($addresses) || empty($paymentMethods) || empty(validPaymentMethods($paymentMethods)))
-                        {
-                            $result.="<div class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%'>Please go to your account information and provide a valid adress and payment Method before confirming the order</div>";
-                        }
-                        else{
+
+                        if (empty($addresses) || empty($paymentMethods) || empty(validPaymentMethods($paymentMethods))) {
+                            $result .= "<div class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%'>Please go to your account information and provide a valid adress and payment Method before confirming the order</div>";
+                        } else {
                             //Show all the available Payment Methods
-                        $result .="Payment Method: <select class='w3-select' name='paymentMethod' form='confirm'>";
-                        
-                                 for($i=0;$i<sizeof($paymentMethods);$i++)
-                                 {
-                                   $result.="<option value='".$paymentMethods[$i]["number"]."'>".$paymentMethods[$i]["number"]." - ".$paymentMethods[$i]["type"]."</option>";  
-                                 }
-                                 
-                                 //Show all the available addresses
-                        $result.="</select>"
-                                . "Address: <select class='w3-select' name='address' form='confirm'>";
-                        
-                                for($i=0;$i<sizeof($paymentMethods);$i++)
-                                 {
-                                   $result.="<option value='".$addresses[$i]["address_id"]."'>".$addresses[$i]["street"]."</option>";  
-                                 }
-                        
-                           $result.="</select>"
-                                   . "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' name='submit' value='Confirm Order' form='confirm' />";
+                            $result .= "Payment Method: <select class='w3-select' name='paymentMethod' form='confirm'>";
+
+                            for ($i = 0; $i < sizeof($paymentMethods); $i++) {
+                                $result .= "<option value='" . $paymentMethods[$i]["number"] . "'>" . $paymentMethods[$i]["number"] . " - " . $paymentMethods[$i]["type"] . "</option>";
+                            }
+
+                            //Show all the available addresses
+                            $result .= "</select>"
+                                    . "Address: <select class='w3-select' name='address' form='confirm'>";
+
+                            for ($i = 0; $i < sizeof($paymentMethods); $i++) {
+                                $result .= "<option value='" . $addresses[$i]["address_id"] . "'>" . $addresses[$i]["street"] . "</option>";
+                            }
+
+                            $result .= "</select>"
+                                    . "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' name='submit' value='Confirm Order' form='confirm' />";
                         }
                         $result .= "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-bottombar w3-text-red w3-cell' style='width:50%' type='submit' name='submit_cancel' value='Cancel Order' form='confirm' />";
                         echo $result;
