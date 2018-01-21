@@ -139,17 +139,13 @@ checkSession();
                     </div>
 
                     <form class="w3-container w3-padding-16 w3-white" method="post" action="paymentMethods.php">
-                        <div>
-                            <label for="owner">Owner</label>
-                            <input type="text" class="w3-input w3-hover-grey" name ="owner" id="owner">
+                        <div class="form-group" id="card-number-field">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" class="w3-input w3-hover-grey" name="cardNumber" id="cardNumber">
                         </div>
                         <div class="form-group CVV">
                             <label for="cvv">CVV</label>
                             <input type="text" class="w3-input w3-hover-grey" name="cvv" id="cvv">
-                        </div>
-                        <div class="form-group" id="card-number-field">
-                            <label for="cardNumber">Card Number</label>
-                            <input type="text" class="w3-input w3-hover-grey" name="cardNumber" id="cardNumber">
                         </div>
                         <div>
                             <label>Type of card</label>
