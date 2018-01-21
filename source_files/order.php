@@ -135,7 +135,10 @@ session_start();
                         $result .= "<p class='w3-panel' >Total price: <strong>$" . $total . "</strong></p>";
                         
                         //Cant continue with order if there isnt a payment method or a address
-                        if(empty(paymentMethodDetails()) || empty(addressDetails()))
+                        
+                        $aux = paymentMethodDetails();
+                        
+                        if(empty(addressDetails()) || empty($aux) || empty(validPaymentMethods($aux)))
                         {
                             $result.="<div class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%'>Please go to your account information and provide a valid adress and payment Method before confirming the order</div>";
                         }

@@ -588,6 +588,26 @@ function paymentMethodDetails() {
     return $paymentMethod;
 }
 
+//Checks if we have any valid credit cards
+function validPaymentMethods($paymentMethod)
+{
+ 
+    $result=[];
+    
+    for($i=0;$i<sizeof($paymentMethod);$i++)
+    {
+        if($paymentMethod[$i]["expiry_date"]>date("Y-m-d"))
+        {
+            $result["number"] =  $paymentMethod["number"];
+            $result["type"] =  $paymentMethod["type"];
+            $result["expiry_date"] =  $paymentMethod["expiry_date"];
+        }
+    }
+    
+    return $result;
+    
+}
+
 
 
 
