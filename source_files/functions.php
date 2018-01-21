@@ -592,15 +592,17 @@ function paymentMethodDetails() {
 function validPaymentMethods($paymentMethod)
 {
  
-    $result=[];
+    $result;
+    
+    $j=0;
     
     for($i=0;$i<sizeof($paymentMethod);$i++)
     {
         if($paymentMethod[$i]["expiry_date"]>date("Y-m-d"))
         {
-            $result["number"] =  $paymentMethod["number"];
-            $result["type"] =  $paymentMethod["type"];
-            $result["expiry_date"] =  $paymentMethod["expiry_date"];
+            $result[$j]["number"] =  $paymentMethod[$i]["number"];
+            $result[$j]["type"] =  $paymentMethod[$i]["type"];
+            /*$result["expiry_date"] =  $paymentMethod["expiry_date"];*/
         }
     }
     

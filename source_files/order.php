@@ -122,9 +122,9 @@ session_start();
                                 }
                             }
                             
-                            echo "i: ".$i;
+                            //echo "i: ".$i;
                             
-                            print_r($_SESSION["quantity"][$i]);
+                            //print_r($_SESSION["quantity"][$i]);
                             
                             $result.="<tr><td>QUANTITY</td><td>" .$_SESSION["quantity"][$i] . "</td>";
                             $i++;
@@ -136,14 +136,35 @@ session_start();
                         
                         //Cant continue with order if there isnt a payment method or a address
                         
-                        $aux = paymentMethodDetails();
+                        $paymentMethods = paymentMethodDetails();
+                        $addresses = addressDetails();
                         
-                        if(empty(addressDetails()) || empty($aux) || empty(validPaymentMethods($aux)))
+                        //print_r($paymentMethods);
+                        
+                        if(empty($addresses) || empty($paymentMethods) || empty(validPaymentMethods($paymentMethods)))
                         {
                             $result.="<div class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%'>Please go to your account information and provide a valid adress and payment Method before confirming the order</div>";
                         }
                         else{
-                        $result .= "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' name='submit' value='Confirm Order' form='confirm' />";
+                            //Show all the available Payment Methods
+                        $result .="Payment Method: <select class='w3-select' name='paymentMethod'>";
+                        
+                                 for($i=0;$i<sizeof($paymentMethods);$i++)
+                                 {
+                                   $result.="<option value='".$paymentMethods[$i]["number"]."'>".$paymentMethods[$i]["number"]." - ".$paymentMethods[$i]["type"]."</option>";  
+                                 }
+                                 
+                                 //Show all the available addresses
+                        $result.="</select>"
+                                . "Address: <select class='w3-select' name='address'>";
+                        
+                                for($i=0;$i<sizeof($paymentMethods);$i++)
+                                 {
+                                   $result.="<option value='".$addresses[$i]["address_id"]."'>".$addresses[$i]["street"]."</option>";  
+                                 }
+                        
+                           $result.="</select>"
+                                   . "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' name='submit' value='Confirm Order' form='confirm' />";
                         }
                         $result .= "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-bottombar w3-text-red w3-cell' style='width:50%' type='submit' name='submit_cancel' value='Cancel Order' form='confirm' />";
                         echo $result;
