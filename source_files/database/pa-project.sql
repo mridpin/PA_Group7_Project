@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-01-2018 a las 16:58:50
+-- Tiempo de generación: 22-01-2018 a las 00:36:25
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -57,6 +57,16 @@ CREATE TABLE `custom_products` (
   `order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `custom_products`
+--
+
+INSERT INTO `custom_products` (`custom_product_id`, `quantity`, `order_id`) VALUES
+(1, 1, 4),
+(2, 2, 5),
+(3, 2, 6),
+(4, 3, 7);
+
 -- --------------------------------------------------------
 
 --
@@ -67,6 +77,44 @@ CREATE TABLE `custom_products_components` (
   `custom_product_id` int(11) NOT NULL,
   `component_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `custom_products_components`
+--
+
+INSERT INTO `custom_products_components` (`custom_product_id`, `component_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 4),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 35),
+(1, 41),
+(2, 1),
+(2, 2),
+(2, 4),
+(2, 6),
+(2, 7),
+(2, 8),
+(2, 35),
+(2, 41),
+(3, 1),
+(3, 2),
+(3, 4),
+(3, 6),
+(3, 7),
+(3, 8),
+(3, 35),
+(3, 41),
+(4, 1),
+(4, 2),
+(4, 4),
+(4, 6),
+(4, 7),
+(4, 8),
+(4, 35),
+(4, 41);
 
 -- --------------------------------------------------------
 
@@ -83,6 +131,16 @@ CREATE TABLE `orders` (
   `payment_method_id` varchar(256) NOT NULL,
   `address_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `total`, `date`, `delivery_date`, `user_id`, `payment_method_id`, `address_id`) VALUES
+(4, 970, '2018-01-22', '2018-01-29', 1, '4716 1089 9971 6531', 11),
+(5, 1940, '2018-01-22', '2018-01-29', 1, '4716 1089 9971 6531', 11),
+(6, 1940, '2018-01-22', '2018-01-29', 1, '4716 1089 9971 6531', 11),
+(7, 2910, '2018-01-22', '2018-01-29', 1, '4716 1089 9971 6531', 11);
 
 -- --------------------------------------------------------
 
@@ -103,7 +161,7 @@ CREATE TABLE `payment_method` (
 --
 
 INSERT INTO `payment_method` (`number`, `expiry_date`, `security_code`, `type`, `user_id`) VALUES
-('4716 1089 9971 6531', '2017-01-31', '$2y$10$oagP1bteuB7wDc9LXTjHEe9pdxa6eh7ihedw8Hh7nNH5eF37XYUpS', 'Credit', 1);
+('4716 1089 9971 6531', '2018-01-31', '$2y$10$oagP1bteuB7wDc9LXTjHEe9pdxa6eh7ihedw8Hh7nNH5eF37XYUpS', 'Credit', 1);
 
 -- --------------------------------------------------------
 
@@ -286,12 +344,12 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT de la tabla `custom_products`
 --
 ALTER TABLE `custom_products`
-  MODIFY `custom_product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `custom_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
