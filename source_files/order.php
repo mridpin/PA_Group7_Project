@@ -85,6 +85,7 @@ session_start();
                             $auxTotal = 0.0;
                         }
 
+                        
                         //Step 1: Add the order to the database
                         $date = date("Y-m-d");
                         $deliveryDate = date("Y-m-d", strtotime("+7 day"));
@@ -120,7 +121,7 @@ session_start();
                                             die("INSERT CUSTOM PRODUCT COMPONENT QUERY FAILED. PLEASE CONTACT SITE ADMIN");
                                         }
                                         
-                                        print_r($componentsStocks);
+                                        //print_r($componentsStocks);
                                         
                                         //Step 4: Update the component stock
                                         
@@ -177,9 +178,38 @@ session_start();
                         $paymentMethods = paymentMethodDetails();
                         $addresses = addressDetails();
 
-                        //print_r($paymentMethods);
-
-                        if (empty($addresses) || empty($paymentMethods) || empty(validPaymentMethods($paymentMethods))) {
+                        $notEnough=FALSE;
+                        
+                        //We have to check if we have enough stock to complete the order
+                        
+                        $i=0;
+                        
+                        $link = createConnection();
+                        foreach ($_SESSION["cart"] as $index => $article) {
+                            foreach ($article as $id => $component) {
+                                // We get the stocl from the database info and not the form, for security
+                                $sql = "SELECT * FROM products WHERE product_id='" . $id . "'";
+                                $query = mysqli_query($link, $sql);
+                                if (!$query) {
+                                    mysqli_close($link);
+                                    die("ERROR IN SELECT PRODUCTS QUERY: PLEASE CONTACT SITE ADMIN");
+                                } else {
+                                    $item = mysqli_fetch_array($query);
+                                    if(($item["stock"] - (1 * $_SESSION["quantity"][$i]))<0 )
+                                    {
+                                        $notEnough=TRUE;
+                                    }
+                                }
+                            }
+                            $i++;
+                        }
+                        mysqli_close($link);
+                        
+                        if($notEnough==TRUE)
+                        {
+                            $result .= "<div class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%'>Sorry, there isn't enough component stock to complete the order, please change the components of your order</div>";                       
+                        }
+                        else if (empty($addresses) || empty($paymentMethods) || empty(validPaymentMethods($paymentMethods))) {
                             $result .= "<div class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%'>Please go to your account information and provide a valid adress and payment Method before confirming the order</div>";
                         } else {
                             //Show all the available Payment Methods

@@ -49,7 +49,7 @@ session_start();
 
             $singleComponent = getSingleComponents($hdCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Second Hardrive Segment
@@ -60,7 +60,7 @@ session_start();
                     . "<option value='-' name='-'>-</option>";
 
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //CPU Hardrive Segment
@@ -71,7 +71,7 @@ session_start();
 
             $singleComponent = getSingleComponents($cpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
 
@@ -84,7 +84,7 @@ session_start();
 
             $singleComponent = getSingleComponents($ramCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //GPU Segment
@@ -95,7 +95,7 @@ session_start();
 
             $singleComponent = getSingleComponents($gpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //MotherBoard Segment
@@ -107,7 +107,7 @@ session_start();
 
             $singleComponent = getSingleComponents($mbCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Display port Segment
@@ -119,7 +119,7 @@ session_start();
 
             $singleComponent = getSingleComponents($dsCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Second Display Segment
@@ -130,7 +130,7 @@ session_start();
                     . "<option value='-' name='-'>-</option>";
 
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //USB Segment
@@ -143,7 +143,7 @@ session_start();
 
             $singleComponent = getSingleComponents($usbCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Disk Drive Segment
@@ -154,7 +154,7 @@ session_start();
 
             $singleComponent = getSingleComponents($ddCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
 
@@ -180,7 +180,7 @@ session_start();
 
             $singleComponent = getSingleComponents($csCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Extra elements
@@ -196,7 +196,7 @@ session_start();
 
             $singleComponent = getSingleComponents($kbCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Mouse Segment
@@ -209,7 +209,7 @@ session_start();
 
             $singleComponent = getSingleComponents($msCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Monitor Segment
@@ -222,7 +222,7 @@ session_start();
 
             $singleComponent = getSingleComponents($mnCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             
@@ -279,7 +279,7 @@ session_start();
 
             $singleComponent = getSingleComponents($cpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //RAM Segment
@@ -291,7 +291,7 @@ session_start();
 
             $singleComponent = getSingleComponents($ramCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //HD Segment
@@ -303,7 +303,7 @@ session_start();
 
             $singleComponent = getSingleComponents($hdCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //GPU Segment
@@ -314,7 +314,7 @@ session_start();
 
             $singleComponent = getSingleComponents($gpuCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Camera Segment
@@ -325,7 +325,7 @@ session_start();
 
             $singleComponent = getSingleComponents($cmCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Batery Segment
@@ -336,7 +336,7 @@ session_start();
 
             $singleComponent = getSingleComponents($btCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //USB Segment
@@ -347,7 +347,7 @@ session_start();
 
             $singleComponent = getSingleComponents($usbCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Body Segment
@@ -358,7 +358,7 @@ session_start();
 
             $singleComponent = getSingleComponents($bdCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //OS Segment
