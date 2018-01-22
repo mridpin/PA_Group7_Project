@@ -296,7 +296,7 @@ function showOrderHistory() {
                         ?>  
                     </ol>
                     <form class="w3-container w3-padding-16 w3-white" method="post" action="addresses.php" >
-                        <input class="w3-block w3-button w3-teal" type="submit" name="add_address" value="Add addreess" class="details_button" id="add_address_button" />
+                        <input class="w3-block w3-button w3-teal" type="submit" name="add_address" value="Add address" class="details_button" id="add_address_button" />
                     </form>
                 </section>
 
