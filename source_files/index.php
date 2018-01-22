@@ -34,10 +34,6 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
                     <form action="newProduct.php" method="POST">
                         <input class="w3-button w3-xxlarge w3-bar-item" type="submit" name="phone" value="Build a new phone"/>
                     </form>
-
-                    <form action="newProduct.php" method="POST">
-                        <input class="w3-button w3-xxlarge w3-bar-item" type="submit" name="product" value="Buy a product"/>
-                    </form>
                 </div>
             </section>
 

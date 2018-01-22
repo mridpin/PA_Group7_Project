@@ -87,7 +87,6 @@ checkSession();
                                     </select>
                                 </td>
                                 <td><select name="category" class="w3-select">
-                                        <option value="X_">-</option>
                                         <option value="PC_">PC</option>
                                         <option value="PH_">Phone</option>
                                     </select>
