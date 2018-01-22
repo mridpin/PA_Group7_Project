@@ -15,7 +15,6 @@ session_start();
         <article class="w3-card w3-mobile w3-margin-bottom" style="width:50%;margin:auto;">
             <section>
                 <?php
-                //For some reason, if there are two types of products in the cart the second quantity is not right
                 $total = 0.0;
                 $auxTotal = 0.0;
                 $i = 0;
@@ -58,6 +57,9 @@ session_start();
                         $total = 0.0;
                         $auxTotal = 0.0;
                         $i = 0;
+                        
+                        $componentsStocks=[];
+                        
 
                         // We get the price from the database info and not the form, for security
                         foreach ($_SESSION["cart"] as $index => $article) {
@@ -73,6 +75,7 @@ session_start();
                                 } else {
                                     $item = mysqli_fetch_array($query);
                                     $auxTotal += $item["price"];
+                                    $componentsStocks[]=$item["stock"] - (1 * $_SESSION["quantity"][$i]);
                                 }
                             }
 
@@ -97,15 +100,17 @@ session_start();
                             $i = 0;
 
                             foreach ($_SESSION["cart"] as $index => $article) {
-                                // "quantity" is being used as "order id" for this component
+                                
                                 $sql = "INSERT INTO custom_products (quantity,order_id) VALUES ('" . $_SESSION["quantity"][$i] . "','" . $order_id . "')";
                                 $result = mysqli_query($link, $sql);
                                 if (!$result) {
                                     mysqli_close($link);
                                     die("ERROR IN INSERT CUSTOM PRODUCT: PLEASE CONTACT SITE ADMIN");
                                 } else {
-                                    // Step 3: insert the relation between custom product and componen
+                                    // Step 3: insert the relation between custom product and component
                                     $custom_product_id = mysqli_insert_id($link);
+                                    
+                                    $j=0;
                                     foreach ($article as $id => $component) {
                                         $safeid = mysqli_real_escape_string($link, $id);
                                         $sql = "INSERT INTO custom_products_components (custom_product_id, component_id) VALUES ('" . $custom_product_id . "', '" . $safeid . "')";
@@ -114,7 +119,22 @@ session_start();
                                             mysqli_close($link);
                                             die("INSERT CUSTOM PRODUCT COMPONENT QUERY FAILED. PLEASE CONTACT SITE ADMIN");
                                         }
+                                        
+                                        print_r($componentsStocks);
+                                        
+                                        //Step 4: Update the component stock
+                                        
+                                        $sql =  "UPDATE products SET stock=" . $componentsStocks[$j] . " WHERE product_id=" . $safeid;
+                                        $result = mysqli_query($link, $sql);
+                                        if (!$result) {
+                                            mysqli_close($link);
+                                            die("UPDATE COMPONENT QUANTITY QUERY FAILED. PLEASE CONTACT SITE ADMIN");
+                                        }
+                                        
+                                        $j++;
+                                        
                                     }
+                                    
                                 }
                                 $i++;
                             }
