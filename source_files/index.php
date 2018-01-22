@@ -9,7 +9,7 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
         <title>Welcome</title>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
     </head>
-    <body>
+    <body class="w3-light-grey">
         <div>
             <?php include("header.php"); ?>
         </div>
@@ -19,24 +19,29 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
         for reference. TODO: Probably all the links can take to the same place but 
         depending on what we click the page newProduct.php can change what it shows
         -->
-        <div>
+        <article class="w3-container w3-mobile" style="width:60%;margin:auto;">
+            <section class="w3-section w3-card">
 
-            <h2>Choose a product</h2>
+                <div class="w3-container w3-teal w3-text-white" >
+                    <h2>Choose a product</h2>
+                </div>
 
-            <form action="newProduct.php" method="POST">
-                <input type="submit" name="computer" value="Build a new computer"/>
-            </form>
+                <div class="w3-container w3-padding-16 w3-bar">
+                    <form action="newProduct.php" method="POST">
+                        <input class="w3-button w3-xxlarge w3-bar-item" type="submit" name="computer" value="Build a new computer" /> 
+                    </form>
 
-            <form action="newProduct.php" method="POST">
-                <input type="submit" name="phone" value="Build a new phone"/>
-            </form>
+                    <form action="newProduct.php" method="POST">
+                        <input class="w3-button w3-xxlarge w3-bar-item" type="submit" name="phone" value="Build a new phone"/>
+                    </form>
 
-            <form action="newProduct.php" method="POST">
-                <input type="submit" name="product" value="Buy a product"/>
-            </form>
+                    <form action="newProduct.php" method="POST">
+                        <input class="w3-button w3-xxlarge w3-bar-item" type="submit" name="product" value="Buy a product"/>
+                    </form>
+                </div>
+            </section>
 
-
-        </div>
+        </article>
 
         <?php include("footer.php"); ?>
 
