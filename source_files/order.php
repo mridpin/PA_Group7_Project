@@ -19,6 +19,9 @@ session_start();
                 $total = 0.0;
                 $auxTotal = 0.0;
                 $i = 0;
+                
+                //print_r($_SESSION["quantity"]);
+                
                 foreach ($_SESSION["cart"] as $index => $article) {
                     // Calculate price                    
                     foreach ($article as $id => $component) {
@@ -40,10 +43,12 @@ session_start();
                     <?php
                     if (isset($_GET["submit_cancel"])) {
                         unset($_SESSION["cart"]);
+                        unset($_SESSION["quantity"]);
                         header("Location: index.php");
                     } else if (isset($_GET["delete_submit"])) {
                         $index = $_GET["delete_item"];
                         unset($_SESSION["cart"][$index]);
+                        unset($_SESSION["quantity"][$index]);
                         header("Location: order.php");
                     } else if (isset($_SESSION["cart"]) && (isset($_GET["submit"]))) {
                         //process the order using the data in the session variable

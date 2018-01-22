@@ -664,6 +664,10 @@ session_start();
                 }
                 
                 //Quantity from the form
+                if($n!=0)
+                {
+                    $n=$n-1;
+                }
                 $_SESSION["quantity"][$n] = $_POST["quantity"];
                 
             } else if (isset($_POST["phone"])) {
@@ -725,6 +729,11 @@ session_start();
                 if ($_POST["os"] !== "-") {
                     $item = explode("_", $_POST["os"]);
                     $_SESSION["cart"][$n][$item[1]][$item[0]] = $item[2];
+                }
+                
+                if($n!=0)
+                {
+                    $n=$n-1;
                 }
                 
                 //Quantity from the form
