@@ -18,7 +18,7 @@ checkSession();
         
         <script>
                 $(document).ready(function(){
-               $(".register_account_form").submit(function(){
+               $("#register_account_form").submit(function(){
                   var c = confirm("Please confirm data to continue:");
                   return c;
                });               
