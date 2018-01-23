@@ -40,6 +40,8 @@ session_start();
                 <div class="w3-teal w3-text-white w3-container">
                     <h2>Your order: $<?php echo $total ?></h2>
                 </div>
+                <form method='get' action='order.php' id='confirm'>
+                </form>
                 <ul class="w3-ul">
                     <?php
                     if (isset($_GET["submit_cancel"])) {
@@ -155,15 +157,12 @@ session_start();
                     } else if (isset($_SESSION["cart"])) {
                         $_SESSION["origin"] = $_SERVER['PHP_SELF'];
                         checkSession();
-                        // Print the form to confirm order
-                        $result = "<form method='get' action='order.php' id='confirm'>";
-                        $result .= "</form>";
+                        
                         // For each article in the cart
-
                         $i = 0;
 
                         foreach ($_SESSION["cart"] as $index => $article) {
-                            $result .= "<li><table class='w3-table-all'>";
+                            $result = "<li><table class='w3-table-all'>";
                             $result .= "<tr><th>Product name</th><th>Price ($)</th>";
                             foreach ($article as $id => $component) {
                                 foreach ($component as $name => $price) {
@@ -180,7 +179,7 @@ session_start();
                             $result .= "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar' type='submit' name='delete_submit' value='Delete Item' form='confirm' />";
                             $result .= "<input type='hidden' name='delete_item' value='" . $index . "' form='confirm' /></li>";
                         }
-                        $result .= "<p class='w3-panel' >Total price: <strong>$" . $total . "</strong></p>";
+                        $result .= "<li><p class='w3-panel' >Total price: <strong>$" . $total . "</strong></p></li>";
 
                         //Cant continue with order if there isnt a payment method or a address
 
@@ -220,28 +219,27 @@ session_start();
                             $result .= "<div class='w3-padding-16 w3-panel w3-red w3-text-white'>Please go to your account information and provide a valid adress and payment Method before confirming the order</div>";
                         } else {
                             //Show all the available Payment Methods
-                            $result .= "Payment Method: <select class='w3-select' name='paymentMethod' form='confirm'>";
+                            $result .= "<li>Payment Method: <select class='w3-select' name='paymentMethod' form='confirm'>";
 
                             for ($i = 0; $i < sizeof($paymentMethods); $i++) {
                                 $result .= "<option value='" . $paymentMethods[$i]["number"] . "'>" . $paymentMethods[$i]["number"] . " - " . $paymentMethods[$i]["type"] . "</option>";
                             }
 
                             //Show all the available addresses
-                            $result .= "</select>"
-                                    . "Address: <select class='w3-select' name='address' form='confirm'>";
+                            $result .= "</select></li>"
+                                    . "<li>Address: <select class='w3-select' name='address' form='confirm'>";
 
                             for ($i = 0; $i < sizeof($paymentMethods); $i++) {
                                 $result .= "<option value='" . $addresses[$i]["address_id"] . "'>" . $addresses[$i]["street"] . "</option>";
                             }
 
-                            $result .= "</select><br /><br />"
+                            $result .= "</select></li></ul>"
                                     . "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' name='submit' value='Confirm Order' form='confirm' />";
                         }
                         $result .= "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-bottombar w3-text-red w3-cell' style='width:50%' type='submit' name='submit_cancel' value='Cancel Order' form='confirm' />";
                         echo $result;
                     }
                     ?>
-                </ul>
             </section>
         </article>
 <?php include("footer.php") ?>
