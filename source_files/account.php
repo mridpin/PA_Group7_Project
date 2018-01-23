@@ -226,7 +226,8 @@ function showOrderHistory() {
                 } else {
                     // If update successful, close connection and reload the page                    
                     mysqli_close($link);
-                    header("Location: logout.php");
+                    $_SESSION["user"] = $email;
+                    header("Location: account.php");
                 }
             }
         } else if (isset($_POST["delete_account_submit"])) {
