@@ -10,15 +10,13 @@ checkSession();
 //Function that uses a SQL query to get the current account information
 function accountDetails() {
     $link = createConnection();
-    $sql = "SELECT * FROM users WHERE email='" . $_SESSION["user"] . "'";
+    $sql = "SELECT * FROM users WHERE user_id='" . $_SESSION["user_id"] . "'";
     $result = mysqli_query($link, $sql);
     if (!$result) {
         mysqli_close($link);
         die("ERROR: There is an error in SELECT ACCOUNT query");
     } else {
         $line = mysqli_fetch_array($result);
-        // Store the user_id in a session so as not to repeat the query
-        $_SESSION["user_id"] = $line["user_id"];
         return $line;
     }
 }

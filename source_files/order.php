@@ -18,9 +18,9 @@ session_start();
                 $total = 0.0;
                 $auxTotal = 0.0;
                 $i = 0;
-                
+
                 //print_r($_SESSION["quantity"]);
-                
+
                 foreach ($_SESSION["cart"] as $index => $article) {
                     // Calculate price                    
                     foreach ($article as $id => $component) {
@@ -57,9 +57,9 @@ session_start();
                         $total = 0.0;
                         $auxTotal = 0.0;
                         $i = 0;
-                        
-                        $componentsStocks=[];
-                        
+
+                        $componentsStocks = [];
+
 
                         // We get the price from the database info and not the form, for security
                         foreach ($_SESSION["cart"] as $index => $article) {
@@ -75,7 +75,7 @@ session_start();
                                 } else {
                                     $item = mysqli_fetch_array($query);
                                     $auxTotal += $item["price"];
-                                    $componentsStocks[]=$item["stock"] - (1 * $_SESSION["quantity"][$i]);
+                                    $componentsStocks[] = $item["stock"] - (1 * $_SESSION["quantity"][$i]);
                                 }
                             }
 
@@ -85,7 +85,7 @@ session_start();
                             $auxTotal = 0.0;
                         }
 
-                        
+
                         //Step 1: Add the order to the database
                         $date = date("Y-m-d");
                         $deliveryDate = date("Y-m-d", strtotime("+7 day"));
@@ -101,7 +101,7 @@ session_start();
                             $i = 0;
 
                             foreach ($_SESSION["cart"] as $index => $article) {
-                                
+
                                 $sql = "INSERT INTO custom_products (quantity,order_id) VALUES ('" . $_SESSION["quantity"][$i] . "','" . $order_id . "')";
                                 $result = mysqli_query($link, $sql);
                                 if (!$result) {
@@ -110,8 +110,8 @@ session_start();
                                 } else {
                                     // Step 3: insert the relation between custom product and component
                                     $custom_product_id = mysqli_insert_id($link);
-                                    
-                                    $j=0;
+
+                                    $j = 0;
                                     foreach ($article as $id => $component) {
                                         $safeid = mysqli_real_escape_string($link, $id);
                                         $sql = "INSERT INTO custom_products_components (custom_product_id, component_id) VALUES ('" . $custom_product_id . "', '" . $safeid . "')";
@@ -120,22 +120,19 @@ session_start();
                                             mysqli_close($link);
                                             die("INSERT CUSTOM PRODUCT COMPONENT QUERY FAILED. PLEASE CONTACT SITE ADMIN");
                                         }
-                                        
+
                                         //print_r($componentsStocks);
-                                        
                                         //Step 4: Update the component stock
-                                        
-                                        $sql =  "UPDATE products SET stock=" . $componentsStocks[$j] . " WHERE product_id=" . $safeid;
+
+                                        $sql = "UPDATE products SET stock=" . $componentsStocks[$j] . " WHERE product_id=" . $safeid;
                                         $result = mysqli_query($link, $sql);
                                         if (!$result) {
                                             mysqli_close($link);
                                             die("UPDATE COMPONENT QUANTITY QUERY FAILED. PLEASE CONTACT SITE ADMIN");
                                         }
-                                        
+
                                         $j++;
-                                        
                                     }
-                                    
                                 }
                                 $i++;
                             }
@@ -178,12 +175,12 @@ session_start();
                         $paymentMethods = paymentMethodDetails();
                         $addresses = addressDetails();
 
-                        $notEnough=FALSE;
-                        
+                        $notEnough = FALSE;
+
                         //We have to check if we have enough stock to complete the order
-                        
-                        $i=0;
-                        
+
+                        $i = 0;
+
                         $link = createConnection();
                         foreach ($_SESSION["cart"] as $index => $article) {
                             foreach ($article as $id => $component) {
@@ -195,23 +192,20 @@ session_start();
                                     die("ERROR IN SELECT PRODUCTS QUERY: PLEASE CONTACT SITE ADMIN");
                                 } else {
                                     $item = mysqli_fetch_array($query);
-                                    if(($item["stock"] - (1 * $_SESSION["quantity"][$i]))<0 )
-                                    {
-                                        $notEnough=TRUE;
+                                    if (($item["stock"] - (1 * $_SESSION["quantity"][$i])) < 0) {
+                                        $notEnough = TRUE;
                                     }
                                 }
                             }
                             $i++;
                         }
                         mysqli_close($link);
-                        
-                        if($notEnough==TRUE)
-                        {
-                            $result .= "<div class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%'>Sorry, there isn't enough component stock to complete the order, please change the components of your order</div>";                       
-                        }
-                        else if (empty($addresses) || empty($paymentMethods) || empty(validPaymentMethods($paymentMethods))) {
+
+                        if ($notEnough == TRUE) {
+                            $result .= "<div class='w3-padding-16 w3-panel w3-red w3-text-white'>Sorry, there isn't enough component stock to complete the order, please change the components of your order</div>";
+                        } else if (empty($addresses) || empty($paymentMethods) || empty(validPaymentMethods($paymentMethods))) {
                             //We don't have a valid payment method or an address
-                            $result .= "<div class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%'>Please go to your account information and provide a valid adress and payment Method before confirming the order</div>";
+                            $result .= "<div class='w3-padding-16 w3-panel w3-red w3-text-white'>Please go to your account information and provide a valid adress and payment Method before confirming the order</div>";
                         } else {
                             //Show all the available Payment Methods
                             $result .= "Payment Method: <select class='w3-select' name='paymentMethod' form='confirm'>";
@@ -236,8 +230,21 @@ session_start();
                     }
                     ?>
                 </ul>
+                <html>
+                      <head>
+                            <title>reCAPTCHA demo: Simple page</title>
+                             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                          </head>
+                      <body>
+                            <form action="" method="POST">
+                                  <div class="g-recaptcha" data-sitekey="6LfXs0AUAAAAAAeISDwD4qmMASwZeHkh-tEWtu7B"></div>
+                                  <br/>
+                                  <input type="submit" value="Submit">
+                                </form>
+                          </body>
+                </html>
             </section>
         </article>
-        <?php include("footer.php") ?>
+<?php include("footer.php") ?>
     </body>
 </html>
