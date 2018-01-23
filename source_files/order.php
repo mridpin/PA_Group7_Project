@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <?php
 include 'functions.php';
 require_once 'functions.php';
@@ -222,7 +224,7 @@ session_start();
                                 $result .= "<option value='" . $addresses[$i]["address_id"] . "'>" . $addresses[$i]["street"] . "</option>";
                             }
 
-                            $result .= "</select>"
+                            $result .= "</select><br /><br />"
                                     . "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' name='submit' value='Confirm Order' form='confirm' />";
                         }
                         $result .= "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-bottombar w3-text-red w3-cell' style='width:50%' type='submit' name='submit_cancel' value='Cancel Order' form='confirm' />";
@@ -230,19 +232,6 @@ session_start();
                     }
                     ?>
                 </ul>
-                <html>
-                      <head>
-                            <title>reCAPTCHA demo: Simple page</title>
-                             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                          </head>
-                      <body>
-                            <form action="" method="POST">
-                                  <div class="g-recaptcha" data-sitekey="6LfXs0AUAAAAAAeISDwD4qmMASwZeHkh-tEWtu7B"></div>
-                                  <br/>
-                                  <input type="submit" value="Submit">
-                                </form>
-                          </body>
-                </html>
             </section>
         </article>
 <?php include("footer.php") ?>

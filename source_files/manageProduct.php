@@ -127,7 +127,7 @@ checkSession();
 
                         //Different code name depending on what we want to insert
                         $finalName = $type . $category . $name;
-                        ;
+
 
                         $sql1 = "INSERT INTO products (name,stock,price) VALUES ('" . $finalName . "', '" . $stock . "', '" . $pru . "')";
                         $result1 = mysqli_query($link, $sql1);
@@ -337,10 +337,8 @@ checkSession();
                     }
                     ?>
                 </div>
-
-                <?php include("footer.php"); ?>
             </section>
         </article>
-
+        <?php include("footer.php"); ?>
     </body>
 </html>

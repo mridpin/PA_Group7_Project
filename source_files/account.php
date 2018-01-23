@@ -363,7 +363,7 @@ function showOrderHistory() {
                         <input class="w3-block w3-button w3-teal" type="submit" name="delete_account_submit" value="Delete Account" />
                     </form>
                 </section>
-            </article>
+            </article>        
             <script>
                             function w3_open() {
                                 document.getElementById("account_nav").style.display = "block";

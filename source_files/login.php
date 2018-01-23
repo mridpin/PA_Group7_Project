@@ -15,6 +15,7 @@ session_start();
     <body class="w3-light-grey">
         <?php include("header.php"); ?>
         <?php
+
         function loginForm() {
             ?>
 
@@ -46,6 +47,7 @@ session_start();
         }
 
         function checkLogin() {
+            $error = [];
             $con = createConnection();
             $user = mysqli_real_escape_string($con, $_POST['username']);
             $password = mysqli_real_escape_string($con, $_POST['password']);
@@ -72,24 +74,24 @@ session_start();
                 } else {
                     mysqli_free_result($query);
                     mysqli_close($con);
-                    die("ERROR: Incorrect login information: password");
+                    $error[] = "User and password do not match";
                 }
             } else {
                 mysqli_free_result($query);
                 mysqli_close($con);
-                var_dump($user);
-                die("ERROR: Incorrect login information: user");
+                $error[] = "User and password do not match";
             }
+            return $error;
         }
 
+        $error = [];
         if (isset($_POST['login'])) {
-            checkLogin();
+            $error = checkLogin();
+            echo printErrorMessage($error);
         }
-
         loginForm();
         ?>
 
         <br />
-
     </body>
 </html>

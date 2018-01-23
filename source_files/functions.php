@@ -516,7 +516,7 @@ function getCountryName($countryCode) {
 }
 
 function printErrorMessage($errors) {
-    $res = "<p class='w3-panel w3-red'>";
+    $res = "<p class='w3-panel w3-red w3-padding-16 w3-center'>";
     if (isset($errors) && !empty($errors)) {
         foreach ($errors as $error) {
             $res = $res . $error . "<br />";
