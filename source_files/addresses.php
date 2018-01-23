@@ -14,6 +14,17 @@ checkSession();
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="js/jquery-validation/jquery.validate.js"></script>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
+        
+        
+        <script>
+                $(document).ready(function(){
+               $(".register_account_form").submit(function(){
+                  var c = confirm("Please confirm data to continue:");
+                  return c;
+               });               
+               
+            });
+        </script>
     </head>
     <body class="w3-light-grey">
         <?php include("header.php"); ?>
