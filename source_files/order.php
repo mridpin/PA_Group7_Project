@@ -10,6 +10,15 @@ session_start();
         <meta charset="UTF-8">
         <title>Account Information</title>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+               $('#confirm').submit(function{
+                    var c = confirm("Please confirm Order:");
+                    return c; 
+               });
+            });
+        </script>
     </head>
 
     <body class="w3-light-grey">

@@ -13,6 +13,17 @@ checkSession();
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
+        <script>
+            $(document).ready(function(){
+               $(".formPayment").submit(function(){
+                  var c = confirm("Please confirm action to proceed:");
+                  return c;
+               });
+               
+               
+            });
+        
+        </script>
     </head>
     <body class="w3-light-grey">
         <div>
@@ -138,7 +149,7 @@ checkSession();
                         <h2>Enter your Credit card Information</h2>
                     </div>
 
-                    <form class="w3-container w3-padding-16 w3-white" method="post" action="paymentMethods.php">
+                    <form class="w3-container w3-padding-16 w3-white" id="formPayment" method="post" action="paymentMethods.php">
                         <div class="form-group" id="card-number-field">
                             <label for="cardNumber">Card Number</label>
                             <input type="text" class="w3-input w3-hover-grey" name="cardNumber" id="cardNumber">
