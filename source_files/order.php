@@ -144,9 +144,7 @@ session_start();
                                             die("INSERT CUSTOM PRODUCT COMPONENT QUERY FAILED. PLEASE CONTACT SITE ADMIN");
                                         }
 
-                                        //print_r($componentsStocks);
                                         //Step 4: Update the component stock
-
                                         $sql = "UPDATE products SET stock=" . $componentsStocks[$j] . " WHERE product_id=" . $safeid;
                                         $result = mysqli_query($link, $sql);
                                         if (!$result) {
@@ -178,9 +176,6 @@ session_start();
                                     $result .= "<tr><td>" . $name . "</td><td>" . $price . "</td>";
                                 }
                             }
-
-                            echo "i: ".$i;
-                            //print_r($_SESSION["quantity"][$i]);
 
                             $result .= "<tr><td>QUANTITY</td><td>" . $_SESSION["quantity"][$i] . "</td>";
                             $i++;

@@ -80,7 +80,6 @@ checkSession();
             <section id="search_box" class="w3-card-4 w3-section">
                 <?php
 
-                //TODO: First number input to know how many products we are going to add, for now only 1 at a time 
                 function newProduct() {
                     ?>
                     <div class='w3-teal w3-text-white w3-container w3-center'>
@@ -316,14 +315,10 @@ checkSession();
                                 . "</td>";
 
                         //Last option
-                        //TODO: When clicked, Update DB
-
-
 
                         $result .= "<td>"
                                 . " <input class='w3-button w3-teal w3-text-white' type='submit' name='" . $button . "' value='" . $buttonText . "' form='form_" . $id . "'>"
                                 . "</td>";
-                        //. "</form>";
                     }
                     $result .= "</table>";
 

@@ -14,11 +14,6 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
             <?php include("header.php"); ?>
         </div>
 
-        <!--
-        This div is for the product boxes (see document Vision de la apliacion)
-        for reference. TODO: Probably all the links can take to the same place but 
-        depending on what we click the page newProduct.php can change what it shows
-        -->
         <article class="w3-container w3-mobile" style="width:60%;margin:auto;">
             <section class="w3-section w3-card">
 
