@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-01-2018 a las 00:54:24
+-- Tiempo de generación: 23-01-2018 a las 17:14:29
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -185,18 +185,16 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`product_id`, `name`, `stock`, `price`) VALUES
 (1, 'CP_PC_HD250GB', 10, 50),
 (2, 'CP_PC_RAMDDR2GB', 3, 30),
-(3, 'PB_X_PS4500GB', 5, 300),
 (4, 'CP_PC_MBASUS', 2, 100),
-(5, 'PB_X_XBOXONE500GB', 1, 300),
 (6, 'CP_PC_CPUi7', 2, 500),
 (7, 'CP_PC_GPUNVIDIAGTX800', 7, 230),
 (8, 'CP_PC_CSCOOLERMASTER', 10, 40),
 (9, 'PB_PC_KBMECHANICAL', 8, 80),
 (10, 'PB_PC_MNACER14HD', 3, 90),
 (11, 'PB_PC_MSLOGITECH', 2, 10),
-(12, 'CP_PC_OSWIN10', NULL, 100),
-(13, 'CP_PC_OSWIN7', NULL, 60),
-(15, 'CP_PC_OSLINUXMINT', NULL, 5),
+(12, 'CP_PC_OSWIN10', 20, 100),
+(13, 'CP_PC_OSWIN7', 20, 60),
+(15, 'CP_PC_OSLINUXMINT', 20, 5),
 (16, 'CP_PH_SCIPS6', 10, 50),
 (17, 'CP_PH_SCFULLHD5', 6, 40),
 (18, 'CP_PH_CPUSNAPDRAGON800', 20, 40),
@@ -204,16 +202,16 @@ INSERT INTO `products` (`product_id`, `name`, `stock`, `price`) VALUES
 (20, 'CP_PH_HD16GB', 10, 10),
 (21, 'CP_PH_GPUNVIDIATEGRAK1', 20, 25),
 (22, 'CP_PH_BDIPHONE6', 10, 5),
-(23, 'CP_PH_OSANDROID7.0', NULL, 5),
-(24, 'CP_PH_OSANDROID8.0', NULL, 5),
-(25, 'CP_PH_FASTCHARGING', NULL, 5),
-(26, 'CP_PH_NFC', NULL, 5),
-(27, 'CP_PH_JACK', NULL, 5),
+(23, 'CP_PH_OSANDROID7.0', 20, 5),
+(24, 'CP_PH_OSANDROID8.0', 20, 5),
+(25, 'CP_PH_FASTCHARGING', 20, 5),
+(26, 'CP_PH_NFC', 20, 5),
+(27, 'CP_PH_JACK', 20, 5),
 (28, 'CP_PH_CM8MPX', 10, 10),
 (30, 'CP_PH_USB3.0', 20, 10),
 (31, 'CP_PH_USBMICRO', 10, 5),
-(32, 'CP_PH_WIRELESS', NULL, 10),
-(33, 'CP_PH_FINGER', NULL, 20),
+(32, 'CP_PH_WIRELESS', 20, 10),
+(33, 'CP_PH_FINGER', 20, 20),
 (34, 'CP_PH_BT6000mH', 20, 18),
 (35, 'CP_PC_DSHDMI', 20, 10),
 (36, 'CP_PC_DSVGA', 30, 5),
@@ -224,7 +222,7 @@ INSERT INTO `products` (`product_id`, `name`, `stock`, `price`) VALUES
 (41, 'CP_PC_DDDVD', 20, 10),
 (42, 'CP_PC_DDCD', 20, 5),
 (46, 'CP_PC_CPUi5', 1, 150),
-(47, 'PB_X_TV40', 3, 300);
+(48, 'CP_PC_CPUAMDRYSEN', 1, 200);
 
 -- --------------------------------------------------------
 
@@ -356,7 +354,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
