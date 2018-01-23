@@ -47,10 +47,20 @@ session_start();
                         unset($_SESSION["quantity"]);
                         header("Location: index.php");
                     } else if (isset($_GET["delete_submit"])) {
-                        $index = $_GET["delete_item"];
-                        unset($_SESSION["cart"][$index]);
-                        unset($_SESSION["quantity"][$index]);
-                        header("Location: order.php");
+                        
+                        if(count($_SESSION["cart"])!=1)
+                        {
+                            $index = $_GET["delete_item"];
+                            unset($_SESSION["cart"][$index]);
+                            unset($_SESSION["quantity"][$index]);
+                            header("Location: order.php");
+                        }
+                        else
+                        {
+                            unset($_SESSION["cart"]);
+                            unset($_SESSION["quantity"]);
+                            header("Location: index.php");
+                        }
                     } else if (isset($_SESSION["cart"]) && (isset($_GET["submit"]))) {
                         //process the order using the data in the session variable
                         $link = createConnection();
