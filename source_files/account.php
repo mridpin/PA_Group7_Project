@@ -28,6 +28,7 @@ function showAccountDetails() {
     $result .= "Name: <input class='w3-input w3-hover-grey' type='text' name='username' value='" . $info["name"] . "' required='required' /><br />";
     $result .= "Last Name: <input class='w3-input w3-hover-grey' type='text' name='last_name' value='" . $info["last_name"] . "' required='required' /><br />";
     $result .= "Email: <input class='w3-input w3-hover-grey' type='email' name='email' value='" . $info["email"] . "' required='required' /><br />";
+    $result .= "New Password: <input class='w3-input w3-hover-grey' type='password' name='npassword' value='' required='required' /><br />";
 
     return $result;
 }
@@ -198,7 +199,10 @@ function showOrderHistory() {
                 $name = mysqli_real_escape_string($link, $_POST['username']);
                 $lastName = mysqli_real_escape_string($link, $_POST['last_name']);
                 $email = mysqli_real_escape_string($link, $_POST['email']);
-                $sql1 = "UPDATE users SET name='" . $name . "', last_name='" . $lastName . "', email='" . $email . "' WHERE user_id='" . $_SESSION["user_id"] . "'";
+                
+                $hash = password_hash($_POST['npassword'], PASSWORD_DEFAULT);
+                
+                $sql1 = "UPDATE users SET name='" . $name . "', last_name='" . $lastName . "', email='" . $email . "', password='".$hash."' WHERE user_id='" . $_SESSION["user_id"] . "'";
                 $result1 = mysqli_query($link, $sql1);
 
                 // Update query

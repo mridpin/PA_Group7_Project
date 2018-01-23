@@ -90,8 +90,6 @@ checkSession();
         function deletePaymentMethod() {
             // Get the address to delete from this user's addresses. Cascade FK will delete it from user_address too
             $id = $_SESSION["user_id"];
-
-            print_r($_SESSION["user_id"]);
             
             $link = createConnection();
             $sql = "DELETE FROM payment_method WHERE user_id='" . $id . "'";
