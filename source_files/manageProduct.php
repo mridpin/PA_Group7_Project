@@ -10,6 +10,7 @@ checkSession();
         <meta charset="UTF-8">
         <title>Manage Product</title>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     </head>
     <body class="w3-light-grey">
 
@@ -57,6 +58,16 @@ checkSession();
                     }
                 }
             }
+            $(document).ready(function(){
+               $("#submitNewProduct").submit(function(){
+                  var c = confirm("Click OK to upload the product");
+                  return c;
+               });
+               S(".formDelete").submit(function(){
+                  var c = confirm("Confirm the changes to continue:");
+                  return c;
+               });
+            });
         </script>
         <?php include("header.php"); ?>
         <article class="w3-container w3-mobile" style="width:90%;margin:auto;">
@@ -71,7 +82,7 @@ checkSession();
                     ?>
                     <div class='w3-teal w3-text-white w3-container w3-center'>
                         <h3>Complete the following form to add a new product:</h3></div>
-                    <form method="POST" action="manageProduct.php">
+                <form id="submitNewProduct" method="POST" action="manageProduct.php">
                         <table class="w3-table-all w3-centered">
                             <tr>
                                 <th><b>Type of product</b></th>
@@ -256,7 +267,7 @@ checkSession();
                         $id = $product[3];
 
                         $result .= "<tr>"
-                                . "<td>" . $id . "<form method='POST' action='manageProduct.php' id='form_" . $id . "'>"
+                                . "<td>" . $id . "<form method='POST' action='manageProduct.php' class='formDelete' id='form_" . $id . "'>"
                                 . "<input type='hidden' value='" . $id . "' name='id'></form></td>" //We use this to know what product is selected
                                 . "<td><select name='type' class='w3-select w3-hover-light-grey' form='form_" . $id . "'>";
 
