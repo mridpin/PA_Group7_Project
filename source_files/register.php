@@ -372,7 +372,7 @@ require_once 'functions.php';
                         <label>Street: </label><input class="w3-input w3-hover-grey" name="street" type="text" required='required'/>
                         <label>Number: </label><input class="w3-input w3-hover-grey" name="number" type="number" required='required'/>
                         <br/>
-                        <input class="w3-block w3-button w3-teal" name="submit" type="submit" value="Create Account!" required='required'/>                
+                        <input class="w3-block w3-button w3-teal" name="submit" type="submit" value="Create Account!"/>                
                     </form>
                     <script src="js/form_manager.js"></script>
                     <?php
