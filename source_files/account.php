@@ -68,7 +68,7 @@ function printPaymentMethodDetails() {
         $result .= "<li class='details_li'>Type: " . $paymentMethod["type"] . "</li>";
         $result .= "<li class='details_li'>Expiry Date: " . $paymentMethod["expiry_date"] . "</li>";
 
-        $result .= "</ul><form method='post' action='paymentMethods.php'>" .
+        $result .= "</ul><form method='post' action='paymentMethods.php'><input type='hidden' name='paymentMethod_number' value='" . $i . "' />".
                 "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' value='Update Payment Method' name='update_paymentMethod'/>" .
                 "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar w3-cell' style='width:50%' type='submit' value='Delete Payment Method' name='delete_paymentMethod'/><br /></form>";
         $result .= "</li>";

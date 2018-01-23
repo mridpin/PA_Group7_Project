@@ -212,7 +212,11 @@ checkSession();
 
         $cardNumber = "";
 
-        if (isset($_POST['paymentMethod_number'])) {
+        
+        if (isset($_POST['delete_paymentMethod'])) {
+            deletePaymentMethod();
+        }
+        else if (isset($_POST['paymentMethod_number'])) {
             $paymentMethodIndex = $_POST["paymentMethod_number"];
             $_SESSION["paymentMethod"] = $_SESSION["paymentMethod_to_modify"][$paymentMethodIndex];
 
@@ -223,12 +227,8 @@ checkSession();
             updatePaymentMethod();
         }else if (isset($_POST['newPayment'])) {
             addPaymentMethod();
-        }else if (isset($_POST['newPayment'])) {
-            addPaymentMethod();
         } else if (isset($_POST['add_paymentMethod'])) {
             addPaymentForm($cardNumber);
-        } else if (isset($_POST['delete_paymentMethod'])) {
-            deletePaymentMethod();
         }
         include("footer.php");
         ?>
