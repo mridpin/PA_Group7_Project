@@ -28,11 +28,11 @@ $_SESSION["origin"] = $_SERVER['PHP_SELF'];
 
                 <div class="w3-container w3-padding-16 w3-bar">
                     <form action="newProduct.php" method="POST">
-                        <input class="w3-button w3-xxlarge w3-bar-item" type="submit" name="computer" value="Build a new computer" /> 
+                        <input class="w3-button w3-xxlarge w3-bar-item" style="width:50%" type="submit" name="computer" value="Build a new computer" /> 
                     </form>
 
                     <form action="newProduct.php" method="POST">
-                        <input class="w3-button w3-xxlarge w3-bar-item" type="submit" name="phone" value="Build a new phone"/>
+                        <input class="w3-button w3-xxlarge w3-bar-item" style="width:50%" type="submit" name="phone" value="Build a new phone"/>
                     </form>
                 </div>
             </section>
