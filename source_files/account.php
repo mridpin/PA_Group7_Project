@@ -48,7 +48,7 @@ function printAddressDetails() {
         // Instead, we sent the index of the address from the user's own addresses
         // This prevents malicious users from trampling with the other user's addresses by F12 and modifiying the value of the form submissions.
         // Now they can only screw with their own addresses
-        $result .= "</ul><form method='post' action='addresses.php'><input type='hidden' name='address_number' value='" . $i . "' />" .
+        $result .= "</ul><form method='post' class='formAddress' action='addresses.php'><input type='hidden' name='address_number' value='" . $i . "' />" .
                 "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:50%' type='submit' value='Update Address' name='update_address'/>" .
                 "<input class='w3-hover-red w3-hover-text-white w3-button w3-block w3-white w3-border-red w3-text-red w3-bottombar w3-cell' style='width:50%' type='submit' value='Delete Address' name='delete_address'/></form>";
         $result .= "</li>";
@@ -175,6 +175,24 @@ function showOrderHistory() {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="js/jquery-validation/jquery.validate.js"></script>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
+        <script>
+        $(document).ready(function(){
+               $(".formAddress").submit(function(){
+                  var c = confirm("Please confirm action to proceed:");
+                  return c;
+               });
+                 $("#personal_details_form").submit(function(){
+                  var c = confirm("Please confirm the change of PERSONAL INFORMATION to proceed:");
+                  return c;
+               });
+               $("#delete_account_form").submit(function(){
+                  var c = confirm("Are you sure you want to leave us? (Confirm to delete the acount) ;-(");
+                  return c;
+               });
+               
+               
+            });
+        </script>
     </head>
 
     <body class="w3-light-grey">
