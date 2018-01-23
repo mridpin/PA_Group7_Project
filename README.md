@@ -3,7 +3,7 @@
 ## Componentes del grupo:
 * Victor Martinelli
 * Manuel Ridao Pineda
-* Pablo Oliva
+* Pablo Oliva Navea
 
 ## Temática del trabajo:
 * Comercio Online
