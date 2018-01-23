@@ -91,6 +91,8 @@ checkSession();
             // Get the address to delete from this user's addresses. Cascade FK will delete it from user_address too
             $id = $_SESSION["user_id"];
 
+            print_r($_SESSION["user_id"]);
+            
             $link = createConnection();
             $sql = "DELETE FROM payment_method WHERE user_id='" . $id . "'";
             $result = mysqli_query($link, $sql);
@@ -219,9 +221,11 @@ checkSession();
             $cardNumber = $_SESSION["paymentMethod"]["number"];
 
             addPaymentForm($cardNumber);
-        } else if (isset($_POST['submit_paymentMethod'])) {
+        } else if (isset($_POST['update_paymentMethod'])) {
             updatePaymentMethod();
-        } else if (isset($_POST['newPayment'])) {
+        }else if (isset($_POST['newPayment'])) {
+            addPaymentMethod();
+        }else if (isset($_POST['newPayment'])) {
             addPaymentMethod();
         } else if (isset($_POST['add_paymentMethod'])) {
             addPaymentForm($cardNumber);
