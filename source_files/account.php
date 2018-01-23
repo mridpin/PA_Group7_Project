@@ -177,10 +177,6 @@ function showOrderHistory() {
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
         <script>
         $(document).ready(function(){
-               $(".formAddress").submit(function(){
-                  var c = confirm("Please confirm action to proceed:");
-                  return c;
-               });
                  $("#personal_details_form").submit(function(){
                   var c = confirm("Please confirm the change of PERSONAL INFORMATION to proceed:");
                   return c;

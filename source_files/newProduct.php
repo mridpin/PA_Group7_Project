@@ -10,6 +10,16 @@ session_start();
         <meta charset="UTF-8">
         <title>New Order</title>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+               $("#order").submit(function(){
+                  var c = confirm("This are all the components you want?:");
+                  return c;
+               });               
+               
+            });
+        </script>
     </head>
 
     <body class="w3-light-grey">
@@ -38,7 +48,7 @@ session_start();
 
             //Hardrive Segment
             $result = "<div class='w3-teal w3-text-white w3-container'><h2>Select your Computer Components</h2></div>"
-                    . "<form class='w3-container w3-padding-16 w3-white' action='newProduct.php' method='POST'>"
+                    . "<form class='w3-container w3-padding-16 w3-white' id='order' action='newProduct.php' method='POST'>"
                     . "Main Hard Drive: <select class='w3-select' name='hd'>";
 
 
@@ -257,7 +267,7 @@ session_start();
 
             //Screen Segment
             $result = "<div class='w3-teal w3-text-white w3-container'><h2>Select your Phone Components</h2></div>"
-                    . "<form class='w3-container w3-padding-16 w3-white' action='newProduct.php' method='POST'>"
+                    . "<form class='w3-container w3-padding-16 w3-white' id='order' action='newProduct.php' method='POST'>"
                     . "Screen: <select class='w3-select' name='screen'>";
 
 

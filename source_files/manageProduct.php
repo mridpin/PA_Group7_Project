@@ -10,7 +10,19 @@ checkSession();
         <meta charset="UTF-8">
         <title>Manage Product</title>
         <link rel="stylesheet" href="stylesheets/stylesheet.css" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+          $(document).ready(function(){
+               $("#submitNewProduct").submit(function(){
+                  var c = confirm("Click OK to upload the product");
+                  return c;
+               });
+               /*S(".formDelete").submit(function(){
+                  var c = confirm("Confirm the changes to continue:");
+                  return c;
+               });*/
+            });
+            </script>
     </head>
     <body class="w3-light-grey">
 
@@ -58,16 +70,7 @@ checkSession();
                     }
                 }
             }
-            $(document).ready(function(){
-               $("#submitNewProduct").submit(function(){
-                  var c = confirm("Click OK to upload the product");
-                  return c;
-               });
-               S(".formDelete").submit(function(){
-                  var c = confirm("Confirm the changes to continue:");
-                  return c;
-               });
-            });
+
         </script>
         <?php include("header.php"); ?>
         <article class="w3-container w3-mobile" style="width:90%;margin:auto;">
