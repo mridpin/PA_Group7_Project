@@ -168,7 +168,7 @@ session_start();
 
             $singleComponent = getSingleComponents($osCode);
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
-                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . "</option>";
+                $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
             }
 
             //Case Segment
@@ -380,36 +380,37 @@ session_start();
             
             $singleComponent = getSingleComponents($fcCode);
             
+            
                    $result .= "<br/>"
-                                . "Fast Charging? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='fastCharging' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
+                                . "Fast Charging? ($" . $singleComponent[0][1] . ") STOCK: ".$singleComponent[0][2]." <input type='checkbox' name='fastCharging' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
                    
             //Jack
                    
             $singleComponent = getSingleComponents($hpCode);       
                    
                     $result .= "<br/>"
-                            . "Headphone Jack? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='headphoneJack' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
+                            . "Headphone Jack? ($" . $singleComponent[0][1] . ") STOCK: ".$singleComponent[0][2]." <input type='checkbox' name='headphoneJack' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
                     
             //NFC
               
             $singleComponent = getSingleComponents($nfcCode); 
             
                     $result.= "<br/>"
-                            . "NFC? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='nfc' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
+                            . "NFC? ($" . $singleComponent[0][1] . ") STOCK: ".$singleComponent[0][2]." <input type='checkbox' name='nfc' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
             
             //Wireless Charging        
             
             $singleComponent = getSingleComponents($wrCode); 
                     
                     $result.="<br/>"
-                            . "Wireless Charging? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='wirelessCharging' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
+                            . "Wireless Charging? ($" . $singleComponent[0][1] . ") STOCK: ".$singleComponent[0][2]." <input type='checkbox' name='wirelessCharging' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
                     
             //Fingerprint
                     
              $singleComponent = getSingleComponents($frCode);         
              
                     $result.="<br/>"
-                            ."Fingerprint Reader? ($" . $singleComponent[0][1] . ")<input type='checkbox' name='fingerprintReader' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
+                            ."Fingerprint Reader? ($" . $singleComponent[0][1] . ") STOCK: ".$singleComponent[0][2]." <input type='checkbox' name='fingerprintReader' value='".$singleComponent[0][0] . "_" . $singleComponent[0][3] . "_" . $singleComponent[0][1]."'><br/><br/>";
 
             $result.="<br/>"
                     . "Product Quantity: <input class ='w3-input w3-hover-grey' type='number' name='quantity' min='1' value='1'/> <br/>";
@@ -438,6 +439,8 @@ session_start();
         function getSingleComponents($code) {
             $result = [];
             global $components;
+            
+            
             $j = 0;
             for ($i = 0; $i < sizeof($components); $i++) {
                 if (strpos($components[$i][0], $code) !== false && $components[$i][2]!=0) {
