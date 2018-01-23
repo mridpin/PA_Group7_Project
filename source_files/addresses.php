@@ -127,7 +127,7 @@ checkSession();
                         <h2><strong>Account Information</strong></h2>
                     </div>
                     <figure class="w3-container w3-center">
-                        <a href="account.php" ><img src="img/logo3.png"></a>
+                        <a href="account.php" ><img alt="logo3" src="img/logo3.png"></a>
                     </figure>
                 </div>
 
@@ -396,7 +396,7 @@ checkSession();
                         if (isset($_POST["add_address"])) {
                             echo "";
                         } else {
-                            echo "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:49%' input name='submit_address' type='submit' value='Update Address' />";
+                            echo "<input class='w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell' style='width:49%' name='submit_address' type='submit' value='Update Address' />";
                         }
                         ?>
                         <input class="w3-hover-teal w3-hover-text-white w3-button w3-block w3-white w3-border-teal w3-bottombar w3-text-teal w3-cell" style="width:50%" name="submit_new_address" type="submit" value="Add as new" />

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<!--
-This structure is a WIP, so you can edit it as much as your want.
--->
+
 <?php
 include 'functions.php';
 require_once 'functions.php';
@@ -20,8 +18,6 @@ session_start();
         <?php
         define("COMPUTER_BUILD_LENGTH", 16);
         //We first get all the components and depending on the form we are on we filter it
-        //OPTION 1 : Website will change form with the button to go to different selec windows (Maybe save the current build in session variable to always have it)
-        //OPTION 2: We list all of the components directly instead of having to navigate through windows
         $components = getAllComponents();
 
         function computerForm() {
@@ -57,7 +53,7 @@ session_start();
                     . "<br/>"
                     . "<br/>"
                     . "Second Hard Drive: <select class='w3-select' name='shd'>"
-                    . "<option value='-' name='-'>-</option>";
+                    . "<option value='-'>-</option>";
 
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
                 $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
@@ -127,7 +123,7 @@ session_start();
                     . "<br/>"
                     . "<br/>"
                     . "Second Display port: <select class='w3-select' name='sDS'>"
-                    . "<option value='-' name='-'>-</option>";
+                    . "<option value='-'>-</option>";
 
             for ($i = 0; $i < sizeof($singleComponent); $i++) {
                 $result .= "<option value='" . $singleComponent[$i][0] . "_" . $singleComponent[$i][3] . "_" . $singleComponent[$i][1] . "'>" . $singleComponent[$i][0] . " - $" . $singleComponent[$i][1] . " STOCK: ".$singleComponent[$i][2]."</option>";
@@ -138,7 +134,7 @@ session_start();
                     . "<br/>"
                     . "<br/>"
                     . "USB Port: <select class='w3-select' name='usb'>"
-                    . "<option value='-' name='-'>-</option>";
+                    . "<option value='-'>-</option>";
 
 
             $singleComponent = getSingleComponents($usbCode);
@@ -163,7 +159,7 @@ session_start();
                     . "<br/>"
                     . "<br/>"
                     . "Operating System: <select class='w3-select' name='os'>"
-                    . "<option value='-' name='-'>-</option>";
+                    . "<option value='-'>-</option>";
 
 
             $singleComponent = getSingleComponents($osCode);
@@ -191,7 +187,7 @@ session_start();
             //Keyboard Segment
             $result .= "<br/>"
                     . "Keyboard: <select class='w3-select' name='keyboard'>"
-                    . "<option value='-' name='-'>-</option>";
+                    . "<option value='-'>-</option>";
 
 
             $singleComponent = getSingleComponents($kbCode);
@@ -204,7 +200,7 @@ session_start();
                     . "<br/>"
                     . "<br/>"
                     . "Mouse: <select class='w3-select' name='mouse'>"
-                    . "<option value='-' name='-'>-</option>";
+                    . "<option value='-'>-</option>";
 
 
             $singleComponent = getSingleComponents($msCode);
@@ -217,7 +213,7 @@ session_start();
                     . "<br/>"
                     . "<br/>"
                     . "Monitor: <select class='w3-select' name='monitor'>"
-                    . "<option value='-' name='-'>-</option>";
+                    . "<option value='-'>-</option>";
 
 
             $singleComponent = getSingleComponents($mnCode);

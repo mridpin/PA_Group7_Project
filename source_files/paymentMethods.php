@@ -155,7 +155,7 @@ checkSession();
                                 <option value="Prepaid">Prepaid</option>
                             </select>
                         </div>
-                        <div class="form-group" name="expiration-date" id="expiration-date">
+                        <div class="form-group" id="expiration-date">
                             <label>Expiration Date</label>
                             <select name="month" id="month" class="w3-select">
                                 <option value="02">February </option>
