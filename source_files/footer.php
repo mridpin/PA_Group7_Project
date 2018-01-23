@@ -9,7 +9,7 @@ if (strpos($_SERVER['PHP_SELF'], "account.php") !== false) {
                 Manuel Ridao Pineda
             </li>
             <li>
-                Victor Martinelli Rodríguez
+                V&iacute;ctor Martinelli Rodr&iacute;guez
             </li>
             <li>
                 Pablo Oliva Navea
@@ -27,7 +27,7 @@ if (strpos($_SERVER['PHP_SELF'], "account.php") !== false) {
                 Manuel Ridao Pineda
             </li>
             <li>
-                Victor Martinelli Rodríguez
+                V&iacute;ctor Martinelli Rodr&iacute;guez
             </li>
             <li>
                 Pablo Oliva Navea
