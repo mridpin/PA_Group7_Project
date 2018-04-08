@@ -6,7 +6,7 @@
 * Pablo Oliva Navea
 
 ## Temática del trabajo:
-* Sistema Educativo Online
+* Comercio Online
 
 ## Entrega
 
